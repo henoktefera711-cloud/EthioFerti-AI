@@ -1,0 +1,3 @@
+#!/data/data/com.termux/files/usr/bin/bash
+cd "$HOME/EthioFerti-AI"
+exec .venv/bin/python -m uvicorn app.main:app --host 0.0.0.0 --port 8000

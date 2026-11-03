@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="am">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EthioFerti AI Dashboard</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;font-family:Arial,sans-serif;background:#f4f7f3;color:#1d3025}
+header{background:#155c3b;color:white;padding:18px 22px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px}
+.logo{font-size:23px;font-weight:bold}
+header small{display:block;font-size:12px;margin-top:4px;color:#d9f4e4}
+button{cursor:pointer;border:0;border-radius:8px;padding:11px 15px;font-weight:bold}
+.lang{background:white;color:#155c3b}
+.container{max-width:1100px;margin:25px auto;padding:0 16px}
+.welcome{margin-bottom:22px}
+.welcome h1{margin:0 0 7px;font-size:25px}
+.welcome p{margin:0;color:#68796d}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:15px;margin:22px 0}
+.card{background:white;border-radius:13px;padding:20px;box-shadow:0 3px 12px #183d2510}
+.card .label{color:#6b7b70;font-size:14px}
+.card .number{font-size:29px;font-weight:bold;margin-top:12px;color:#155c3b}
+.panel{background:white;border-radius:13px;padding:20px;margin:18px 0;box-shadow:0 3px 12px #183d2510}
+.panel h2{font-size:19px;margin:0 0 17px}
+form{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:13px}
+label{font-size:13px;color:#53665a}
+input,select{display:block;width:100%;margin-top:7px;padding:12px;border:1px solid #d6e1d8;border-radius:8px;font-size:15px;background:white}
+.submit{background:#167447;color:white;align-self:end;min-height:43px}
+table{width:100%;border-collapse:collapse;min-width:520px}
+th,td{text-align:left;padding:13px 10px;border-bottom:1px solid #edf1ed;font-size:14px}
+th{color:#607366;background:#f8faf8}
+.table-wrap{overflow-x:auto}
+.status{color:#167447;background:#e6f5eb;padding:5px 9px;border-radius:20px;font-size:12px}
+.message{margin-top:12px;font-size:14px}
+footer{text-align:center;color:#849187;font-size:12px;padding:25px}
+</style>
+</head>
+<body>
+<header>
+  <div>
+    <div class="logo">🌱 EthioFerti AI</div>
+    <small data-am="ዘመናዊ የኦርጋኒክ ማዳበሪያ አስተዳደር ስርዓት"
+           data-en="Smart Organic Fertilizer Management System">
+      ዘመናዊ የኦርጋኒክ ማዳበሪያ አስተዳደር ስርዓት
+    </small>
+  </div>
+  <button class="lang" onclick="toggleLanguage()">English</button>
+</header>
+
+<main class="container">
+  <section class="welcome">
+    <h1 data-am="የአስተዳደር ዳሽቦርድ" data-en="Management Dashboard">የአስተዳደር ዳሽቦርድ</h1>
+    <p data-am="ወደ EthioFerti AI እንኳን በደህና መጡ።"
+       data-en="Welcome to EthioFerti AI.">ወደ EthioFerti AI እንኳን በደህና መጡ።</p>
+  </section>
+
+  <section class="cards">
+    <div class="card">
+      <div class="label" data-am="ጠቅላላ ምርቶች" data-en="Total Products">ጠቅላላ ምርቶች</div>
+      <div class="number" id="productCount">0</div>
+    </div>
+    <div class="card">
+      <div class="label" data-am="ጠቅላላ የምርት መጠን (ኪ.ግ)" data-en="Total Quantity (kg)">ጠቅላላ የምርት መጠን (ኪ.ግ)</div>
+      <div class="number" id="totalQuantity">0</div>
+    </div>
+    <div class="card">
+      <div class="label" data-am="የሲስተም ሁኔታ" data-en="System Status">የሲስተም ሁኔታ</div>
+      <div class="number" style="font-size:22px" id="systemStatus">...</div>
+    </div>
+  </section>
+
+  <section class="panel">
+    <h2 data-am="➕ አዲስ ማዳበሪያ መመዝገብ" data-en="➕ Register New Fertilizer">➕ አዲስ ማዳበሪያ መመዝገብ</h2>
+    <form id="productForm">
+      <label>
+        <span data-am="የምርት ስም" data-en="Product Name">የምርት ስም</span>
+        <input name="name" required minlength="2" placeholder="Organic Compost">
+      </label>
+      <label>
+        <span data-am="የምርት ዓይነት" data-en="Category">የምርት ዓይነት</span>
+        <select name="category">
+          <option value="Organic">Organic</option>
+          <option value="Compost">Compost</option>
+          <option value="Vermicompost">Vermicompost</option>
+          <option value="Other">Other</option>
+        </select>
+      </label>
+      <label>
+        <span data-am="መጠን (ኪ.ግ)" data-en="Quantity (kg)">መጠን (ኪ.ግ)</span>
+        <input name="quantity_kg" type="number" min="0.1" step="0.1" required>
+      </label>
+      <label>
+        <span data-am="የBatch መለያ" data-en="Batch Code">የBatch መለያ</span>
+        <input name="batch_code" required placeholder="ETHIOFERTI-002">
+      </label>
+      <button class="submit" type="submit" data-am="ምርት መዝግብ" data-en="Register Product">ምርት መዝግብ</button>
+    </form>
+    <div class="message" id="message"></div>
+  </section>
+
+  <section class="panel">
+    <h2 data-am="📦 የተመዘገቡ ምርቶች" data-en="📦 Registered Products">📦 የተመዘገቡ ምርቶች</h2>
+    <div class="table-wrap">
+      <table>
+        <thead><tr>
+          <th>ID</th>
+          <th data-am="የምርት ስም" data-en="Product">የምርት ስም</th>
+          <th data-am="ዓይነት" data-en="Category">ዓይነት</th>
+          <th data-am="መጠን (ኪ.ግ)" data-en="Quantity (kg)">መጠን (ኪ.ግ)</th>
+          <th data-am="Batch መለያ" data-en="Batch Code">Batch መለያ</th>
+          <th data-am="ሁኔታ" data-en="Status">ሁኔታ</th>
+        </tr></thead>
+        <tbody id="productRows">
+          <tr><td colspan="6">Loading...</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+</main>
+<footer>EthioFerti AI · Development Version 0.2.0</footer>
+
+<script>
+let language = "am";
+
+function toggleLanguage() {
+  language = language === "am" ? "en" : "am";
+  document.documentElement.lang = language;
+  document.querySelectorAll("[data-am]").forEach(el => {
+    el.textContent = el.dataset[language];
+  });
+  document.querySelector(".lang").textContent =
+    language === "am" ? "English" : "አማርኛ";
+}
+
+async function loadProducts() {
+  const rows = document.getElementById("productRows");
+  try {
+    const response = await fetch("/api/v1/products");
+    if (!response.ok) throw new Error("API error");
+    const products = await response.json();
+
+    document.getElementById("productCount").textContent = products.length;
+    const total = products.reduce((sum, p) => sum + Number(p.quantity_kg), 0);
+    document.getElementById("totalQuantity").textContent = total.toLocaleString();
+    document.getElementById("systemStatus").textContent = "Online";
+
+    if (!products.length) {
+      rows.innerHTML = '<tr><td colspan="6">No products registered yet.</td></tr>';
+      return;
+    }
+
+    rows.innerHTML = products.map(p => `
+      <tr>
+        <td>${p.id}</td>
+        <td>${escapeHtml(p.name)}</td>
+        <td>${escapeHtml(p.category)}</td>
+        <td>${p.quantity_kg}</td>
+        <td>${escapeHtml(p.batch_code)}</td>
+        <td><span class="status">${escapeHtml(p.status)}</span></td>
+      </tr>
+    `).join("");
+  } catch (error) {
+    document.getElementById("systemStatus").textContent = "Offline";
+    rows.innerHTML = '<tr><td colspan="6">Could not load products.</td></tr>';
+  }
+}
+
+function escapeHtml(value) {
+  return String(value).replace(/[&<>"']/g, char => ({
+    "&":"&amp;", "<":"&lt;", ">":"&gt;", '"':"&quot;", "'":"&#39;"
+  })[char]);
+}
+
+document.getElementById("productForm").addEventListener("submit", async event => {
+  event.preventDefault();
+  const form = event.target;
+  const data = Object.fromEntries(new FormData(form).entries());
+  data.quantity_kg = Number(data.quantity_kg);
+  const message = document.getElementById("message");
+
+  try {
+    const response = await fetch("/api/v1/products", {
+      method: "POST",
+      headers: {"Content-Type": "application/json"},
+      body: JSON.stringify(data)
+    });
+    const result = await response.json();
+
+    if (!response.ok) throw new Error(result.detail || "Registration failed");
+
+    message.style.color = "green";
+    message.textContent = language === "am"
+      ? "ምርቱ በተሳካ ሁኔታ ተመዝግቧል።"
+      : "Product registered successfully.";
+    form.reset();
+    loadProducts();
+  } catch (error) {
+    message.style.color = "red";
+    message.textContent = error.message;
+  }
+});
+
+loadProducts();
+</script>
+</body>
+</html>
