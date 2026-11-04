@@ -1,4 +1,4 @@
-from fastapi import FastAPI, HTTPException
+from fastapi import FastAPI, HTTPException, Request
 from fastapi.responses import FileResponse
 from pydantic import BaseModel, Field
 from pathlib import Path
@@ -25,6 +25,90 @@ with connect_db() as conn:
         )
     """)
 
+
+# ===== ETHIOFERTI COMPLETE DATABASE INITIALIZATION =====
+def init_database():
+    with connect_db() as conn:
+        conn.execute("""
+            CREATE TABLE IF NOT EXISTS farmers (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                full_name TEXT NOT NULL,
+                phone TEXT,
+                location TEXT,
+                region TEXT,
+                zone TEXT,
+                woreda TEXT,
+                kebele TEXT,
+                production_type TEXT,
+                created_at TEXT DEFAULT CURRENT_TIMESTAMP
+            )
+        """)
+        conn.execute("""
+            CREATE TABLE IF NOT EXISTS quality_records (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                product_id INTEGER,
+                batch_code TEXT NOT NULL,
+                test_type TEXT NOT NULL,
+                measured_value REAL,
+                unit TEXT,
+                method TEXT,
+                tester TEXT,
+                result_status TEXT DEFAULT 'pending',
+                notes TEXT,
+                tested_at TEXT DEFAULT CURRENT_TIMESTAMP
+            )
+        """)
+        conn.execute("""
+            CREATE TABLE IF NOT EXISTS camera_records (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                batch_code TEXT NOT NULL,
+                camera_type TEXT DEFAULT 'mobile',
+                image_path TEXT NOT NULL,
+                visual_observation TEXT,
+                review_status TEXT DEFAULT 'pending',
+                captured_at TEXT DEFAULT CURRENT_TIMESTAMP
+            )
+        """)
+        conn.execute("""
+            CREATE TABLE IF NOT EXISTS qr_codes (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                product_id INTEGER NOT NULL,
+                batch_code TEXT NOT NULL UNIQUE,
+                token TEXT NOT NULL UNIQUE,
+                created_at TEXT DEFAULT CURRENT_TIMESTAMP
+            )
+        """)
+
+        columns = {
+            "manufacturer": "TEXT",
+            "origin": "TEXT",
+            "description": "TEXT",
+            "ingredients": "TEXT",
+            "nutrient_composition": "TEXT",
+            "benefits": "TEXT",
+            "suitable_crops": "TEXT",
+            "application_instructions": "TEXT",
+            "safety_instructions": "TEXT",
+            "storage_instructions": "TEXT",
+            "production_date": "TEXT",
+            "expiry_date": "TEXT",
+            "registration_number": "TEXT"
+        }
+
+        existing = {
+            row["name"]
+            for row in conn.execute("PRAGMA table_info(products)")
+        }
+
+        for column, sql_type in columns.items():
+            if column not in existing:
+                conn.execute(
+                    f"ALTER TABLE products ADD COLUMN {column} {sql_type}"
+                )
+
+init_database()
+# ===== END DATABASE INITIALIZATION =====
+
 app = FastAPI(
     title="EthioFerti AI",
     description="Organic Fertilizer Production and Management Platform",
@@ -36,6 +120,73 @@ class ProductCreate(BaseModel):
     category: str = Field(min_length=2, max_length=100)
     quantity_kg: float = Field(gt=0)
     batch_code: str = Field(min_length=2, max_length=100)
+
+
+class ProductProfileUpdate(BaseModel):
+    manufacturer: str | None = None
+    origin: str | None = None
+    description: str | None = None
+    ingredients: str | None = None
+    nutrient_composition: str | None = None
+    benefits: str | None = None
+    suitable_crops: str | None = None
+    application_instructions: str | None = None
+    safety_instructions: str | None = None
+    storage_instructions: str | None = None
+    production_date: str | None = None
+    expiry_date: str | None = None
+    registration_number: str | None = None
+
+
+@app.patch("/api/v1/products/{product_id}/profile")
+def update_product_profile(product_id: int, item: ProductProfileUpdate):
+    values = item.dict(exclude_unset=True)
+
+    if not values:
+        raise HTTPException(status_code=400, detail="No profile fields supplied")
+
+    allowed = {
+        "manufacturer", "origin", "description", "ingredients",
+        "nutrient_composition", "benefits", "suitable_crops",
+        "application_instructions", "safety_instructions",
+        "storage_instructions", "production_date", "expiry_date",
+        "registration_number"
+    }
+
+    values = {key: value for key, value in values.items() if key in allowed}
+    assignments = ", ".join(f"{key} = ?" for key in values)
+
+    with connect_db() as conn:
+        exists = conn.execute(
+            "SELECT id FROM products WHERE id = ?", (product_id,)
+        ).fetchone()
+
+        if exists is None:
+            raise HTTPException(status_code=404, detail="Product not found")
+
+        conn.execute(
+            f"UPDATE products SET {assignments} WHERE id = ?",
+            (*values.values(), product_id)
+        )
+
+        product = conn.execute(
+            "SELECT * FROM products WHERE id = ?", (product_id,)
+        ).fetchone()
+
+    return {"message": "Fertilizer profile updated", "product": dict(product)}
+
+
+@app.get("/api/v1/products/batch/{batch_code}")
+def get_product_by_batch(batch_code: str):
+    with connect_db() as conn:
+        product = conn.execute(
+            "SELECT * FROM products WHERE batch_code = ?", (batch_code,)
+        ).fetchone()
+
+    if product is None:
+        raise HTTPException(status_code=404, detail="Batch not found")
+
+    return dict(product)
 
 @app.get("/", include_in_schema=False)
 def dashboard():
@@ -379,6 +530,256 @@ def get_camera_photo(photo_id: int):
     return FileResponse(path)
 # ===== END ETHIOFERTI MOBILE CAMERA API =====
 
+
+# ===== INDEPENDENT FERTILIZER CAMERA ANALYSIS =====
+class CameraAnalyzeRequest(BaseModel):
+    image_data: str = Field(min_length=20)
+
+
+@app.post("/api/v1/camera/analyze")
+def analyze_camera_image(item: CameraAnalyzeRequest):
+    import base64
+    import binascii
+    import uuid
+
+    try:
+        header, encoded = item.image_data.split(",", 1)
+        allowed = {
+            "data:image/jpeg;base64": ".jpg",
+            "data:image/png;base64": ".png",
+            "data:image/webp;base64": ".webp"
+        }
+        extension = allowed.get(header)
+
+        if extension is None:
+            raise HTTPException(status_code=400, detail="Unsupported image type")
+
+        image_bytes = base64.b64decode(encoded, validate=True)
+
+        if len(image_bytes) > 5 * 1024 * 1024:
+            raise HTTPException(status_code=413, detail="Image must be under 5 MB")
+
+        if not image_bytes:
+            raise HTTPException(status_code=400, detail="Empty image")
+
+    except (ValueError, binascii.Error):
+        raise HTTPException(status_code=400, detail="Invalid image data")
+
+    filename = f"{uuid.uuid4().hex}{extension}"
+    image_path = CAMERA_DIR / filename
+    image_path.write_bytes(image_bytes)
+
+    try:
+        with connect_db() as conn:
+            cursor = conn.execute(
+                """
+                INSERT INTO camera_records
+                (batch_code, camera_type, image_path,
+                 visual_observation, review_status)
+                VALUES (?, ?, ?, ?, ?)
+                """,
+                (
+                    "UNMATCHED",
+                    "mobile-independent",
+                    str(image_path.relative_to(BASE_DIR)),
+                    "Image stored; OCR and visual review not yet verified",
+                    "pending"
+                )
+            )
+            record_id = cursor.lastrowid
+    except Exception:
+        image_path.unlink(missing_ok=True)
+        raise
+
+    return {
+        "message": "Image received for analysis",
+        "id": record_id,
+        "image_url": f"/api/v1/camera/photos/{record_id}",
+        "ocr_status": "performed_in_browser",
+        "visual_ai_status": "not_configured",
+        "review_status": "pending",
+        "notice": "OCR text is not proof of product authenticity or chemical composition."
+    }
+
+# ===== END INDEPENDENT FERTILIZER CAMERA ANALYSIS =====
+
+
+
+# ===== GEMINI FERTILIZER VISUAL RECOGNITION =====
+import os
+import json
+import base64
+import binascii
+import uuid
+import httpx
+
+
+@app.post("/api/v1/camera/recognize")
+def recognize_fertilizer_material(item: CameraAnalyzeRequest):
+    api_key = os.getenv("GEMINI_API_KEY")
+    if not api_key:
+        raise HTTPException(status_code=503, detail="Gemini API key is not configured.")
+
+    try:
+        header, encoded = item.image_data.split(",", 1)
+        allowed = {
+            "data:image/jpeg;base64": ("jpg", "image/jpeg"),
+            "data:image/png;base64": ("png", "image/png"),
+            "data:image/webp;base64": ("webp", "image/webp")
+        }
+        image_type = allowed.get(header)
+        if not image_type:
+            raise HTTPException(status_code=400, detail="Unsupported image type.")
+
+        image_bytes = base64.b64decode(encoded, validate=True)
+        if not image_bytes or len(image_bytes) > 5 * 1024 * 1024:
+            raise HTTPException(status_code=413, detail="Image must be under 5 MB.")
+
+    except (ValueError, binascii.Error):
+        raise HTTPException(status_code=400, detail="Invalid image data.")
+
+    extension, mime_type = image_type
+    image_path = CAMERA_DIR / f"{uuid.uuid4().hex}.{extension}"
+    image_path.write_bytes(image_bytes)
+
+    prompt = """
+You are EthioFerti AI, an agricultural material visual inspection assistant.
+
+Analyze the actual loose material in the image, not packaging or labels.
+It may be fertilizer granules, powder, pellets, compost, manure or another
+material. Do not assume it is fertilizer.
+
+Return only valid JSON with:
+{
+ "is_fertilizer_candidate": true,
+ "category_en": "Likely category or unknown",
+ "category_am": "የሚገመተው ዓይነት",
+ "identification_en": "Careful identification",
+ "identification_am": "ጥንቃቄ የተሞላበት መለያ",
+ "visual_description_en": "Color, texture, shape and visible condition",
+ "visual_description_am": "የቀለምና የገጽታ መግለጫ",
+ "visible_clues_en": ["Visible clue"],
+ "visible_clues_am": ["የሚታይ ምልክት"],
+ "confidence_band": "low",
+ "confidence_explanation_en": "Explain uncertainty",
+ "confidence_explanation_am": "የእርግጠኝነት ማብራሪያ",
+ "possible_uses_en": ["Possible use if justified"],
+ "possible_uses_am": ["ሊኖር የሚችል አጠቃቀም"],
+ "cannot_determine_en": ["NPK", "Chemical composition", "Contamination"],
+ "cannot_determine_am": ["NPK", "የኬሚካል ይዘት", "ብክለት"],
+ "recommended_tests_en": ["Laboratory test"],
+ "recommended_tests_am": ["የላቦራቶሪ ምርመራ"],
+ "farmer_guidance_en": "Cautious practical guidance",
+ "farmer_guidance_am": "ጥንቃቄ የተሞላበት ምክር"
+}
+
+Rules:
+- Never invent NPK, nutrients, ingredients, brand, origin or dosage.
+- Appearance cannot prove chemical composition, identity or safety.
+- Never recommend applying unidentified material.
+- Recommend laboratory tests where appropriate.
+- If unclear, say so and request a clearer image.
+- Confidence must be low, medium or high.
+- Distinguish observations from hypotheses.
+- If it does not look like fertilizer, say so.
+- Give useful English and natural Amharic answers.
+"""
+
+    try:
+        response = httpx.post(
+            "https://generativelanguage.googleapis.com/v1beta/interactions",
+            headers={
+                "x-goog-api-key": api_key,
+                "Content-Type": "application/json",
+                "Api-Revision": "2026-05-20"
+            },
+            json={
+                "model": "gemini-3.8-flash",
+                "input": [
+                    {"type": "text", "text": prompt},
+                    {"type": "image", "data": encoded, "mime_type": mime_type}
+                ],
+                "generation_config": {"max_output_tokens": 1800}
+            },
+            timeout=120.0
+        )
+        response.raise_for_status()
+        payload = response.json()
+
+        text_parts = []
+        for step in payload.get("steps", []):
+            if step.get("type") == "model_output":
+                for part in step.get("content", []):
+                    if part.get("type") == "text" and part.get("text"):
+                        text_parts.append(part["text"])
+
+        if not text_parts:
+            raise ValueError("Gemini returned no text analysis.")
+
+        content = "\n".join(text_parts).strip()
+        if content.startswith("```"):
+            content = content.split("\n", 1)[-1]
+            if content.endswith("```"):
+                content = content[:-3].strip()
+
+        analysis = json.loads(content)
+
+        required = [
+            "is_fertilizer_candidate", "category_en", "category_am",
+            "identification_en", "identification_am",
+            "visual_description_en", "visual_description_am",
+            "confidence_band", "farmer_guidance_en", "farmer_guidance_am"
+        ]
+        if not all(key in analysis for key in required):
+            raise ValueError("Gemini returned incomplete analysis.")
+        if analysis["confidence_band"] not in ("low", "medium", "high"):
+            analysis["confidence_band"] = "low"
+
+    except httpx.HTTPStatusError as exc:
+        image_path.unlink(missing_ok=True)
+        raise HTTPException(
+            status_code=502,
+            detail=f"Gemini API HTTP {exc.response.status_code}: {exc.response.text[:500]}"
+        )
+    except (httpx.HTTPError, KeyError, ValueError, TypeError, IndexError, StopIteration) as exc:
+        image_path.unlink(missing_ok=True)
+        raise HTTPException(status_code=502, detail=f"Gemini analysis failed: {str(exc)[:300]}")
+
+    try:
+        with connect_db() as conn:
+            cursor = conn.execute(
+                """
+                INSERT INTO camera_records
+                (batch_code, camera_type, image_path, visual_observation, review_status)
+                VALUES (?, ?, ?, ?, ?)
+                """,
+                (
+                    "UNMATCHED",
+                    "gemini-vision",
+                    str(image_path.relative_to(BASE_DIR)),
+                    json.dumps(analysis, ensure_ascii=False),
+                    "ai_analyzed"
+                )
+            )
+            record_id = cursor.lastrowid
+    except Exception:
+        image_path.unlink(missing_ok=True)
+        raise
+
+    return {
+        "message": "Gemini fertilizer material analysis completed.",
+        "record_id": record_id,
+        "analysis_source": "Google Gemini 3.8 Flash",
+        "analysis": analysis,
+        "important_notice": (
+            "Visual analysis is not laboratory verification. "
+            "It cannot establish NPK, chemical composition or safety."
+        )
+    }
+
+# ===== END GEMINI FERTILIZER VISUAL RECOGNITION =====
+
+
 # ===== ETHIOFERTI_QR_API_V1 =====
 
 import io
@@ -388,7 +789,7 @@ from fastapi.responses import Response
 
 
 @app.post("/api/v1/qr/generate/{batch_code}")
-def generate_qr_code(batch_code: str):
+def generate_qr_code(batch_code: str, request: Request):
 
     with connect_db() as conn:
         product = conn.execute(
@@ -427,14 +828,15 @@ def generate_qr_code(batch_code: str):
         "message": "QR code generated" if created else "Existing QR code retrieved",
         "batch_code": batch_code,
         "token": token,
-        "qr_payload": f"ETHIOFERTI:{token}",
+        "qr_payload": str(request.base_url).rstrip("/") + f"/scan/{token}",
+        "scan_url": str(request.base_url).rstrip("/") + f"/scan/{token}",
         "image_url": f"/api/v1/qr/image/{token}",
         "verification_url": f"/api/v1/qr/verify/{token}"
     }
 
 
 @app.get("/api/v1/qr/image/{token}")
-def get_qr_image(token: str):
+def get_qr_image(token: str, request: Request):
 
     with connect_db() as conn:
         record = conn.execute(
@@ -448,7 +850,7 @@ def get_qr_image(token: str):
             detail="QR code not found"
         )
 
-    payload = f"ETHIOFERTI:{token}"
+    payload = str(request.base_url).rstrip("/") + f"/scan/{token}"
 
     qr = qrcode.QRCode(
         version=None,
@@ -460,19 +862,20 @@ def get_qr_image(token: str):
     qr.add_data(payload)
     qr.make(fit=True)
 
+    from qrcode.image.svg import SvgPathImage
+
     image = qr.make_image(
-        fill_color="black",
-        back_color="white"
+        image_factory=SvgPathImage
     )
 
     output = io.BytesIO()
-    image.save(output, format="PNG")
+    image.save(output)
 
     return Response(
         content=output.getvalue(),
-        media_type="image/png",
+        media_type="image/svg+xml",
         headers={
-            "Content-Disposition": 'inline; filename="ethioferti-qr.png"'
+            "Content-Disposition": 'inline; filename="ethioferti-qr.svg"'
         }
     )
 
@@ -485,13 +888,8 @@ def verify_qr_code(token: str):
         product = conn.execute(
             """
             SELECT
-                p.id,
-                p.name,
-                p.category,
-                p.quantity_kg,
-                p.batch_code,
-                p.status,
-                q.created_at
+                p.*,
+                q.created_at AS qr_created_at
             FROM qr_codes q
             JOIN products p ON p.id = q.product_id
             WHERE q.token = ?
@@ -544,5 +942,70 @@ def verify_qr_code(token: str):
         )
     }
 
+
+
+
+@app.get("/manifest.webmanifest", include_in_schema=False)
+def pwa_manifest():
+    return FileResponse(
+        BASE_DIR / "app" / "static" / "manifest.webmanifest",
+        media_type="application/manifest+json"
+    )
+
+
+@app.get("/service-worker.js", include_in_schema=False)
+def pwa_service_worker():
+    return FileResponse(
+        BASE_DIR / "app" / "static" / "service-worker.js",
+        media_type="application/javascript",
+        headers={"Service-Worker-Allowed": "/"}
+    )
+
+
+
+@app.get("/local-db.js", include_in_schema=False)
+def local_database_script():
+    return FileResponse(BASE_DIR / "app" / "static" / "local-db.js", media_type="application/javascript")
+
+@app.get("/vendor/jsQR.js", include_in_schema=False)
+def local_qr_decoder():
+    return FileResponse(BASE_DIR / "app" / "static" / "vendor" / "jsQR.js", media_type="application/javascript")
+
+@app.get("/icons/icon.svg", include_in_schema=False)
+def pwa_icon():
+    return FileResponse(BASE_DIR / "app" / "static" / "icons" / "icon.svg", media_type="image/svg+xml")
+
+@app.get("/scan", include_in_schema=False)
+def portable_product_scan():
+    return FileResponse(BASE_DIR / "app" / "static" / "scan.html")
+
+
+@app.get("/scanner")
+def qr_scanner_page():
+    return FileResponse(BASE_DIR / "app" / "static" / "scanner.html")
+
+
+@app.get("/scan/{token}")
+def public_product_scan(token: str):
+    if token.startswith("EF1:"):
+        return FileResponse(BASE_DIR / "app" / "static" / "scan.html")
+
+    with connect_db() as conn:
+        record = conn.execute(
+            "SELECT id FROM qr_codes WHERE token = ?",
+            (token,)
+        ).fetchone()
+
+    if record is None:
+        raise HTTPException(status_code=404, detail="Invalid QR code")
+
+    return FileResponse(BASE_DIR / "app" / "static" / "scan.html")
+
+
 # ===== END ETHIOFERTI_QR_API_V1 =====
 
+
+
+@app.get("/qr-scanner")
+def qr_scanner_page():
+    return FileResponse(BASE_DIR / "app" / "static" / "qr-scanner.html")

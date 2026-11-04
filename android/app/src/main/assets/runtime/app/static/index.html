@@ -1,0 +1,827 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#155c3b">
+<title>EthioFerti AI — Projects</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#f1f5f1;color:#20352a;font-family:Arial,sans-serif}
+header{background:#155c3b;color:white;padding:18px;font-weight:bold}
+main{max-width:720px;margin:auto;padding:16px}
+.card{background:white;padding:18px;border-radius:15px;margin-bottom:15px}
+h1{font-size:23px}h2{font-size:17px}
+p{font-size:14px;line-height:1.65;color:#68766d}
+button{border:0;border-radius:10px;padding:14px;font-weight:bold;cursor:pointer}
+button:disabled{opacity:.55;cursor:wait}
+.primary{background:#155c3b;color:white;width:100%;margin-top:12px}
+.secondary{background:#e8eee9;color:#155c3b;width:100%;margin-top:10px}
+#camera{background:#15251b;border-radius:12px;min-height:230px;display:flex;align-items:center;justify-content:center;overflow:hidden}
+video{width:100%;max-height:440px}
+#cameraText{color:white;text-align:center;padding:25px}
+.result{background:#f0f5f1;padding:13px;border-radius:9px;margin-top:10px;font-size:14px;line-height:1.6;overflow-wrap:anywhere}
+.hidden{display:none!important}
+.notice{background:#fff4dc;padding:12px;border-radius:9px;font-size:12px;line-height:1.6}
+a{color:#155c3b;font-weight:bold}
+.field{margin-top:15px}
+.field h3{font-size:14px;margin-bottom:5px;color:#155c3b}
+#status{white-space:pre-wrap}
+.history-item{padding:12px 0;border-bottom:1px solid #e8eee9;font-size:13px;line-height:1.6}
+.history-item:last-child{border:0}
+
+.taskbar{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:16px}
+.task-btn{background:white;color:#155c3b;border:1px solid #dce7de;border-radius:12px;padding:16px 10px;font-size:15px;font-weight:800;box-shadow:0 3px 12px #183d2510}
+.task-btn.active{background:#155c3b;color:white}
+.history-item{display:grid;grid-template-columns:145px minmax(0,1fr);gap:13px;padding:13px 0;border-bottom:1px solid #e8eee9}
+.history-item img{width:100%;height:130px;object-fit:cover;border-radius:10px;background:#edf2ed}
+.project-content{min-width:0;display:flex;flex-direction:column;align-items:flex-start;gap:7px}
+.project-title{width:100%;border:1px solid transparent;background:transparent;border-radius:7px;padding:5px;font-size:15px;font-weight:bold;color:#20352a}
+.project-title:focus{outline:2px solid #9ab9a4;background:#f7faf7}
+.project-date{font-size:11px;color:#829087}
+.project-description{font-size:13px;line-height:1.5;color:#52645a}
+.project-status{font-size:12px;font-weight:bold;color:#155c3b}
+.project-view{background:#155c3b;color:white;padding:9px 13px;border-radius:8px;font-size:12px;margin-top:auto}
+.qr-video{width:100%;max-height:390px;background:#17251d;border-radius:12px}
+.qr-input{width:100%;padding:13px;border:1px solid #dce5dd;border-radius:9px;font-size:14px;margin-top:12px}
+.qr-result{background:#f0f5f1;padding:13px;border-radius:10px;margin-top:12px;overflow-wrap:anywhere}
+.qr-result .field{padding:10px 0;border-bottom:1px solid #dce5dd}
+.qr-result .field:last-child{border:0}.project-section-title{font-size:14px;color:#155c3b;margin:20px 0 8px;padding-bottom:8px;border-bottom:1px solid #e3ebe4}
+@media(max-width:500px){.history-item{grid-template-columns:105px minmax(0,1fr);gap:10px}.history-item img{height:115px}.project-title{font-size:13px}.task-btn{font-size:13px}}
+
+
+.project-delete{
+ display:inline-flex;
+ align-items:center;
+ justify-content:center;
+ margin:10px 0 0 8px;
+ padding:9px 16px;
+ border:1px solid #e4b9b9;
+ border-radius:9px;
+ background:#fff5f5;
+ color:#b42318;
+ font-weight:700;
+ cursor:pointer;
+ transition:background .2s ease,transform .2s ease;
+}
+.project-delete:hover{
+ background:#ffe5e5;
+ transform:translateY(-2px);
+}
+.project-delete:disabled{
+ opacity:.6;
+ cursor:wait;
+ transform:none;
+}
+
+</style>
+<link rel="manifest" href="/manifest.webmanifest"><meta name="theme-color" content="#155c3b"></head>
+<body>
+<header>🌱 EthioFerti AI · Material Intelligence</header>
+
+<main>
+<div class="taskbar">
+<button class="task-btn active" id="showAI">📷 AI Material Scan</button>
+<button class="task-btn" id="showQR">▦ QR Scan</button>
+</div>
+
+<section class="card" id="aiPanel">
+<div id="camera">
+<div id="cameraText"></div>
+<video id="video" autoplay muted playsinline class="hidden"></video>
+</div>
+<button class="primary" id="start">Open camera</button>
+<button class="primary hidden" id="capture">Capture and analyze</button>
+<button class="secondary hidden" id="stop">Stop camera</button>
+<div class="result" id="status">Preparing local database...</div>
+<button class="secondary" id="retry">Retry pending AI analyses</button>
+<div class="project-list">
+<h3 class="project-section-title">📷 AI Camera Projects</h3>
+<div id="history">Loading AI projects...</div>
+</div>
+</section>
+
+<section class="card hidden" id="qrPanel">
+<video id="qrVideo" class="qr-video" autoplay muted playsinline></video>
+<button class="primary" id="qrStart">Start QR camera</button>
+<button class="secondary hidden" id="qrStop">Stop QR camera</button>
+<div class="result" id="qrStatus">Ready to scan.</div>
+<input class="qr-input" id="manualQR" placeholder="Paste QR data or product token">
+<button class="primary" id="openQR">Read product information</button>
+<input type="file" id="qrImageInput" accept="image/*" hidden>
+<button class="secondary" id="qrUploadButton">▧ Upload QR image from device</button>
+
+<div class="qr-result hidden" id="qrResult"></div>
+<div class="project-list">
+<h3 class="project-section-title">▦ QR Scan Projects</h3>
+<div id="qrHistory">Loading QR projects...</div>
+</div>
+</section>
+
+<section class="card hidden" id="results">
+<h2>AI Inspection Details</h2>
+<div id="analysis"></div>
+<div class="notice">Visual AI recognition is not laboratory verification. A photograph cannot establish chemical composition, contamination or safety.</div>
+</section>
+</main>
+
+
+<script src="/local-db.js"></script>
+<script src="/vendor/jsQR.js"></script>
+<script>
+const video=document.getElementById("video");
+const start=document.getElementById("start");
+const stop=document.getElementById("stop");
+const capture=document.getElementById("capture");
+const statusBox=document.getElementById("status");
+const cameraText=document.getElementById("cameraText");
+const canvas=document.createElement("canvas");
+const ctx=canvas.getContext("2d");
+let stream=null,busy=false;
+
+function status(message){statusBox.textContent=message;}
+
+function stopCamera(){
+ if(stream)stream.getTracks().forEach(track=>track.stop());
+ stream=null;
+ video.srcObject=null;
+ video.classList.add("hidden");
+ cameraText.classList.remove("hidden");
+ start.classList.remove("hidden");
+ stop.classList.add("hidden");
+ capture.classList.add("hidden");
+}
+
+stop.onclick=()=>{
+ stopCamera();
+ status("Camera stopped.");
+};
+
+start.onclick=async()=>{
+ try{
+  if(!navigator.mediaDevices?.getUserMedia)throw Error("Camera requires HTTPS or localhost.");
+  stream=await navigator.mediaDevices.getUserMedia({
+   audio:false,
+   video:{facingMode:{ideal:"environment"},width:{ideal:1280},height:{ideal:720}}
+  });
+  video.srcObject=stream;
+  await video.play();
+  video.classList.remove("hidden");
+  cameraText.classList.add("hidden");
+  start.classList.add("hidden");
+  stop.classList.remove("hidden");
+  capture.classList.remove("hidden");
+  status("Camera ready. Point it at the actual fertilizer material.");
+ }catch(error){
+  status("Camera error: "+error.message);
+  stopCamera();
+ }
+};
+
+function addField(container,title,value){
+ if(value===undefined||value===null||value==="")return;
+ const section=document.createElement("div");
+ section.className="field";
+ const heading=document.createElement("h3");
+ heading.textContent=title;
+ const content=document.createElement("div");
+ content.className="result";
+ content.textContent=Array.isArray(value)?value.join("• "):String(value);
+ if(Array.isArray(value)&&value.length)content.textContent="• "+content.textContent;
+ section.append(heading,content);
+ container.append(section);
+}
+
+function displayAnalysis(data){
+ const box=document.getElementById("analysis");
+ box.replaceChildren();
+ const fields=[
+  ["Likely material category",data.category_en],
+  ["የቁሳቁሱ ዓይነት",data.category_am],
+  ["AI identification",data.identification_en],
+  ["የAI ለይቶ ማወቅ",data.identification_am],
+  ["Visual description",data.visual_description_en],
+  ["የሚታይ መግለጫ",data.visual_description_am],
+  ["Visible clues",data.visible_clues_en],
+  ["የሚታዩ ምልክቶች",data.visible_clues_am],
+  ["Confidence: "+(data.confidence_band||"unknown").toUpperCase(),data.confidence_explanation_en],
+  ["የእርግጠኝነት ማብራሪያ",data.confidence_explanation_am],
+  ["Possible uses",data.possible_uses_en],
+  ["ሊኖሩ የሚችሉ አጠቃቀሞች",data.possible_uses_am],
+  ["What cannot be determined visually",data.cannot_determine_en],
+  ["በምስል ብቻ ማወቅ የማይቻለው",data.cannot_determine_am],
+  ["Recommended laboratory tests",data.recommended_tests_en],
+  ["የሚመከሩ የላቦራቶሪ ምርመራዎች",data.recommended_tests_am],
+  ["Farmer guidance",data.farmer_guidance_en],
+  ["ለገበሬው ምክር",data.farmer_guidance_am]
+ ];
+ fields.forEach(([title,value])=>addField(box,title,value));
+ document.getElementById("results").classList.remove("hidden");
+}
+
+
+async function refreshHistory(){
+ const history=document.getElementById("history");
+ const qrHistory=document.getElementById("qrHistory");
+
+ function makeProjectCard(record,type){
+  const item=document.createElement("div");
+  item.className="history-item";
+
+  const image=document.createElement("img");
+  image.src=record.image_data||"";
+  image.alt=type==="qr"?"QR scan image":"AI material photograph";
+  image.loading="lazy";
+
+  const content=document.createElement("div");
+  content.className="project-content";
+
+  const title=document.createElement("input");
+  title.className="project-title";
+  title.value=record.title||(type==="qr"?"QR scan #":"Material inspection #")+record.id;
+  title.maxLength=80;
+  title.setAttribute("aria-label","Edit project title");
+  title.addEventListener("change",async()=>{
+   record.title=title.value.trim()||((type==="qr"?"QR scan #":"Material inspection #")+record.id);
+   title.value=record.title;
+   try{await EthioFertiDB.put("camera_records",record);}
+   catch(error){status("Could not save title: "+error.message);}
+  });
+
+  const date=document.createElement("div");
+  date.className="project-date";
+  date.textContent=new Date(record.captured_at||record.created_at||Date.now()).toLocaleString();
+
+  const state=document.createElement("div");
+  state.className="project-status";
+  state.textContent=type==="qr"?(record.qr_status==="unverified"?"QR decoded · product details unavailable":"QR information saved"):
+   (record.analysis?"AI analysis complete":
+   (record.review_status==="failed"?"Analysis failed":"AI analysis pending"));
+
+  const description=document.createElement("div");
+  description.className="project-description";
+  description.textContent=type==="qr"
+   ?(record.qr_product?.n||record.qr_product?.b||"QR code scanned and saved.")
+   :(record.analysis?.identification_en||record.visual_observation||"Photograph saved on this device.");
+
+  content.append(title,date,state,description);
+
+  const view=document.createElement("button");
+  view.className="project-view";
+  view.textContent="View full details";
+
+  if(type==="qr"){
+   view.onclick=()=>{
+    document.getElementById("stop").click();
+    document.getElementById("aiPanel").classList.add("hidden");
+    document.getElementById("qrPanel").classList.remove("hidden");
+    document.getElementById("showQR").classList.add("active");
+    document.getElementById("showAI").classList.remove("active");
+    showQRFields(record.qr_product||{});
+    document.getElementById("qrStatus").textContent=(record.qr_status==="unverified"?"QR scan saved. Product details could not be verified.":"Saved QR project details.")+"QR data: "+(record.qr_raw||"Unavailable");
+    document.getElementById("qrPanel").scrollIntoView({behavior:"smooth"});
+   };
+  }else if(record.analysis){
+   view.onclick=()=>{
+    displayAnalysis(record.analysis);
+    document.getElementById("results").classList.remove("hidden");
+    document.getElementById("results").scrollIntoView({behavior:"smooth"});
+   };
+  }else{
+   view.disabled=true;
+   view.textContent="Details pending";
+  }
+
+  const removeButton=document.createElement("button");
+  removeButton.className="project-delete";
+  removeButton.type="button";
+  removeButton.textContent="Delete";
+  removeButton.setAttribute("aria-label","Delete "+(type==="qr"?"QR":"AI camera")+" project");
+
+  removeButton.onclick=async()=>{
+   const label=type==="qr"?"QR scan project":"AI camera project";
+   if(!confirm("Permanently delete this "+label+"?"))return;
+
+   removeButton.disabled=true;
+   removeButton.textContent="Deleting...";
+
+   try{
+    await EthioFertiDB.remove("camera_records",record.id);
+    await refreshHistory();
+   }catch(error){
+    removeButton.disabled=false;
+    removeButton.textContent="Delete";
+    status("Could not delete project: "+error.message);
+   }
+  };
+
+  content.append(view,removeButton);
+  item.append(image,content);
+  return item;
+ }
+
+ try{
+  const records=await EthioFertiDB.all("camera_records");
+  const aiRecords=records.filter(r=>r.project_type!=="qr");
+  const qrRecords=records.filter(r=>r.project_type==="qr");
+
+  const newest=(a,b)=>new Date(b.captured_at||b.created_at||0)-new Date(a.captured_at||a.created_at||0);
+  aiRecords.sort(newest);
+  qrRecords.sort(newest);
+
+  history.replaceChildren();
+  qrHistory.replaceChildren();
+
+  if(!aiRecords.length){
+   history.textContent="No AI camera projects yet.";
+  }else{
+   aiRecords.forEach(record=>history.append(makeProjectCard(record,"ai")));
+  }
+
+  if(!qrRecords.length){
+   qrHistory.textContent="No QR scan projects yet.";
+  }else{
+   qrRecords.forEach(record=>qrHistory.append(makeProjectCard(record,"qr")));
+  }
+ }catch(error){
+  history.textContent="Project history error: "+error.message;
+ }
+}
+
+async function recognizeRecord(record,queueItem){
+ if(!navigator.onLine)throw Error("No internet connection.");
+ const response=await fetch("/api/v1/camera/recognize",{
+  method:"POST",
+  headers:{"Content-Type":"application/json"},
+  body:JSON.stringify({image_data:record.image_data})
+ });
+ const result=await response.json();
+ if(!response.ok)throw Error(result.detail||"AI analysis failed.");
+
+ record.analysis=result.analysis;
+ record.server_record_id=result.record_id;
+ record.review_status="analyzed";
+ await EthioFertiDB.put("camera_records",record);
+
+ queueItem.status="completed";
+ queueItem.completed_at=new Date().toISOString();
+ await EthioFertiDB.put("sync_queue",queueItem);
+
+ displayAnalysis(result.analysis);
+ return result;
+}
+
+async function retryPending(){
+ if(busy)return;
+ if(!navigator.onLine){
+  status("Offline. Saved photographs will remain on this device until internet returns.");
+  return;
+ }
+ busy=true;
+ try{
+  const queue=await EthioFertiDB.all("sync_queue");
+  const pending=queue.filter(item=>item.status==="pending"&&item.kind==="camera_recognition");
+  if(!pending.length){
+   status("No pending AI analyses.");
+   return;
+  }
+  let completed=0;
+  for(const item of pending){
+   const record=await EthioFertiDB.get("camera_records",item.camera_record_id);
+   if(!record||!record.image_data){
+    item.status="failed";
+    item.error="Saved photograph is missing.";
+    await EthioFertiDB.put("sync_queue",item);
+    continue;
+   }
+   try{
+    await recognizeRecord(record,item);
+    completed++;
+   }catch(error){
+    item.last_error=error.message;
+    item.attempts=(item.attempts||0)+1;
+    await EthioFertiDB.put("sync_queue",item);
+    status("AI retry stopped: "+error.message);
+    break;
+   }
+  }
+  status(completed+" pending photograph(s) analyzed.");
+  await refreshHistory();
+ }finally{busy=false;}
+}
+
+capture.onclick=async()=>{
+ if(busy)return;
+ if(!video.videoWidth)return status("Camera is not ready.");
+ busy=true;
+ capture.disabled=true;
+ capture.textContent="Saving photograph...";
+ let queueItem=null;
+ try{
+  canvas.width=video.videoWidth;
+  canvas.height=video.videoHeight;
+  ctx.drawImage(video,0,0,canvas.width,canvas.height);
+  const data=await new Promise((resolve,reject)=>{
+   canvas.toBlob(blob=>{
+    if(!blob)return reject(Error("Could not capture image."));
+    const reader=new FileReader();
+    reader.onload=()=>resolve(reader.result);
+    reader.onerror=()=>reject(Error("Could not read captured image."));
+    reader.readAsDataURL(blob);
+   },"image/jpeg",0.85);
+  });
+
+  const record={
+   camera_type:"fertilizer-material",
+   image_data:data,
+   visual_observation:"Photograph captured for AI material inspection.",
+   captured_at:new Date().toISOString(),
+   review_status:"pending"
+  };
+  const id=await EthioFertiDB.addCameraRecord(record);
+  record.id=id;
+
+  queueItem={
+   kind:"camera_recognition",
+   camera_record_id:id,
+   status:"pending",
+   attempts:0
+  };
+  const queueId=await EthioFertiDB.queueRecognition(queueItem);
+  queueItem.id=queueId;
+
+  await refreshHistory();
+
+  if(!navigator.onLine){
+   status("Photograph saved on this device. AI analysis is queued until internet returns.");
+   return;
+  }
+
+  capture.textContent="Analyzing...";
+  status("Photograph saved locally. Sending it to Gemini AI...");
+  await recognizeRecord(record,queueItem);
+  status("Gemini analysis completed. Saved locally as inspection #"+id);
+  await refreshHistory();
+  document.getElementById("results").scrollIntoView({behavior:"smooth"});
+
+ }catch(error){
+  status("Recognition error: "+error.message+" Your saved photograph remains in local history.");
+  await refreshHistory();
+ }finally{
+  busy=false;
+  capture.disabled=false;
+  capture.textContent="Analyze fertilizer material";
+ }
+};
+
+document.getElementById("retry").onclick=retryPending;
+window.addEventListener("online",retryPending);
+
+(async()=>{
+ try{
+  await EthioFertiDB.openDB();
+  status(navigator.onLine?"Local database ready. Camera inspection is available.":"Offline mode. Local photograph storage is ready.");
+  await refreshHistory();
+  if(navigator.onLine)await retryPending();
+ }catch(error){status("Local database error: "+error.message);}
+})();
+</script>
+
+<script>
+const qrVideo=document.getElementById("qrVideo");
+let qrStream=null,qrScanning=false,qrFrame=0;
+
+function stopQR(){
+ qrScanning=false;
+ if(qrFrame)cancelAnimationFrame(qrFrame);
+ qrFrame=0;
+ if(qrStream)qrStream.getTracks().forEach(t=>t.stop());
+ qrStream=null;
+ qrVideo.srcObject=null;
+ document.getElementById("qrStart").classList.remove("hidden");
+ document.getElementById("qrStop").classList.add("hidden");
+}
+
+document.getElementById("showAI").onclick=()=>{
+ stopQR();
+ document.getElementById("aiPanel").classList.remove("hidden");
+ document.getElementById("qrPanel").classList.add("hidden");
+ document.getElementById("showAI").classList.add("active");
+ document.getElementById("showQR").classList.remove("active");
+};
+
+document.getElementById("showQR").onclick=()=>{
+ document.getElementById("stop").click();
+ document.getElementById("aiPanel").classList.add("hidden");
+ document.getElementById("qrPanel").classList.remove("hidden");
+ document.getElementById("showQR").classList.add("active");
+ document.getElementById("showAI").classList.remove("active");
+};
+
+function normalizeQR(raw){
+ let token=String(raw||"").trim();
+ if(!token)return "";
+ try{
+  const url=new URL(token);
+  if(url.hash&&url.hash.slice(1).startsWith("EF1:"))token=url.hash.slice(1);
+  else{
+   const parts=url.pathname.split("/").filter(Boolean);
+   if(parts.length>=2&&parts.at(-2)==="scan")token=decodeURIComponent(parts.at(-1));
+  }
+ }catch(e){}
+ if(token.startsWith("ETHIOFERTI:"))token=token.slice(11);
+ return token;
+}
+
+function showQRFields(data){
+ const box=document.getElementById("qrResult");
+ box.replaceChildren();
+ const labels={
+  n:"Product name",c:"Category",b:"Batch code",q:"Quantity (kg)",
+  type:"QR code type",url:"QR link",m:"Manufacturer",o:"Origin",r:"Registration number",
+  pd:"Production date",ed:"Expiry date",d:"Description",
+  i:"Ingredients",nc:"Nutrient composition",be:"Benefits",
+  sc:"Suitable crops",ai:"Application instructions",
+  si:"Safety instructions",st:"Storage instructions"
+ };
+ Object.keys(labels).forEach(key=>{
+  const value=data[key];
+  if(value===undefined||value===null||value==="")return;
+  const row=document.createElement("div");
+  row.className="field";
+  const label=document.createElement("strong");
+  label.textContent=labels[key];
+  const val=document.createElement("div");
+  if(key==="url"){
+   try{
+    const link=new URL(String(value));
+    if(link.protocol==="https:"||link.protocol==="http:"){
+     const anchor=document.createElement("a");
+     anchor.href=link.href;
+     anchor.target="_blank";
+     anchor.rel="noopener noreferrer";
+     anchor.textContent=link.href;
+     val.append(anchor);
+    }else{
+     val.textContent=String(value);
+    }
+   }catch{
+    val.textContent=String(value);
+   }
+  }else{
+   val.textContent=String(value);
+  }
+  row.append(label,val);
+  box.append(row);
+ });
+ box.classList.remove("hidden");
+}
+
+function toQRFields(product){
+ if(!product)return {};
+ if(product.n||product.b||product.v)return product;
+ return {
+  n:product.name,c:product.category,b:product.batch_code,
+  q:product.quantity_kg,m:product.manufacturer,o:product.origin,
+  r:product.registration_number,pd:product.production_date,
+  ed:product.expiry_date,d:product.description,i:product.ingredients,
+  nc:product.nutrient_composition,be:product.benefits,
+  sc:product.suitable_crops,ai:product.application_instructions,
+  si:product.safety_instructions,st:product.storage_instructions
+ };
+}
+
+async function saveQRProject(raw,fields={},imageData="",qrStatus="read"){
+ const productFields=fields||{};
+ const preview=imageData||"data:image/svg+xml;charset=UTF-8,"+
+  encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="500" height="350"><rect width="100%" height="100%" fill="#e8eee9"/><text x="50%" y="48%" text-anchor="middle" font-size="35" fill="#155c3b">QR PROJECT</text><text x="50%" y="62%" text-anchor="middle" font-size="18" fill="#52645a">QR scan saved</text></svg>');
+
+ const name=productFields.n||productFields.b||"QR scan";
+ const record={
+  project_type:"qr",
+  qr_status:qrStatus,
+  title:name+" — QR scan",
+  image_data:preview,
+  qr_raw:raw,
+  qr_product:productFields,
+  visual_observation:"QR code scanned and saved",
+  captured_at:new Date().toISOString()
+ };
+
+ await EthioFertiDB.addCameraRecord(record);
+ await refreshHistory();
+}
+
+async function openQR(raw,imageData=""){
+ const token=normalizeQR(raw);
+ const statusBox=document.getElementById("qrStatus");
+ const resultBox=document.getElementById("qrResult");
+
+ if(!token){
+  statusBox.textContent="No readable QR data was found.";
+  return false;
+ }
+
+ resultBox.classList.add("hidden");
+ statusBox.textContent="Reading QR code...";
+
+ let fields={};
+ let message="";
+ let lookupError="";
+
+ try{
+  await EthioFertiDB.openDB();
+
+  if(token.startsWith("EF1:")){
+   const product=EthioFertiDB.decodeQR(token);
+   if(!product)throw Error("Unsupported QR format.");
+   fields=toQRFields(product);
+   message="EthioFerti product QR recognized. Portable product information read successfully.";
+  }else{
+   let decodedURL=null;
+   try{
+    decodedURL=new URL(token);
+   }catch{}
+
+   if(decodedURL && ["http:","https:"].includes(decodedURL.protocol)){
+    const host=decodedURL.hostname.toLowerCase();
+    if(host==="wa.me" || host==="www.wa.me" ||
+       host==="whatsapp.com" || host.endsWith(".whatsapp.com")){
+     fields={
+      n:"WhatsApp contact",
+      type:"WhatsApp contact QR",
+      url:decodedURL.href,
+      d:"This QR code opens a WhatsApp contact or conversation."
+     };
+     message="WhatsApp contact QR recognized.";
+    }else{
+     fields={
+      n:"Website link",
+      type:"Website QR",
+      url:decodedURL.href,
+      d:"This QR code contains a website address."
+     };
+     message="Website QR recognized.";
+    }
+   }else if(!decodedURL){
+    fields={
+     n:"Text QR code",
+     type:"Plain text QR",
+     d:token
+    };
+    message="Plain text QR recognized.";
+   }
+
+   if(Object.keys(fields).length){
+    // General QR links and text are saved without product verification.
+   }else{
+   const saved=await EthioFertiDB.byIndex("qr_codes","token",token);
+
+   if(saved){
+    const product=await EthioFertiDB.getProductByBatch(saved.batch_code);
+    if(product){
+     fields=toQRFields(product);
+     message="Product found in this device's local database.";
+    }
+   }
+
+   if(!Object.keys(fields).length){
+    if(!navigator.onLine){
+     throw Error("Product details are unavailable offline.");
+    }
+
+    const response=await fetch("/api/v1/qr/verify/"+encodeURIComponent(token));
+    const data=await response.json();
+    if(!response.ok)throw Error(data.detail||"Product verification failed.");
+
+    fields=toQRFields(data.product||data);
+    message="Registered QR product information loaded.";
+   }
+   }
+  }
+ }catch(error){
+  lookupError=error.message||"Product information could not be retrieved.";
+ }
+
+ await saveQRProject(
+  raw,
+  fields,
+  imageData,
+  lookupError?"unverified":"read"
+ );
+
+ if(Object.keys(fields).length){
+  showQRFields(fields);
+  statusBox.textContent=message+" QR project saved on this device.";
+ }else{
+  showQRFields({});
+  statusBox.textContent="QR decoded and saved in QR projects. Product details unavailable: "+lookupError;
+ }
+
+ return !lookupError;
+}
+
+document.getElementById("qrUploadButton").onclick=()=>{
+ document.getElementById("qrImageInput").click();
+};
+
+document.getElementById("qrImageInput").onchange=async event=>{
+ const file=event.target.files?.[0];
+ if(!file)return;
+
+ const uploadStatus=document.getElementById("qrUploadStatus");
+ uploadStatus.textContent="Reading QR code from your image...";
+
+ try{
+  if(!file.type.startsWith("image/"))throw Error("Please choose an image file.");
+
+  const bitmap=await createImageBitmap(file);
+  const maxSide=1800;
+  const scale=Math.min(1,maxSide/Math.max(bitmap.width,bitmap.height));
+  const canvas=document.createElement("canvas");
+  canvas.width=Math.round(bitmap.width*scale);
+  canvas.height=Math.round(bitmap.height*scale);
+
+  const context=canvas.getContext("2d",{willReadFrequently:true});
+  context.drawImage(bitmap,0,0,canvas.width,canvas.height);
+  bitmap.close();
+
+  const frame=context.getImageData(0,0,canvas.width,canvas.height);
+  const found=window.jsQR(frame.data,frame.width,frame.height,{inversionAttempts:"attemptBoth"});
+
+  if(!found||!found.data)throw Error("No readable QR code found. Try a clearer image.");
+
+  const imageData=canvas.toDataURL("image/jpeg",0.85);
+  const detailsLoaded=await openQR(found.data,imageData);
+  uploadStatus.textContent=detailsLoaded?"QR image read and product details saved in QR projects.":"QR image decoded and saved in QR projects, but product details could not be verified.";
+ }catch(error){
+  uploadStatus.textContent="Image scan error: "+error.message;
+ }finally{
+  event.target.value="";
+ }
+};
+
+
+document.getElementById("openQR").onclick=()=>openQR(document.getElementById("manualQR").value);
+document.getElementById("manualQR").addEventListener("keydown",e=>{
+ if(e.key==="Enter")openQR(e.target.value);
+});
+
+document.getElementById("qrStart").onclick=async()=>{
+ try{
+  if(!window.jsQR)throw Error("Local QR decoder is missing.");
+  qrStream=await navigator.mediaDevices.getUserMedia({
+   audio:false,video:{facingMode:{ideal:"environment"}}
+  });
+  qrVideo.srcObject=qrStream;
+  await qrVideo.play();
+  document.getElementById("qrStart").classList.add("hidden");
+  document.getElementById("qrStop").classList.remove("hidden");
+  statusQR("Camera active. Hold the QR code steady.");
+  qrScanning=true;
+  scanQR();
+ }catch(error){statusQR("Camera error: "+error.message);stopQR();}
+};
+
+function statusQR(message){document.getElementById("qrStatus").textContent=message;}
+
+document.getElementById("qrStop").onclick=()=>{
+ stopQR();
+ statusQR("Camera stopped.");
+};
+
+function scanQR(){
+ if(!qrScanning)return;
+ if(qrVideo.readyState===qrVideo.HAVE_ENOUGH_DATA){
+  const canvas=document.createElement("canvas");
+  canvas.width=qrVideo.videoWidth;
+  canvas.height=qrVideo.videoHeight;
+  if(canvas.width&&canvas.height){
+   const ctx=canvas.getContext("2d",{willReadFrequently:true});
+   ctx.drawImage(qrVideo,0,0,canvas.width,canvas.height);
+   const frame=ctx.getImageData(0,0,canvas.width,canvas.height);
+   const found=window.jsQR(frame.data,frame.width,frame.height,{inversionAttempts:"attemptBoth"});
+   if(found&&found.data){
+    const preview=canvas.toDataURL("image/jpeg",0.85);
+    stopQR();
+    openQR(found.data,preview);
+    return;
+   }
+  }
+ }
+ qrFrame=requestAnimationFrame(scanQR);
+}
+window.addEventListener("pagehide",stopQR);
+</script>
+
+<script>
+if ("serviceWorker" in navigator) {
+  window.addEventListener("load", () => {
+    navigator.serviceWorker.register("/service-worker.js").catch(error => {
+      console.error("Offline installation setup:", error);
+    });
+  });
+}
+</script>
+</body>
+</html>

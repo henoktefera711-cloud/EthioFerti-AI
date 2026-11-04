@@ -1,0 +1,19 @@
+{
+  "id": "/",
+  "name": "EthioFerti AI",
+  "short_name": "EthioFerti",
+  "description": "Fertilizer product records, material recognition and QR information.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#f1f5f1",
+  "theme_color": "#155c3b",
+  "icons": [
+    {
+      "src": "/icons/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}

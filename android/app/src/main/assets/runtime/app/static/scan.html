@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#155c3b">
+<title>EthioFerti AI — Product Information</title>
+<style>
+*{box-sizing:border-box}body{margin:0;background:#f1f5f1;color:#20352a;font-family:Arial,sans-serif}
+header{background:#155c3b;color:white;padding:18px;font-weight:bold}
+main{max-width:720px;margin:auto;padding:16px}.card{background:white;padding:18px;border-radius:15px;margin-bottom:15px}
+h1{font-size:23px}h2{font-size:17px;color:#155c3b}
+p{font-size:14px;line-height:1.6;color:#68766d}
+.field{padding:12px 0;border-bottom:1px solid #e8eee9}
+.field:last-child{border:0}.key{font-size:12px;color:#718077;margin-bottom:5px}
+.value{font-size:15px;line-height:1.6;overflow-wrap:anywhere;white-space:pre-wrap}
+.notice{background:#fff4dc;padding:13px;border-radius:10px;font-size:13px;line-height:1.6}
+a{color:#155c3b;font-weight:bold}
+#status{white-space:pre-wrap}
+</style>
+<link rel="manifest" href="/manifest.webmanifest">\n<meta name="theme-color" content="#155c3b">\n</head>
+<body>
+<header>🌱 EthioFerti AI · Product Information</header>
+<main>
+<section class="card">
+<h1 id="productName">Reading QR code...</h1>
+<p id="status">Loading product information.</p>
+<div id="details"></div>
+</section>
+<section class="card">
+<div class="notice">
+<strong>Important authenticity notice</strong><br>
+Product information embedded in a QR code can be read on different devices, including offline. This information alone does not prove that the product is genuine, that its manufacturer is legitimate, or that its chemical composition is accurate. Use trusted registration records and laboratory testing for independent verification.
+</div>
+</section>
+<section class="card"><a href="/qr-scanner">← Scan another QR code</a></section>
+<section class="card"><a href="/">← Back to dashboard</a></section>
+</main>
+<script src="/local-db.js"></script>
+<script>
+const nameBox=document.getElementById("productName");
+const statusBox=document.getElementById("status");
+const details=document.getElementById("details");
+
+function showFields(data){
+ details.replaceChildren();
+ const labels={
+  n:"Product name",c:"Category",b:"Batch code",q:"Quantity (kg)",
+  m:"Manufacturer",o:"Origin",r:"Registration number",
+  pd:"Production date",ed:"Expiry date",d:"Description",
+  i:"Ingredients",nc:"Nutrient composition",be:"Benefits",
+  sc:"Suitable crops",ai:"Application instructions",
+  si:"Safety instructions",st:"Storage instructions"
+ };
+ const keys=Object.keys(labels);
+ keys.forEach(key=>{
+  const value=data[key];
+  if(value===undefined||value===null||value==="")return;
+  const row=document.createElement("div");
+  row.className="field";
+  const label=document.createElement("div");
+  label.className="key";
+  label.textContent=labels[key];
+  const content=document.createElement("div");
+  content.className="value";
+  content.textContent=String(value);
+  row.append(label,content);
+  details.append(row);
+ });
+}
+
+function showLegacy(data){
+ details.replaceChildren();
+ function walk(value,label){
+  if(value===null||value===undefined||typeof value==="function")return;
+  if(typeof value==="object"){
+   if(Array.isArray(value)){
+    value.forEach((item,index)=>walk(item,label+" "+(index+1)));
+   }else{
+    Object.entries(value).forEach(([key,item])=>walk(item,key.replace(/_/g," ")));
+   }
+   return;
+  }
+  const row=document.createElement("div");
+  row.className="field";
+  const key=document.createElement("div");
+  key.className="key";
+  key.textContent=label;
+  const val=document.createElement("div");
+  val.className="value";
+  val.textContent=String(value);
+  row.append(key,val);
+  details.append(row);
+ }
+ walk(data,"Product information");
+}
+
+async function load(){
+ const params=new URLSearchParams(location.search);\n const token=params.get("data")||decodeURIComponent(location.pathname.split("/").filter(Boolean).pop()||"");
+ if(token.startsWith("EF1:")){
+  try{
+   const product=EthioFertiDB.decodeQR(token);
+   if(!product)throw Error("Unsupported product QR format.");
+   nameBox.textContent=product.n||"Product information";
+   statusBox.textContent="Portable product information read directly from this QR code. No internet or local database lookup was needed.";
+   showFields(product);
+  }catch(error){
+   nameBox.textContent="QR data could not be read";
+   statusBox.textContent=error.message;
+  }
+  return;
+ }
+
+ try{
+  await EthioFertiDB.openDB();
+  const saved=await EthioFertiDB.byIndex("qr_codes","token",token);
+  if(saved){
+   const product=await EthioFertiDB.getProductByBatch(saved.batch_code);
+   if(product){
+    nameBox.textContent=product.name||"Registered product";
+    statusBox.textContent="Product record found in this device's local database.";
+    showFields({
+     n:product.name,c:product.category,b:product.batch_code,q:product.quantity_kg,
+     m:product.manufacturer,o:product.origin,r:product.registration_number,
+     pd:product.production_date,ed:product.expiry_date,d:product.description,
+     i:product.ingredients,nc:product.nutrient_composition,be:product.benefits,
+     sc:product.suitable_crops,ai:product.application_instructions,
+     si:product.safety_instructions,st:product.storage_instructions
+    });
+    return;
+   }
+  }
+ }catch(error){}
+
+ if(!navigator.onLine){
+  nameBox.textContent="Product not available offline";
+  statusBox.textContent="This is an older lookup-token QR code and its product record is not stored on this device. Connect to the internet to check it.";
+  return;
+ }
+
+ try{
+  const response=await fetch("/api/v1/qr/verify/"+encodeURIComponent(token));
+  const data=await response.json();
+  if(!response.ok)throw Error(data.detail||"QR verification failed.");
+  nameBox.textContent=data.product?.name||data.name||"Registered product";
+  statusBox.textContent="Legacy QR verification response. Review the returned registration information below.";
+  showLegacy(data);
+ }catch(error){
+  nameBox.textContent="Product lookup failed";
+  statusBox.textContent=error.message;
+ }
+}
+load();
+</script>
+<script>
+if ("serviceWorker" in navigator) {
+  window.addEventListener("load", () => {
+    navigator.serviceWorker.register("/service-worker.js").catch(error => {
+      console.error("Offline installation setup:", error);
+    });
+  });
+}
+</script>
+</body>
+</html>
