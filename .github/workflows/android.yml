@@ -45,6 +45,11 @@ jobs:
           if [ -f data/ethioferti.db ]; then cp data/ethioferti.db android/app/src/main/assets/runtime/data/ethioferti.db; fi
           if [ -d data/uploads ]; then mkdir -p android/app/src/main/assets/runtime/data/uploads; cp -a data/uploads/. android/app/src/main/assets/runtime/data/uploads/; fi
 
+      - name: Set up Python for Chaquopy
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
       - name: Build APK
         working-directory: android
         run: |
