@@ -76,6 +76,10 @@ public class MainActivity extends Activity {
                 copyAssets("runtime", runtime);
             }
 
+            // Refresh application code and web interface on every launch.
+            // The persistent runtime/data directory is deliberately preserved.
+            copyAssets("runtime/app", new File(runtime, "app"));
+
             if (!Python.isStarted()) {
                 Python.start(new AndroidPlatform(this));
             }

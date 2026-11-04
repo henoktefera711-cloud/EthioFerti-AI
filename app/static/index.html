@@ -75,7 +75,628 @@ a{color:#155c3b;font-weight:bold}
 }
 
 </style>
-<link rel="manifest" href="/manifest.webmanifest"><meta name="theme-color" content="#155c3b"></head>
+<link rel="manifest" href="/manifest.webmanifest"><meta name="theme-color" content="#155c3b">
+<style>
+/* ETHIOFERTI PREMIUM VISUAL UPGRADE V1 */
+:root {
+  --forest:#123d2b;
+  --forest-deep:#0b2c20;
+  --green:#23764d;
+  --mint:#e6f2e9;
+  --gold:#d8b66c;
+  --ink:#182c22;
+  --muted:#718077;
+  --line:#e4ebe5;
+  --surface:#ffffff;
+  --page:#f3f6f2;
+  --shadow:0 12px 35px rgba(22,54,36,.075);
+}
+* { box-sizing:border-box; }
+html { scroll-behavior:smooth; }
+body {
+  margin:0;
+  color:var(--ink);
+  background:
+    radial-gradient(ellipse at 5% 0%,rgba(35,118,77,.09),transparent 32rem),
+    var(--page);
+  font-family:Inter,"Segoe UI",Roboto,Arial,sans-serif;
+  -webkit-font-smoothing:antialiased;
+}
+header {
+  position:relative;
+  overflow:hidden;
+  isolation:isolate;
+  padding:23px max(20px,calc((100% - 820px)/2));
+  min-height:82px;
+  display:flex;
+  align-items:center;
+  background:linear-gradient(115deg,#0b2c20 0%,#15583a 58%,#20734b 100%);
+  color:white;
+  font-size:19px;
+  font-weight:850;
+  letter-spacing:-.45px;
+  box-shadow:0 5px 24px #123d2b25;
+}
+header:before {
+  content:"";
+  position:absolute;
+  width:230px;height:230px;
+  right:-65px;top:-145px;
+  border:1px solid #ffffff20;
+  border-radius:50%;
+  box-shadow:0 0 0 25px #ffffff08,0 0 0 55px #ffffff06;
+  z-index:-1;
+}
+header:after {
+  content:"FIELD INTELLIGENCE  ·  ETHIOPIA";
+  position:absolute;
+  right:20px;bottom:12px;
+  font-size:8px;
+  letter-spacing:2px;
+  color:#ffffff80;
+  font-weight:700;
+}
+main {
+  width:min(100% - 30px,780px);
+  max-width:780px;
+  margin:25px auto 60px;
+  padding:0;
+}
+.taskbar {
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:11px;
+  padding:6px;
+  margin-bottom:17px;
+  background:#e8eee8;
+  border:1px solid #e0e9e1;
+  border-radius:17px;
+}
+.task-btn {
+  position:relative;
+  min-height:55px;
+  padding:13px 9px;
+  border:1px solid transparent;
+  border-radius:12px;
+  background:transparent;
+  color:#627267;
+  font-size:14px;
+  font-weight:800;
+  box-shadow:none;
+  transition:all .25s ease;
+}
+.task-btn.active {
+  color:white;
+  background:linear-gradient(135deg,#164d34,#23764d);
+  border-color:#276e49;
+  box-shadow:0 5px 14px #123d2b28;
+}
+.task-btn:active,button:active { transform:scale(.98); }
+.card {
+  padding:clamp(16px,4vw,25px);
+  margin-bottom:17px;
+  background:var(--surface);
+  border:1px solid #e8eee8;
+  border-radius:20px;
+  box-shadow:var(--shadow);
+  animation:ethioEnter .45s ease both;
+}
+h1,h2,h3 { color:var(--ink); }
+h1 {font-size:25px;letter-spacing:-.7px;}
+h2 {font-size:20px;letter-spacing:-.4px;}
+.project-section-title {
+  display:flex;
+  align-items:center;
+  gap:9px;
+  margin:26px 0 12px;
+  padding:0 0 12px;
+  border-bottom:1px solid var(--line);
+  color:var(--forest);
+  font-size:14px;
+  font-weight:850;
+  letter-spacing:.1px;
+}
+#camera {
+  position:relative;
+  min-height:270px;
+  border:1px solid #244c36;
+  border-radius:17px;
+  background:
+    radial-gradient(ellipse at 50% 45%,#28543a 0%,#142f21 58%,#0b2017 100%);
+  box-shadow:inset 0 0 45px #00000030;
+}
+#camera:after {
+  content:"";
+  position:absolute;
+  inset:17px;
+  pointer-events:none;
+  border:1px solid #ffffff12;
+  border-radius:11px;
+}
+#cameraText {
+  position:relative;
+  z-index:1;
+  max-width:300px;
+  color:#e4f0e7;
+  font-size:14px;
+  line-height:1.7;
+}
+#cameraText:empty:before {
+  content:"◉";
+  display:block;
+  margin-bottom:12px;
+  color:#b6d8bd;
+  font-size:34px;
+}
+#video {
+  position:relative;
+  z-index:1;
+  width:100%;
+  max-height:440px;
+  object-fit:cover;
+}
+button {
+  font-family:inherit;
+  transition:transform .2s ease,background .2s ease,box-shadow .2s ease;
+}
+.primary {
+  min-height:49px;
+  margin-top:12px;
+  border-radius:12px;
+  background:linear-gradient(110deg,#155438,#258052);
+  color:white;
+  font-size:14px;
+  font-weight:800;
+  box-shadow:0 5px 13px #15543820;
+}
+.primary:hover {
+  background:linear-gradient(110deg,#10442d,#1b6d43);
+  box-shadow:0 7px 18px #15543830;
+}
+.secondary {
+  min-height:45px;
+  margin-top:10px;
+  border:1px solid #dce9df;
+  border-radius:12px;
+  background:#f0f6f1;
+  color:#205c3b;
+  font-size:13px;
+  font-weight:750;
+}
+#status,#qrStatus {
+  padding:14px 15px;
+  border:1px solid #e2ebe3;
+  border-radius:12px;
+  background:#f4f8f4;
+  color:#53675a;
+  font-size:13px;
+  line-height:1.65;
+}
+.result {
+  padding:14px;
+  border:1px solid #e6eee7;
+  border-radius:12px;
+  background:#f5f8f5;
+  color:#43564a;
+  line-height:1.7;
+}
+.notice {
+  margin-top:17px;
+  padding:14px;
+  border:1px solid #eee1bf;
+  border-radius:12px;
+  background:#fff9e9;
+  color:#78643a;
+  line-height:1.7;
+}
+.field h3 {
+  color:var(--forest);
+  font-size:13px;
+  font-weight:850;
+}
+.history-item {
+  grid-template-columns:135px minmax(0,1fr);
+  gap:15px;
+  padding:16px 0;
+  border-bottom:1px solid var(--line);
+}
+.history-item img {
+  height:125px;
+  border-radius:13px;
+  background:#edf3ed;
+}
+.project-content {gap:8px;}
+.project-title {
+  color:#1a3526;
+  font-size:15px;
+  font-weight:800;
+}
+.project-date {
+  color:#89958c;
+  font-size:11px;
+}
+.project-description {
+  color:#65756a;
+  font-size:13px;
+  line-height:1.6;
+}
+.project-status {
+  padding:5px 9px;
+  border-radius:20px;
+  background:#e9f5ec;
+  color:#247348;
+  font-size:11px;
+}
+.project-view {
+  min-height:35px;
+  padding:9px 15px;
+  border-radius:9px;
+  background:#174d33;
+  font-size:12px;
+  box-shadow:0 3px 8px #123d2b18;
+}
+.project-delete {
+  border-radius:9px;
+  font-size:12px;
+}
+.qr-video {
+  min-height:240px;
+  border:1px solid #264d37;
+  border-radius:16px;
+  background:#102b1e;
+}
+.qr-input {
+  min-height:49px;
+  border:1px solid #dce7de;
+  border-radius:12px;
+  background:#fbfdfb;
+  color:var(--ink);
+  font-family:inherit;
+  outline:none;
+}
+.qr-input:focus,.project-title:focus {
+  border-color:#47946a;
+  box-shadow:0 0 0 3px #47946a18;
+}
+.qr-result {
+  border:1px solid #e0eae1;
+  border-radius:13px;
+  background:#f5f8f5;
+}
+a {color:#207449;}
+button:focus-visible,a:focus-visible,input:focus-visible {
+  outline:3px solid #d8b66c;
+  outline-offset:3px;
+}
+.hidden {display:none!important;}
+@keyframes ethioEnter {
+  from {opacity:0;transform:translateY(9px);}
+  to {opacity:1;transform:translateY(0);}
+}
+@media(max-width:500px) {
+  header {
+    min-height:75px;
+    padding:20px 16px;
+    font-size:17px;
+  }
+  header:after {font-size:7px;right:13px;bottom:9px;}
+  main {
+    width:calc(100% - 22px);
+    margin:16px auto 35px;
+  }
+  .card {padding:15px;border-radius:17px;}
+  .task-btn {min-height:51px;font-size:12px;}
+  #camera {min-height:245px;}
+  .history-item {
+    grid-template-columns:100px minmax(0,1fr);
+    gap:11px;
+    padding:13px 0;
+  }
+  .history-item img {height:108px;}
+  .project-title {font-size:13px;}
+  .project-description {font-size:12px;}
+  .project-view {padding:8px 11px;}
+}
+@media(prefers-reduced-motion:reduce) {
+  *,*:before,*:after {
+    scroll-behavior:auto!important;
+    animation-duration:.01ms!important;
+    transition-duration:.01ms!important;
+  }
+}
+</style>
+
+
+<style>
+/* ETHIOFERTI IOS MOBILE EXPERIENCE V2 */
+
+:root {
+  --ios-green:#17613d;
+  --ios-glass:rgba(255,255,255,.82);
+  --ios-border:rgba(255,255,255,.85);
+  --ios-shadow:0 8px 30px rgba(28,55,37,.075);
+}
+
+body {
+  background:
+    radial-gradient(ellipse at 10% 0%,#e0eee2 0%,transparent 38%),
+    #f2f5f1;
+  font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display",
+    "Segoe UI",Roboto,Arial,sans-serif;
+  letter-spacing:-.15px;
+  padding-bottom:env(safe-area-inset-bottom);
+}
+
+header {
+  min-height:88px;
+  padding:20px max(18px,calc((100% - 920px)/2));
+  font-size:20px;
+  letter-spacing:-.6px;
+  backdrop-filter:blur(20px);
+  -webkit-backdrop-filter:blur(20px);
+}
+
+main {
+  width:calc(100% - 20px);
+  max-width:920px;
+  margin:22px auto 55px;
+}
+
+.card {
+  padding:clamp(18px,3.5vw,30px);
+  border:1px solid var(--ios-border);
+  border-radius:25px;
+  background:var(--ios-glass);
+  box-shadow:var(--ios-shadow);
+  backdrop-filter:blur(18px);
+  -webkit-backdrop-filter:blur(18px);
+}
+
+.taskbar {
+  padding:6px;
+  gap:7px;
+  border:1px solid #e5ece5;
+  border-radius:19px;
+  background:#e9eee9;
+}
+
+.task-btn {
+  min-height:61px;
+  border-radius:15px;
+  font-size:14px;
+  letter-spacing:-.2px;
+}
+
+.primary,.secondary {
+  width:100%;
+  min-height:58px;
+  padding:16px 20px;
+  border-radius:16px;
+  font-size:15px;
+  font-weight:800;
+  letter-spacing:-.2px;
+}
+
+.primary {
+  background:linear-gradient(145deg,#1c7048,#125335);
+  box-shadow:0 7px 17px rgba(23,97,61,.19);
+}
+
+.secondary {
+  background:#edf4ee;
+  border:1px solid #dce9de;
+  color:#205d3c;
+}
+
+#camera {
+  min-height:300px;
+  border-radius:21px;
+  overflow:hidden;
+  background:#102b1d;
+}
+
+#video {
+  width:100%;
+  height:100%;
+  max-height:500px;
+  min-height:300px;
+  object-fit:cover;
+}
+
+#cameraText {
+  padding:35px 24px;
+  font-size:15px;
+}
+
+#status,#qrStatus {
+  padding:17px;
+  border-radius:15px;
+  font-size:14px;
+  background:#f2f7f2;
+}
+
+.project-section-title {
+  margin-top:30px;
+  font-size:15px;
+}
+
+.history-item {
+  grid-template-columns:145px minmax(0,1fr);
+  gap:17px;
+  padding:17px 0;
+}
+
+.history-item img {
+  height:135px;
+  border-radius:16px;
+}
+
+.project-title {
+  font-size:15px;
+  padding:8px;
+  border-radius:10px;
+}
+
+.project-view {
+  min-height:42px;
+  padding:11px 17px;
+  border-radius:12px;
+  font-size:13px;
+}
+
+.qr-input {
+  min-height:57px;
+  padding:16px;
+  border-radius:15px;
+  font-size:15px;
+}
+
+/* QR camera fills its complete viewing frame */
+#qrPanel {
+  overflow:hidden;
+}
+
+.qr-video {
+  display:block;
+  width:100%;
+  height:clamp(300px,65vw,470px);
+  min-height:300px;
+  max-height:none;
+  object-fit:cover;
+  object-position:center;
+  border-radius:21px;
+  background:#102b1d;
+}
+
+/* Larger result sections */
+#results {
+  padding:clamp(18px,4vw,30px);
+}
+
+#analysis .field {
+  margin-top:19px;
+}
+
+#analysis .field h3 {
+  font-size:14px;
+  letter-spacing:-.2px;
+}
+
+#analysis .result {
+  padding:16px;
+  border-radius:15px;
+  font-size:14px;
+}
+
+/* Comfortable touch feedback */
+button {
+  -webkit-tap-highlight-color:transparent;
+  touch-action:manipulation;
+}
+
+button:active {
+  transform:scale(.975);
+  transition:transform .12s ease;
+}
+
+input {
+  font-family:inherit;
+}
+
+@media(max-width:600px) {
+  header {
+    min-height:78px;
+    padding:19px 17px;
+    font-size:18px;
+  }
+
+  main {
+    width:calc(100% - 14px);
+    margin:13px auto 35px;
+  }
+
+  .card {
+    padding:16px;
+    border-radius:22px;
+    margin-bottom:13px;
+  }
+
+  .taskbar {
+    margin-bottom:13px;
+  }
+
+  .task-btn {
+    min-height:59px;
+    padding:12px 5px;
+    font-size:13px;
+  }
+
+  #camera {
+    min-height:290px;
+    border-radius:19px;
+  }
+
+  #video {
+    min-height:290px;
+  }
+
+  .qr-video {
+    height:72vw;
+    min-height:290px;
+    max-height:440px;
+    border-radius:19px;
+  }
+
+  .primary,.secondary {
+    min-height:59px;
+    font-size:15px;
+  }
+
+  .history-item {
+    grid-template-columns:112px minmax(0,1fr);
+    gap:12px;
+    padding:15px 0;
+  }
+
+  .history-item img {
+    height:120px;
+    border-radius:14px;
+  }
+
+  .project-title {
+    font-size:14px;
+  }
+
+  .project-description {
+    font-size:13px;
+  }
+
+  .project-view {
+    min-height:40px;
+  }
+
+  .qr-input {
+    min-height:56px;
+  }
+}
+
+@media(min-width:700px) {
+  .taskbar {
+    max-width:600px;
+    margin-left:auto;
+    margin-right:auto;
+  }
+}
+
+@media(prefers-reduced-motion:reduce) {
+  * {
+    animation:none!important;
+    transition:none!important;
+  }
+}
+</style>
+
+</head>
 <body>
 <header>🌱 EthioFerti AI · Material Intelligence</header>
 
@@ -195,30 +816,75 @@ function addField(container,title,value){
 function displayAnalysis(data){
  const box=document.getElementById("analysis");
  box.replaceChildren();
- const fields=[
-  ["Likely material category",data.category_en],
-  ["የቁሳቁሱ ዓይነት",data.category_am],
-  ["AI identification",data.identification_en],
-  ["የAI ለይቶ ማወቅ",data.identification_am],
+
+ function addInsight(title,entries){
+  const values=entries.filter(([label,value])=>
+   value!==undefined&&value!==null&&value!==""
+  );
+  if(!values.length)return;
+
+  const section=document.createElement("section");
+  section.className="field insight";
+
+  const heading=document.createElement("h3");
+  heading.textContent=title;
+
+  const paragraph=document.createElement("p");
+  paragraph.className="insight-paragraph";
+
+  values.forEach(([label,value],index)=>{
+   if(index)paragraph.append(document.createTextNode(" "));
+   const strong=document.createElement("strong");
+   strong.textContent=label+": ";
+   paragraph.append(strong);
+   paragraph.append(document.createTextNode(
+    Array.isArray(value)?value.join(", "):String(value)
+   ));
+  });
+
+  section.append(heading,paragraph);
+  box.append(section);
+ }
+
+ addInsight("Material assessment · የቁሳቁሱ ግምገማ",[
+  ["Likely category",data.category_en],
+  ["የቁሳቁስ ዓይነት",data.category_am],
+  ["Identification",data.identification_en],
+  ["መለያየት",data.identification_am]
+ ]);
+
+ addInsight("Physical appearance · አካላዊ ገጽታ",[
   ["Visual description",data.visual_description_en],
   ["የሚታይ መግለጫ",data.visual_description_am],
   ["Visible clues",data.visible_clues_en],
-  ["የሚታዩ ምልክቶች",data.visible_clues_am],
-  ["Confidence: "+(data.confidence_band||"unknown").toUpperCase(),data.confidence_explanation_en],
-  ["የእርግጠኝነት ማብራሪያ",data.confidence_explanation_am],
-  ["Possible uses",data.possible_uses_en],
-  ["ሊኖሩ የሚችሉ አጠቃቀሞች",data.possible_uses_am],
-  ["What cannot be determined visually",data.cannot_determine_en],
-  ["በምስል ብቻ ማወቅ የማይቻለው",data.cannot_determine_am],
+  ["የሚታዩ ምልክቶች",data.visible_clues_am]
+ ]);
+
+ addInsight("Assessment confidence · የግምገማ እርግጠኝነት",[
+  ["Confidence",data.confidence_band],
+  ["Explanation",data.confidence_explanation_en],
+  ["ማብራሪያ",data.confidence_explanation_am]
+ ]);
+
+ addInsight("Potential uses · ሊኖሩ የሚችሉ አጠቃቀሞች",[
+  ["Agricultural uses",data.possible_uses_en],
+  ["የግብርና አጠቃቀም",data.possible_uses_am]
+ ]);
+
+ addInsight("Limitations and verification · ገደቦችና ማረጋገጫ",[
+  ["What a photograph cannot establish",data.cannot_determine_en],
+  ["በፎቶ ብቻ ማረጋገጥ የማይቻለው",data.cannot_determine_am],
   ["Recommended laboratory tests",data.recommended_tests_en],
-  ["የሚመከሩ የላቦራቶሪ ምርመራዎች",data.recommended_tests_am],
-  ["Farmer guidance",data.farmer_guidance_en],
-  ["ለገበሬው ምክር",data.farmer_guidance_am]
- ];
- fields.forEach(([title,value])=>addField(box,title,value));
+  ["የሚመከሩ የላቦራቶሪ ምርመራዎች",data.recommended_tests_am]
+ ]);
+
+ addInsight("Farmer guidance · ለገበሬው ምክር",[
+  ["Recommendation",data.farmer_guidance_en],
+  ["ምክር",data.farmer_guidance_am]
+ ]);
+
  document.getElementById("results").classList.remove("hidden");
 }
-
 
 async function refreshHistory(){
  const history=document.getElementById("history");
@@ -355,8 +1021,17 @@ async function recognizeRecord(record,queueItem){
   headers:{"Content-Type":"application/json"},
   body:JSON.stringify({image_data:record.image_data})
  });
- const result=await response.json();
- if(!response.ok)throw Error(result.detail||"AI analysis failed.");
+ const responseText=await response.text();
+ let result;
+ try {
+  result=JSON.parse(responseText);
+ } catch {
+  if(responseText.trimStart().startsWith("<")) {
+   throw Error("AI service is not reachable. Open EthioFerti AI with its Android backend running, not the static website preview.");
+  }
+  throw Error("The AI service returned an invalid response.");
+ }
+ if(!response.ok)throw Error(result.detail||"AI inspection failed.");
 
  record.analysis=result.analysis;
  record.server_record_id=result.record_id;
@@ -458,9 +1133,9 @@ capture.onclick=async()=>{
   }
 
   capture.textContent="Analyzing...";
-  status("Photograph saved locally. Sending it to Gemini AI...");
+  status("Photograph saved locally. Sending photograph for AI material inspection...");
   await recognizeRecord(record,queueItem);
-  status("Gemini analysis completed. Saved locally as inspection #"+id);
+  status("Material inspection completed. Saved locally as inspection #"+id);
   await refreshHistory();
   document.getElementById("results").scrollIntoView({behavior:"smooth"});
 
@@ -489,10 +1164,13 @@ window.addEventListener("online",retryPending);
 
 <script>
 const qrVideo=document.getElementById("qrVideo");
+qrVideo.setAttribute("playsinline","");
+qrVideo.muted=true;
 let qrStream=null,qrScanning=false,qrFrame=0;
 
 function stopQR(){
  qrScanning=false;
+ qrLastScanAt=0;
  if(qrFrame)cancelAnimationFrame(qrFrame);
  qrFrame=0;
  if(qrStream)qrStream.getTracks().forEach(t=>t.stop());
@@ -618,7 +1296,7 @@ async function openQR(raw,imageData=""){
  const resultBox=document.getElementById("qrResult");
 
  if(!token){
-  statusBox.textContent="No readable QR data was found.";
+  statusBox.textContent="Enter QR data or a product token, or use the camera or image upload.";
   return false;
  }
 
@@ -663,40 +1341,48 @@ async function openQR(raw,imageData=""){
      };
      message="Website QR recognized.";
     }
-   }else if(!decodedURL){
-    fields={
-     n:"Text QR code",
-     type:"Plain text QR",
-     d:token
-    };
-    message="Plain text QR recognized.";
-   }
-
-   if(Object.keys(fields).length){
-    // General QR links and text are saved without product verification.
-   }else{
-   const saved=await EthioFertiDB.byIndex("qr_codes","token",token);
-
-   if(saved){
-    const product=await EthioFertiDB.getProductByBatch(saved.batch_code);
-    if(product){
-     fields=toQRFields(product);
-     message="Product found in this device's local database.";
-    }
    }
 
    if(!Object.keys(fields).length){
-    if(!navigator.onLine){
-     throw Error("Product details are unavailable offline.");
+    const saved=await EthioFertiDB.byIndex("qr_codes","token",token);
+
+    if(saved){
+     const product=await EthioFertiDB.getProductByBatch(saved.batch_code);
+     if(product){
+      fields=toQRFields(product);
+      message="Product found in this device's local database.";
+     }
     }
 
-    const response=await fetch("/api/v1/qr/verify/"+encodeURIComponent(token));
-    const data=await response.json();
-    if(!response.ok)throw Error(data.detail||"Product verification failed.");
+    if(!Object.keys(fields).length && navigator.onLine){
+     const response=await fetch(
+      "/api/v1/qr/verify/"+encodeURIComponent(token),
+      {headers:{"Accept":"application/json"}}
+     );
+     let data={};
+     try{data=await response.json();}catch{}
 
-    fields=toQRFields(data.product||data);
-    message="Registered QR product information loaded.";
-   }
+     if(response.ok){
+      fields=toQRFields(data.product||data);
+      message="Registered QR product information loaded.";
+     }else if(response.status===404){
+      fields={
+       n:"Text QR code",
+       type:"Plain text QR",
+       d:token
+      };
+      message="Unregistered QR text recognized.";
+     }else{
+      throw Error(data.detail||"QR verification service is unavailable.");
+     }
+    }else if(!Object.keys(fields).length && !navigator.onLine){
+     fields={
+      n:"Offline QR content",
+      type:"QR code",
+      d:token
+     };
+     message="QR content read offline. Product verification requires internet.";
+    }
    }
   }
  }catch(error){
@@ -725,35 +1411,87 @@ document.getElementById("qrUploadButton").onclick=()=>{
  document.getElementById("qrImageInput").click();
 };
 
+async function decodeUploadedQR(file){
+ let source=null,objectURL=null;
+ try{
+  if(typeof createImageBitmap==="function"){
+   try{source=await createImageBitmap(file);}catch{}
+  }
+
+  if(!source){
+   objectURL=URL.createObjectURL(file);
+   source=await new Promise((resolve,reject)=>{
+    const image=new Image();
+    image.onload=()=>resolve(image);
+    image.onerror=()=>reject(Error("This image format cannot be decoded by the device."));
+    image.src=objectURL;
+   });
+  }
+
+  const width=source.width||source.naturalWidth;
+  const height=source.height||source.naturalHeight;
+  if(!width||!height)throw Error("The selected image has invalid dimensions.");
+
+  const maxSide=1800;
+  const baseScale=Math.min(1,maxSide/Math.max(width,height));
+  const scales=[baseScale,Math.min(1.5,1200/Math.max(width,height))];
+  const rotations=[0,90,180,270];
+
+  for(const rotation of rotations){
+   for(const scale of scales){
+    const w=Math.max(1,Math.round(width*scale));
+    const h=Math.max(1,Math.round(height*scale));
+    const canvas=document.createElement("canvas");
+    canvas.width=rotation%180===0?w:h;
+    canvas.height=rotation%180===0?h:w;
+
+    const ctx=canvas.getContext("2d",{willReadFrequently:true});
+    if(!ctx)continue;
+
+    ctx.translate(canvas.width/2,canvas.height/2);
+    ctx.rotate(rotation*Math.PI/180);
+    ctx.drawImage(source,-w/2,-h/2,w,h);
+
+    const frame=ctx.getImageData(0,0,canvas.width,canvas.height);
+    const found=window.jsQR(
+     frame.data,frame.width,frame.height,
+     {inversionAttempts:"attemptBoth"}
+    );
+
+    if(found&&found.data){
+     return {
+      data:found.data,
+      preview:canvas.toDataURL("image/jpeg",0.88)
+     };
+    }
+   }
+  }
+
+  throw Error("No QR code detected. Try a sharper, brighter image with the complete QR code visible.");
+ }finally{
+  if(source&&typeof source.close==="function")source.close();
+  if(objectURL)URL.revokeObjectURL(objectURL);
+ }
+}
+
 document.getElementById("qrImageInput").onchange=async event=>{
  const file=event.target.files?.[0];
  if(!file)return;
 
- const uploadStatus=document.getElementById("qrUploadStatus");
+ const uploadStatus=document.getElementById("qrStatus");
  uploadStatus.textContent="Reading QR code from your image...";
 
  try{
   if(!file.type.startsWith("image/"))throw Error("Please choose an image file.");
+  if(file.size>20*1024*1024)throw Error("Image is too large. Choose an image under 20 MB.");
+  if(!window.jsQR)throw Error("Local QR decoder is missing.");
 
-  const bitmap=await createImageBitmap(file);
-  const maxSide=1800;
-  const scale=Math.min(1,maxSide/Math.max(bitmap.width,bitmap.height));
-  const canvas=document.createElement("canvas");
-  canvas.width=Math.round(bitmap.width*scale);
-  canvas.height=Math.round(bitmap.height*scale);
+  const found=await decodeUploadedQR(file);
+  const detailsLoaded=await openQR(found.data,found.preview);
 
-  const context=canvas.getContext("2d",{willReadFrequently:true});
-  context.drawImage(bitmap,0,0,canvas.width,canvas.height);
-  bitmap.close();
-
-  const frame=context.getImageData(0,0,canvas.width,canvas.height);
-  const found=window.jsQR(frame.data,frame.width,frame.height,{inversionAttempts:"attemptBoth"});
-
-  if(!found||!found.data)throw Error("No readable QR code found. Try a clearer image.");
-
-  const imageData=canvas.toDataURL("image/jpeg",0.85);
-  const detailsLoaded=await openQR(found.data,imageData);
-  uploadStatus.textContent=detailsLoaded?"QR image read and product details saved in QR projects.":"QR image decoded and saved in QR projects, but product details could not be verified.";
+  uploadStatus.textContent=detailsLoaded
+   ?"QR image read and information saved in QR projects."
+   :"QR content saved, but product verification needs attention.";
  }catch(error){
   uploadStatus.textContent="Image scan error: "+error.message;
  }finally{
@@ -790,26 +1528,54 @@ document.getElementById("qrStop").onclick=()=>{
  statusQR("Camera stopped.");
 };
 
-function scanQR(){
+let qrLastScanAt=0;
+const qrCanvas=document.createElement("canvas");
+const qrContext=qrCanvas.getContext("2d",{willReadFrequently:true});
+
+function scanQR(timestamp=0){
  if(!qrScanning)return;
- if(qrVideo.readyState===qrVideo.HAVE_ENOUGH_DATA){
-  const canvas=document.createElement("canvas");
-  canvas.width=qrVideo.videoWidth;
-  canvas.height=qrVideo.videoHeight;
-  if(canvas.width&&canvas.height){
-   const ctx=canvas.getContext("2d",{willReadFrequently:true});
-   ctx.drawImage(qrVideo,0,0,canvas.width,canvas.height);
-   const frame=ctx.getImageData(0,0,canvas.width,canvas.height);
-   const found=window.jsQR(frame.data,frame.width,frame.height,{inversionAttempts:"attemptBoth"});
-   if(found&&found.data){
-    const preview=canvas.toDataURL("image/jpeg",0.85);
-    stopQR();
-    openQR(found.data,preview);
-    return;
+
+ if(timestamp-qrLastScanAt>=120){
+  qrLastScanAt=timestamp;
+
+  if(qrVideo.readyState>=2){
+   const sourceWidth=qrVideo.videoWidth;
+   const sourceHeight=qrVideo.videoHeight;
+
+   if(sourceWidth>0&&sourceHeight>0&&qrContext){
+    try{
+     const scale=Math.min(1,1280/Math.max(sourceWidth,sourceHeight));
+     const width=Math.max(1,Math.round(sourceWidth*scale));
+     const height=Math.max(1,Math.round(sourceHeight*scale));
+
+     qrCanvas.width=width;
+     qrCanvas.height=height;
+     qrContext.drawImage(qrVideo,0,0,width,height);
+
+     const frame=qrContext.getImageData(0,0,width,height);
+     const found=window.jsQR(
+      frame.data,frame.width,frame.height,
+      {inversionAttempts:"attemptBoth"}
+     );
+
+     if(found&&found.data){
+      const preview=qrCanvas.toDataURL("image/jpeg",0.88);
+      stopQR();
+      openQR(found.data,preview).catch(error=>{
+       statusQR("QR reading error: "+error.message);
+      });
+      return;
+     }
+    }catch(error){
+     statusQR("Camera scanning error: "+error.message);
+     stopQR();
+     return;
+    }
    }
   }
  }
- qrFrame=requestAnimationFrame(scanQR);
+
+ if(qrScanning)qrFrame=requestAnimationFrame(scanQR);
 }
 window.addEventListener("pagehide",stopQR);
 </script>
