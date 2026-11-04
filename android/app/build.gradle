@@ -23,7 +23,7 @@ android {
 chaquopy {
     defaultConfig {
         version = "3.11"
-        buildPython = "python3"
+        buildPython = ["python3"]
         pip {
             install("fastapi==0.115.12")
             install("uvicorn==0.34.2")
