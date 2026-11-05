@@ -534,6 +534,7 @@ def get_camera_photo(photo_id: int):
 # ===== INDEPENDENT FERTILIZER CAMERA ANALYSIS =====
 class CameraAnalyzeRequest(BaseModel):
     image_data: str = Field(min_length=20)
+    features: dict = Field(default_factory=dict)
 
 
 @app.post("/api/v1/camera/analyze")
@@ -605,169 +606,120 @@ def analyze_camera_image(item: CameraAnalyzeRequest):
 
 
 
-# ===== GEMINI FERTILIZER VISUAL RECOGNITION =====
-import os
-import json
+# ===== LOCAL OFFLINE FERTILIZER MATERIAL INSPECTION =====
 import base64
 import binascii
 import uuid
-import httpx
+import json
 
 
 @app.post("/api/v1/camera/recognize")
 def recognize_fertilizer_material(item: CameraAnalyzeRequest):
-    api_key = os.getenv("GEMINI_API_KEY")
-    if not api_key:
-        raise HTTPException(status_code=503, detail="Gemini API key is not configured.")
+    allowed = {
+        "data:image/jpeg;base64": "jpg",
+        "data:image/png;base64": "png",
+        "data:image/webp;base64": "webp"
+    }
 
     try:
         header, encoded = item.image_data.split(",", 1)
-        allowed = {
-            "data:image/jpeg;base64": ("jpg", "image/jpeg"),
-            "data:image/png;base64": ("png", "image/png"),
-            "data:image/webp;base64": ("webp", "image/webp")
-        }
-        image_type = allowed.get(header)
-        if not image_type:
+        extension = allowed.get(header)
+        if not extension:
             raise HTTPException(status_code=400, detail="Unsupported image type.")
 
         image_bytes = base64.b64decode(encoded, validate=True)
         if not image_bytes or len(image_bytes) > 5 * 1024 * 1024:
             raise HTTPException(status_code=413, detail="Image must be under 5 MB.")
-
     except (ValueError, binascii.Error):
         raise HTTPException(status_code=400, detail="Invalid image data.")
 
-    extension, mime_type = image_type
+    features = item.features or {}
+    try:
+        brightness = float(features.get("brightness", 0))
+        saturation = float(features.get("saturation", 0))
+        texture = float(features.get("texture", 0))
+        uniformity = float(features.get("uniformity", 0))
+        edge_density = float(features.get("edge_density", 0))
+        color_name = str(features.get("color_name", "unclear"))[:40]
+    except (TypeError, ValueError):
+        brightness = saturation = texture = uniformity = edge_density = 0
+        color_name = "unclear"
+
+    valid_features = (
+        0 <= brightness <= 255
+        and 0 <= saturation <= 255
+        and 0 <= texture <= 255
+        and 0 <= uniformity <= 1
+        and 0 <= edge_density <= 1
+    )
+
+    if not valid_features:
+        raise HTTPException(status_code=400, detail="Invalid image features.")
+
+    # These are appearance groups, not chemical or product identification.
+    if brightness < 1 and texture < 1:
+        appearance_en = "The photograph does not provide enough usable visual detail."
+        appearance_am = "ፎቶው በቂ የሆነ የእይታ መረጃ አያቀርብም።"
+        category_en = "Unclear material"
+        category_am = "ያልተለየ ቁሳቁስ"
+    elif brightness < 105 and texture > 18:
+        appearance_en = "The image has a relatively dark and varied surface appearance. This may resemble some organic materials, but appearance alone cannot establish that."
+        appearance_am = "ምስሉ በአንጻራዊነት ጠቆር ያለና የተለያየ ገጽታ ያሳያል። አንዳንድ ኦርጋኒክ ቁሳቁሶችን ሊመስል ይችላል፤ ይህ ግን ማረጋገጫ አይደለም።"
+        category_en = "Dark, varied material appearance"
+        category_am = "ጠቆር ያለና የተለያየ ገጽታ ያለው ቁሳቁስ"
+    elif saturation > 65:
+        appearance_en = "The image contains noticeably saturated or coloured areas. Fertilizer products can have many colours, so colour cannot identify a product."
+        appearance_am = "ምስሉ ግልጽ የሆኑ ቀለማትን ያሳያል። የማዳበሪያ ምርቶች የተለያዩ ቀለሞች ሊኖራቸው ስለሚችል ቀለም ብቻ ምርቱን አይለይም።"
+        category_en = "Coloured material appearance"
+        category_am = "ቀለም ያለው ቁሳቁስ"
+    elif texture < 12 and edge_density < 0.12:
+        appearance_en = "The visible surface appears relatively smooth or fine in this photograph. The image cannot reliably distinguish powder from very small particles."
+        appearance_am = "በፎቶው የሚታየው ገጽታ በአንጻራዊነት ለስላሳ ወይም ጥቃቅን ይመስላል። ዱቄትን ከበጣም ትንንሽ ቅንጣቶች በእርግጠኝነት መለየት አይቻልም።"
+        category_en = "Fine or smooth-looking material"
+        category_am = "ጥቃቅን ወይም ለስላሳ የሚመስል ቁሳቁስ"
+    else:
+        appearance_en = "The photograph shows a visible granular or uneven surface. This appearance is shared by many unrelated materials and fertilizer products."
+        appearance_am = "ፎቶው ቅንጣታማ ወይም ያልተመጣጠነ ገጽታ ያሳያል። ይህ ገጽታ በብዙ የተለያዩ ቁሳቁሶችና ማዳበሪያዎች ላይ ሊታይ ይችላል።"
+        category_en = "Granular or uneven material appearance"
+        category_am = "ቅንጣታማ ወይም ያልተመጣጠነ ገጽታ ያለው ቁሳቁስ"
+
+    clues_en = [
+        "Estimated dominant image colour: " + color_name,
+        "Average image brightness: " + str(round(brightness, 1)) + " on a 0–255 scale",
+        "Image texture variation: " + str(round(texture, 1)),
+        "Image uniformity estimate: " + str(round(uniformity * 100)) + "%"
+    ]
+    clues_am = [
+        "በምስሉ የተገመተው ዋና ቀለም፦ " + color_name,
+        "የምስሉ አማካይ ብሩህነት፦ " + str(round(brightness, 1)),
+        "የምስሉ የገጽታ ልዩነት፦ " + str(round(texture, 1))
+    ]
+
+    analysis = {
+        "is_fertilizer_candidate": True,
+        "category_en": category_en,
+        "category_am": category_am,
+        "identification_en": "This is a local visual screening result, not an identification of a fertilizer product. " + appearance_en,
+        "identification_am": "ይህ የአካባቢያዊ የእይታ ግምገማ ነው፤ የማዳበሪያ ምርትን በትክክል የሚለይ ውጤት አይደለም። " + appearance_am,
+        "visual_description_en": appearance_en + " Estimated colour: " + color_name + ". Image measurements are affected by lighting, camera quality and background.",
+        "visual_description_am": appearance_am + " የተገመተው ቀለም፦ " + color_name + "። የብርሃን፣ የካሜራና የጀርባ ሁኔታ የምስል ግምቱን ሊቀይር ይችላል።",
+        "visible_clues_en": clues_en,
+        "visible_clues_am": clues_am,
+        "confidence_band": "low",
+        "confidence_explanation_en": "Low confidence. Image features describe appearance only. Different materials, including urea, DAP, NPS and NPK blends, can look similar.",
+        "confidence_explanation_am": "ዝቅተኛ እርግጠኝነት። የምስል መረጃው ገጽታን ብቻ ይገልጻል። ዩሪያ፣ DAP፣ NPS እና NPK የሚመስሉ የተለያዩ ምርቶች ተመሳሳይ ሊመስሉ ይችላሉ።",
+        "possible_uses_en": ["No agricultural use can be recommended until the material and its label or laboratory result are verified."],
+        "possible_uses_am": ["ቁሳቁሱና መለያው ወይም የላቦራቶሪ ውጤቱ እስኪረጋገጥ ድረስ የእርሻ አጠቃቀም ምክር አይሰጥም።"],
+        "cannot_determine_en": ["Exact fertilizer identity", "NPK content", "Chemical composition", "Nutrient concentration", "Authenticity", "Contamination", "Safety"],
+        "cannot_determine_am": ["ትክክለኛ የማዳበሪያ ዓይነት", "የNPK ይዘት", "የኬሚካል ይዘት", "የንጥረ ነገር መጠን", "እውነተኛነት", "ብክለት", "ደህንነት"],
+        "recommended_tests_en": ["Check the original product label and batch number.", "Ask an agricultural extension officer.", "Use an accredited laboratory for nutrient and composition testing."],
+        "recommended_tests_am": ["የምርቱን የመጀመሪያ መለያና የባች ቁጥር ያረጋግጡ።", "የግብርና ባለሙያን ያማክሩ።", "የንጥረ ነገርና የኬሚካል ይዘትን በታወቀ ላቦራቶሪ ያስመርምሩ።"],
+        "farmer_guidance_en": "Do not apply an unidentified material based on its appearance. Keep it in its original labelled container, avoid inhaling dust or touching it with bare hands, and verify its identity with a qualified agricultural professional or laboratory.",
+        "farmer_guidance_am": "ያልታወቀ ቁሳቁስን በገጽታው ብቻ ተመስርተው አይጠቀሙ። በመጀመሪያው መለያ ባለው እቃ ውስጥ ያቆዩት፤ አቧራውን ከመተንፈስና በባዶ እጅ ከመንካት ይቆጠቡ። ከመጠቀምዎ በፊት የግብርና ባለሙያ ወይም ላቦራቶሪ ያረጋግጥልዎ።"
+    }
+
     image_path = CAMERA_DIR / f"{uuid.uuid4().hex}.{extension}"
     image_path.write_bytes(image_bytes)
-
-    prompt = """
-You are the visual material-inspection intelligence of EthioFerti AI.
-Inspect the actual loose material in the photograph, NOT its packaging,
-printed label, QR code or surrounding objects.
-
-Give a detailed but understandable agricultural inspection in English
-and natural Amharic. Carefully examine:
-
-1. PHYSICAL FORM: Decide whether the sample looks like granules, powder,
-   crystals, pellets, compost, manure, liquid or another material.
-2. GRANULES: Describe approximate visible size (fine, small, medium, large),
-   shape (round, irregular, angular, elongated), size consistency and colour.
-   Never invent measurements.
-3. COLOUR: Describe the visible colour and whether it is uniform or varied.
-4. TEXTURE: Describe smooth, rough, porous, dusty, compact, crystalline,
-   fibrous, sticky or other visible texture.
-5. CONSISTENCY: Describe whether particles appear uniform, mixed, loose,
-   compacted, clumped or separated.
-6. POSSIBLE CATEGORY: Give a cautious visual hypothesis: likely organic,
-   likely mineral/inorganic, possibly mixed, another material, or unknown.
-   Explain which visible clues support that hypothesis.
-7. CONDITION: Look for visible moisture, caking, discoloration, foreign
-   particles, mould-like growth or other unusual appearance. Do not claim
-   a substance is contaminated or safe from a photograph alone.
-8. AGRICULTURAL INSIGHT: Explain what the visible form may suggest about
-   handling and potential use, without inventing a product identity.
-9. NEXT STEPS: Explain what a farmer should verify before using an
-   unidentified sample.
-
-Return ONLY valid JSON with exactly these keys:
-{
- "is_fertilizer_candidate": true,
- "category_en": "Likely category or unknown",
- "category_am": "የሚገመተው ዓይነት",
- "identification_en": "Careful visual identification and reasoning",
- "identification_am": "ጥንቃቄ የተሞላበት መለያ",
- "visual_description_en": "A detailed paragraph covering physical form, approximate particle size, shape, colour, texture, consistency and visible condition",
- "visual_description_am": "የአካላዊ ቅርጽ፣ መጠን፣ ቅርጽ፣ ቀለም፣ ገጽታና ሁኔታ ዝርዝር መግለጫ",
- "visible_clues_en": ["Specific visible observation"],
- "visible_clues_am": ["የሚታይ ልዩ ምልክት"],
- "confidence_band": "low",
- "confidence_explanation_en": "Explain confidence and uncertainty",
- "confidence_explanation_am": "የእርግጠኝነትና የጥርጣሬ ማብራሪያ",
- "possible_uses_en": ["Potential use only if visually justified"],
- "possible_uses_am": ["በሚታየው ማስረጃ የተደገፈ ሊሆን የሚችል አጠቃቀም"],
- "cannot_determine_en": ["NPK", "Chemical composition", "Exact identity", "Safety"],
- "cannot_determine_am": ["NPK", "የኬሚካል ይዘት", "ትክክለኛ ማንነት", "ደህንነት"],
- "recommended_tests_en": ["Appropriate laboratory verification"],
- "recommended_tests_am": ["ተገቢ የላቦራቶሪ ምርመራ"],
- "farmer_guidance_en": "A useful paragraph explaining what was observed, what it may mean, what remains uncertain and what to check before use.",
- "farmer_guidance_am": "ስለታየው ሁኔታ፣ ሊኖረው ስለሚችለው ትርጉም፣ ስለማይታወቀውና ከመጠቀም በፊት ስለሚያስፈልገው ማረጋገጫ ጠቃሚ ማብራሪያ"
-}
-
-Rules:
-- Separate direct visual observations from hypotheses.
-- Never invent NPK, nutrients, ingredients, brand, origin or dosage.
-- Appearance alone cannot prove organic origin, mineral composition,
-  chemical identity, nutrient content, contamination or safety.
-- Never recommend applying unidentified material.
-- Do not identify a sample from colour alone.
-- If the photograph is unclear, state that and request a clearer image.
-- Confidence must be low, medium or high and must be justified.
-- If it does not appear to be fertilizer, say so.
-- Use practical, detailed paragraphs, not vague generic answers.
-- Give useful English and natural Amharic answers.
-"""
-
-    try:
-        response = httpx.post(
-            "https://generativelanguage.googleapis.com/v1beta/interactions",
-            headers={
-                "x-goog-api-key": api_key,
-                "Content-Type": "application/json",
-                "Api-Revision": "2026-05-20"
-            },
-            json={
-                "model": "gemini-3.8-flash",
-                "input": [
-                    {"type": "text", "text": prompt},
-                    {"type": "image", "data": encoded, "mime_type": mime_type}
-                ],
-                "generation_config": {"max_output_tokens": 1800}
-            },
-            timeout=120.0
-        )
-        response.raise_for_status()
-        payload = response.json()
-
-        text_parts = []
-        for step in payload.get("steps", []):
-            if step.get("type") == "model_output":
-                for part in step.get("content", []):
-                    if part.get("type") == "text" and part.get("text"):
-                        text_parts.append(part["text"])
-
-        if not text_parts:
-            raise ValueError("Gemini returned no text analysis.")
-
-        content = "\n".join(text_parts).strip()
-        if content.startswith("```"):
-            content = content.split("\n", 1)[-1]
-            if content.endswith("```"):
-                content = content[:-3].strip()
-
-        analysis = json.loads(content)
-
-        required = [
-            "is_fertilizer_candidate", "category_en", "category_am",
-            "identification_en", "identification_am",
-            "visual_description_en", "visual_description_am",
-            "confidence_band", "farmer_guidance_en", "farmer_guidance_am"
-        ]
-        if not all(key in analysis for key in required):
-            raise ValueError("Gemini returned incomplete analysis.")
-        if analysis["confidence_band"] not in ("low", "medium", "high"):
-            analysis["confidence_band"] = "low"
-
-    except httpx.HTTPStatusError as exc:
-        image_path.unlink(missing_ok=True)
-        raise HTTPException(
-            status_code=502,
-            detail=f"Gemini API HTTP {exc.response.status_code}: {exc.response.text[:500]}"
-        )
-    except (httpx.HTTPError, KeyError, ValueError, TypeError, IndexError, StopIteration) as exc:
-        image_path.unlink(missing_ok=True)
-        raise HTTPException(status_code=502, detail=f"Gemini analysis failed: {str(exc)[:300]}")
 
     try:
         with connect_db() as conn:
@@ -779,10 +731,10 @@ Rules:
                 """,
                 (
                     "UNMATCHED",
-                    "gemini-vision",
+                    "offline-visual-screening",
                     str(image_path.relative_to(BASE_DIR)),
                     json.dumps(analysis, ensure_ascii=False),
-                    "ai_analyzed"
+                    "review_required"
                 )
             )
             record_id = cursor.lastrowid
@@ -791,17 +743,14 @@ Rules:
         raise
 
     return {
-        "message": "Gemini fertilizer material analysis completed.",
+        "message": "Offline visual screening completed.",
         "record_id": record_id,
-        "analysis_source": "Google Gemini 3.8 Flash",
+        "analysis_source": "Local visual feature rules and reference guidance",
         "analysis": analysis,
-        "important_notice": (
-            "Visual analysis is not laboratory verification. "
-            "It cannot establish NPK, chemical composition or safety."
-        )
+        "important_notice": "This is not chemical identification or laboratory verification."
     }
 
-# ===== END GEMINI FERTILIZER VISUAL RECOGNITION =====
+# ===== END LOCAL OFFLINE FERTILIZER MATERIAL INSPECTION =====
 
 
 # ===== ETHIOFERTI_QR_API_V1 =====

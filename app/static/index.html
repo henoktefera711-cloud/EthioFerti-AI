@@ -1014,12 +1014,73 @@ async function refreshHistory(){
  }
 }
 
+
+async function extractVisualFeatures(dataUrl){
+ const image=new Image();
+ image.src=dataUrl;
+ await new Promise((resolve,reject)=>{
+  image.onload=resolve;
+  image.onerror=()=>reject(new Error("Could not read the captured photograph."));
+ });
+ const canvas=document.createElement("canvas");
+ const width=96,height=96;
+ canvas.width=width;
+ canvas.height=height;
+ const context=canvas.getContext("2d",{willReadFrequently:true});
+ if(!context)throw new Error("Image processing is unavailable.");
+ context.drawImage(image,0,0,width,height);
+ const pixels=context.getImageData(0,0,width,height).data;
+ let red=0,green=0,blue=0,brightness=0,saturation=0;
+ const gray=[];
+ for(let i=0;i<pixels.length;i+=4){
+  const r=pixels[i],g=pixels[i+1],b=pixels[i+2];
+  red+=r;green+=g;blue+=b;
+  const high=Math.max(r,g,b),low=Math.min(r,g,b);
+  brightness+=(r+g+b)/3;
+  saturation+=high===0?0:(high-low)/high*255;
+  gray.push((r+g+b)/3);
+ }
+ const count=gray.length;
+ const mean=brightness/count;
+ let variance=0,uniform=0,edges=0;
+ for(let i=0;i<count;i++){
+  variance+=(gray[i]-mean)**2;
+  if(Math.abs(gray[i]-mean)<25)uniform++;
+  const x=i%width,y=Math.floor(i/width);
+  if(x>0&&Math.abs(gray[i]-gray[i-1])>25)edges++;
+  if(y>0&&Math.abs(gray[i]-gray[i-width])>25)edges++;
+ }
+ const avgR=red/count,avgG=green/count,avgB=blue/count;
+ let colorName="mixed or unclear";
+ if(Math.max(avgR,avgG,avgB)-Math.min(avgR,avgG,avgB)<18){
+  colorName=mean<75?"dark grey or black":mean>190?"white or very pale grey":"grey";
+ }else if(avgR>avgG*1.15&&avgR>avgB*1.15){
+  colorName="reddish or brown";
+ }else if(avgG>avgR*1.12&&avgG>avgB*1.08){
+  colorName="greenish";
+ }else if(avgB>avgR*1.12&&avgB>avgG*1.08){
+  colorName="bluish";
+ }else if(mean>175){
+  colorName="pale or cream";
+ }else{
+  colorName="mixed colour";
+ }
+ return {
+  brightness:mean,
+  saturation:saturation/count,
+  texture:Math.sqrt(variance/count),
+  uniformity:uniform/count,
+  edge_density:edges/(count*2),
+  color_name:colorName
+ };
+}
+
 async function recognizeRecord(record,queueItem){
- if(!navigator.onLine)throw Error("No internet connection.");
+ const features=await extractVisualFeatures(record.image_data);
  const response=await fetch("/api/v1/camera/recognize",{
   method:"POST",
   headers:{"Content-Type":"application/json"},
-  body:JSON.stringify({image_data:record.image_data})
+  body:JSON.stringify({image_data:record.image_data,features})
  });
  const responseText=await response.text();
  let result;
@@ -1027,37 +1088,30 @@ async function recognizeRecord(record,queueItem){
   result=JSON.parse(responseText);
  } catch {
   if(responseText.trimStart().startsWith("<")) {
-   throw Error("AI service is not reachable. Open EthioFerti AI with its Android backend running, not the static website preview.");
+   throw Error("The local inspection service is unavailable. Open EthioFerti AI with its Android backend running.");
   }
-  throw Error("The AI service returned an invalid response.");
+  throw Error("The local inspection service returned an invalid response.");
  }
- if(!response.ok)throw Error(result.detail||"AI inspection failed.");
-
+ if(!response.ok)throw Error(result.detail||"Local material inspection failed.");
  record.analysis=result.analysis;
  record.server_record_id=result.record_id;
  record.review_status="analyzed";
  await EthioFertiDB.put("camera_records",record);
-
  queueItem.status="completed";
  queueItem.completed_at=new Date().toISOString();
  await EthioFertiDB.put("sync_queue",queueItem);
-
  displayAnalysis(result.analysis);
  return result;
 }
 
 async function retryPending(){
  if(busy)return;
- if(!navigator.onLine){
-  status("Offline. Saved photographs will remain on this device until internet returns.");
-  return;
- }
  busy=true;
  try{
   const queue=await EthioFertiDB.all("sync_queue");
   const pending=queue.filter(item=>item.status==="pending"&&item.kind==="camera_recognition");
   if(!pending.length){
-   status("No pending AI analyses.");
+   status("No pending material inspections.");
    return;
   }
   let completed=0;
@@ -1076,7 +1130,7 @@ async function retryPending(){
     item.last_error=error.message;
     item.attempts=(item.attempts||0)+1;
     await EthioFertiDB.put("sync_queue",item);
-    status("AI retry stopped: "+error.message);
+    status("Offline inspection stopped: "+error.message);
     break;
    }
   }
@@ -1127,20 +1181,15 @@ capture.onclick=async()=>{
 
   await refreshHistory();
 
-  if(!navigator.onLine){
-   status("Photograph saved on this device. AI analysis is queued until internet returns.");
-   return;
-  }
-
-  capture.textContent="Analyzing...";
-  status("Photograph saved locally. Sending photograph for AI material inspection...");
+  capture.textContent="Inspecting...";
+  status("Photograph saved locally. Checking its visible features on this device...");
   await recognizeRecord(record,queueItem);
-  status("Material inspection completed. Saved locally as inspection #"+id);
+  status("Offline material screening completed. Saved locally as inspection #"+id);
   await refreshHistory();
   document.getElementById("results").scrollIntoView({behavior:"smooth"});
 
  }catch(error){
-  status("Recognition error: "+error.message+" Your saved photograph remains in local history.");
+  status("Material inspection error: "+error.message+" Your saved photograph remains in local history.");
   await refreshHistory();
  }finally{
   busy=false;
