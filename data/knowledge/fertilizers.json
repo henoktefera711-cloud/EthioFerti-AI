@@ -292,7 +292,56 @@
         "visual_identification_limits",
         "verification_requirements"
       ],
-      "knowledge_updated": "2026-11-05"
+      "knowledge_updated": "2026-11-05",
+      "translations": {
+        "name": "ዩሪያ",
+        "classification": "ማዕድናዊ፣ ሰው ሠራሽ የናይትሮጅን ማዳበሪያ",
+        "description": "ዩሪያ 46% ናይትሮጅን የያዘ ከፍተኛ የናይትሮጅን ማዳበሪያ ነው። የተክል ቅጠልና ግንድ እድገትን ይደግፋል።",
+        "agricultural_uses": "የእህል፣ የአትክልትና ሌሎች ሰብሎችን የናይትሮጅን ፍላጎት ለማሟላት ይጠቅማል።",
+        "crop_suitability": "ስንዴ፣ ገብስ፣ በቆሎ፣ ጤፍ፣ ጥራጥሬ ያልሆኑ አትክልቶችና ሌሎች የናይትሮጅን ፍላጎት ያላቸው ሰብሎች።",
+        "application_guidance": "በአፈር ምርመራና በሰብሉ ፍላጎት መሠረት ይጠቀሙ። በአፈር ላይ ከተበተነ በኋላ በአፈር ውስጥ መቀላቀል ወይም በተገቢው ጊዜ ዝናብ/መስኖ ማግኘት የናይትሮጅን መጥፋትን ይቀንሳል።",
+        "soil_considerations": "በአልካላይን አፈር ላይ በገጽታ ብቻ መተው የአሞኒያ መጥፋትን ሊጨምር ይችላል።"
+      },
+      "laboratory_diagnosis": {
+        "levels": {
+          "top": {
+            "position_en": "Top",
+            "position_am": "ላይኛ ክፍል",
+            "focus_en": "Top-layer inspection: exposed surface, visible particle condition, surface distribution and exposure to air or moisture.",
+            "focus_am": "የላይኛው ክፍል ምርመራ፦ የውጭ ገጽታ፣ የቅንጣት ሁኔታ፣ የተበተነበት ሁኔታና ለአየር ወይም ለእርጥበት መጋለጥ።",
+            "observation_en": "The top position is recorded as the surface inspection point. Review visible colour, particle form, surface crusting and signs of moisture.",
+            "observation_am": "ይህ የላይኛው የምርመራ ቦታ ነው። የሚታየውን ቀለም፣ የቅንጣት ቅርጽ፣ የገጽታ መጠንጠንና የእርጥበት ምልክቶች ይመልከቱ።",
+            "recommended_check_en": "Compare the surface material with the product's known physical description and inspect for contamination or weather exposure.",
+            "recommended_check_am": "የገጽታውን ቁሳቁስ ከምርቱ የታወቀ አካላዊ መግለጫ ጋር ያነጻጽሩ፤ ብክለትና ለአየር ሁኔታ መጋለጥን ይመርምሩ።",
+            "sampling_note_en": "Take a representative surface sample without mixing it with material from other positions.",
+            "sampling_note_am": "ከላይኛው ክፍል ብቻ የሚወክል ናሙና ይውሰዱ፤ ከሌሎች ክፍሎች ጋር አይቀላቅሉት።"
+          },
+          "middle": {
+            "position_en": "Middle",
+            "position_am": "መካከለኛ ክፍል",
+            "focus_en": "Middle-layer inspection: internal bulk appearance, particle-size consistency, mixture uniformity and representative material condition.",
+            "focus_am": "የመካከለኛው ክፍል ምርመራ፦ የውስጥ ቁሳቁስ ገጽታ፣ የቅንጣት መጠን ተመሳሳይነት፣ የቅልቅሉ አንድነትና የተወካይ ናሙና ሁኔታ።",
+            "observation_en": "The middle position is recorded as the central inspection point. Review whether particles and components appear evenly distributed.",
+            "observation_am": "ይህ የመካከለኛው የምርመራ ቦታ ነው። ቅንጣቶችና ክፍሎች በእኩል ሁኔታ መበተናቸውን ይመልከቱ።",
+            "recommended_check_en": "Compare the central material with the top and bottom samples to identify visible variation or mixing differences.",
+            "recommended_check_am": "የመካከለኛውን ቁሳቁስ ከላይኛውና ከታችኛው ናሙና ጋር በማነጻጸር የሚታይ ልዩነት ይፈልጉ።",
+            "sampling_note_en": "Collect a representative sample from the middle layer while keeping it separate from the other positions.",
+            "sampling_note_am": "ከመካከለኛው ክፍል የሚወክል ናሙና ይውሰዱ፤ ከሌሎች ክፍሎች ለይተው ያቆዩት።"
+          },
+          "bottom": {
+            "position_en": "Bottom",
+            "position_am": "ታችኛ ክፍል",
+            "focus_en": "Bottom-layer inspection: settling, compaction, fine-particle accumulation, moisture concentration and possible segregation.",
+            "focus_am": "የታችኛው ክፍል ምርመራ፦ መርገት፣ መጠቅጠቅ፣ ጥቃቅን ቅንጣቶች መከማቸት፣ የእርጥበት ማተኮርና የቁሳቁስ መለያየት።",
+            "observation_en": "The bottom position is recorded as the lower-layer inspection point. Review the material for settled fines, compacted masses and moisture-related changes.",
+            "observation_am": "ይህ የታችኛው ክፍል የምርመራ ቦታ ነው። የተከማቹ ጥቃቅን ቅንጣቶችን፣ የተጠቀጠቁ ክፍሎችንና ከእርጥበት ጋር የተያያዙ ለውጦችን ይመልከቱ።",
+            "recommended_check_en": "Compare the lower material with the upper layers and check whether storage or handling has caused visible separation.",
+            "recommended_check_am": "የታችኛውን ቁሳቁስ ከላይኛው ክፍሎች ጋር ያነጻጽሩ፤ በማከማቻ ወይም በአያያዝ ምክንያት የተፈጠረ መለያየት ካለ ይመርምሩ።",
+            "sampling_note_en": "Collect a separate bottom-layer sample, including representative settled material where present.",
+            "sampling_note_am": "ከታችኛው ክፍል የተለየ ናሙና ይውሰዱ፤ ካሉ የተረጉ ቁሳቁሶችንም በተወካይነት ያካትቱ።"
+          }
+        }
+      }
     },
     {
       "id": "dap",
@@ -571,7 +620,56 @@
         "visual_identification_limits",
         "verification_requirements"
       ],
-      "knowledge_updated": "2026-11-05"
+      "knowledge_updated": "2026-11-05",
+      "translations": {
+        "name": "ዳፕ (ዳይአሞኒየም ፎስፌት)",
+        "classification": "ማዕድናዊ የናይትሮጅንና ፎስፈረስ ውህድ ማዳበሪያ",
+        "description": "ዳፕ 18% ናይትሮጅንና 46% ፎስፈረስን (P₂O₅) የያዘ የመነሻ እድገት ማዳበሪያ ነው።",
+        "agricultural_uses": "ለሥር እድገት፣ ለተክል መጀመሪያ እድገትና የፎስፈረስ እጥረትን ለማሟላት ይጠቅማል።",
+        "crop_suitability": "ስንዴ፣ ገብስ፣ በቆሎ፣ ጤፍ፣ ጥራጥሬዎችና አትክልቶች።",
+        "application_guidance": "በተመከረው መጠን ከዘር ጋር በቀጥታ እንዳይነካካ በተገቢው ርቀት ወይም በአፈር ውስጥ ይተግብሩ።",
+        "soil_considerations": "በፎስፈረስ የተጎዱ አፈሮች ላይ ጠቃሚ ነው፤ የአፈር pH የፎስፈረስ መገኘትን ይቆጣጠራል።"
+      },
+      "laboratory_diagnosis": {
+        "levels": {
+          "top": {
+            "position_en": "Top",
+            "position_am": "ላይኛ ክፍል",
+            "focus_en": "Top-layer inspection: exposed surface, visible particle condition, surface distribution and exposure to air or moisture.",
+            "focus_am": "የላይኛው ክፍል ምርመራ፦ የውጭ ገጽታ፣ የቅንጣት ሁኔታ፣ የተበተነበት ሁኔታና ለአየር ወይም ለእርጥበት መጋለጥ።",
+            "observation_en": "The top position is recorded as the surface inspection point. Review visible colour, particle form, surface crusting and signs of moisture.",
+            "observation_am": "ይህ የላይኛው የምርመራ ቦታ ነው። የሚታየውን ቀለም፣ የቅንጣት ቅርጽ፣ የገጽታ መጠንጠንና የእርጥበት ምልክቶች ይመልከቱ።",
+            "recommended_check_en": "Compare the surface material with the product's known physical description and inspect for contamination or weather exposure.",
+            "recommended_check_am": "የገጽታውን ቁሳቁስ ከምርቱ የታወቀ አካላዊ መግለጫ ጋር ያነጻጽሩ፤ ብክለትና ለአየር ሁኔታ መጋለጥን ይመርምሩ።",
+            "sampling_note_en": "Take a representative surface sample without mixing it with material from other positions.",
+            "sampling_note_am": "ከላይኛው ክፍል ብቻ የሚወክል ናሙና ይውሰዱ፤ ከሌሎች ክፍሎች ጋር አይቀላቅሉት።"
+          },
+          "middle": {
+            "position_en": "Middle",
+            "position_am": "መካከለኛ ክፍል",
+            "focus_en": "Middle-layer inspection: internal bulk appearance, particle-size consistency, mixture uniformity and representative material condition.",
+            "focus_am": "የመካከለኛው ክፍል ምርመራ፦ የውስጥ ቁሳቁስ ገጽታ፣ የቅንጣት መጠን ተመሳሳይነት፣ የቅልቅሉ አንድነትና የተወካይ ናሙና ሁኔታ።",
+            "observation_en": "The middle position is recorded as the central inspection point. Review whether particles and components appear evenly distributed.",
+            "observation_am": "ይህ የመካከለኛው የምርመራ ቦታ ነው። ቅንጣቶችና ክፍሎች በእኩል ሁኔታ መበተናቸውን ይመልከቱ።",
+            "recommended_check_en": "Compare the central material with the top and bottom samples to identify visible variation or mixing differences.",
+            "recommended_check_am": "የመካከለኛውን ቁሳቁስ ከላይኛውና ከታችኛው ናሙና ጋር በማነጻጸር የሚታይ ልዩነት ይፈልጉ።",
+            "sampling_note_en": "Collect a representative sample from the middle layer while keeping it separate from the other positions.",
+            "sampling_note_am": "ከመካከለኛው ክፍል የሚወክል ናሙና ይውሰዱ፤ ከሌሎች ክፍሎች ለይተው ያቆዩት።"
+          },
+          "bottom": {
+            "position_en": "Bottom",
+            "position_am": "ታችኛ ክፍል",
+            "focus_en": "Bottom-layer inspection: settling, compaction, fine-particle accumulation, moisture concentration and possible segregation.",
+            "focus_am": "የታችኛው ክፍል ምርመራ፦ መርገት፣ መጠቅጠቅ፣ ጥቃቅን ቅንጣቶች መከማቸት፣ የእርጥበት ማተኮርና የቁሳቁስ መለያየት።",
+            "observation_en": "The bottom position is recorded as the lower-layer inspection point. Review the material for settled fines, compacted masses and moisture-related changes.",
+            "observation_am": "ይህ የታችኛው ክፍል የምርመራ ቦታ ነው። የተከማቹ ጥቃቅን ቅንጣቶችን፣ የተጠቀጠቁ ክፍሎችንና ከእርጥበት ጋር የተያያዙ ለውጦችን ይመልከቱ።",
+            "recommended_check_en": "Compare the lower material with the upper layers and check whether storage or handling has caused visible separation.",
+            "recommended_check_am": "የታችኛውን ቁሳቁስ ከላይኛው ክፍሎች ጋር ያነጻጽሩ፤ በማከማቻ ወይም በአያያዝ ምክንያት የተፈጠረ መለያየት ካለ ይመርምሩ።",
+            "sampling_note_en": "Collect a separate bottom-layer sample, including representative settled material where present.",
+            "sampling_note_am": "ከታችኛው ክፍል የተለየ ናሙና ይውሰዱ፤ ካሉ የተረጉ ቁሳቁሶችንም በተወካይነት ያካትቱ።"
+          }
+        }
+      }
     },
     {
       "id": "nps_19_38_0_7s",
@@ -854,7 +952,56 @@
         "visual_identification_limits",
         "verification_requirements"
       ],
-      "knowledge_updated": "2026-11-05"
+      "knowledge_updated": "2026-11-05",
+      "translations": {
+        "name": "ኤንፒኤስ (NPS)",
+        "classification": "ማዕድናዊ የተዋሃደ ብዙ-ንጥረ ማዳበሪያ",
+        "description": "NPS ናይትሮጅን፣ ፎስፈረስና ሰልፈር የያዘ የተዋሃደ ማዳበሪያ ነው። የዚህ ደረጃ ይዘት 19-38-0+7S ነው።",
+        "agricultural_uses": "የመነሻ እድገትን፣ የሥር እድገትንና የሰልፈር አቅርቦትን ይደግፋል።",
+        "crop_suitability": "እህሎች፣ ጥራጥሬዎች፣ ዘይት ሰብሎችና አትክልቶች።",
+        "application_guidance": "በአፈር ምርመራና በሰብል ምክረ-መጠን መሠረት በመዝራት ጊዜ ይተግብሩ።",
+        "soil_considerations": "የፎስፈረስና ሰልፈር እጥረት ባለባቸው አፈሮች ላይ ይጠቅማል።"
+      },
+      "laboratory_diagnosis": {
+        "levels": {
+          "top": {
+            "position_en": "Top",
+            "position_am": "ላይኛ ክፍል",
+            "focus_en": "Top-layer inspection: exposed surface, visible particle condition, surface distribution and exposure to air or moisture.",
+            "focus_am": "የላይኛው ክፍል ምርመራ፦ የውጭ ገጽታ፣ የቅንጣት ሁኔታ፣ የተበተነበት ሁኔታና ለአየር ወይም ለእርጥበት መጋለጥ።",
+            "observation_en": "The top position is recorded as the surface inspection point. Review visible colour, particle form, surface crusting and signs of moisture.",
+            "observation_am": "ይህ የላይኛው የምርመራ ቦታ ነው። የሚታየውን ቀለም፣ የቅንጣት ቅርጽ፣ የገጽታ መጠንጠንና የእርጥበት ምልክቶች ይመልከቱ።",
+            "recommended_check_en": "Compare the surface material with the product's known physical description and inspect for contamination or weather exposure.",
+            "recommended_check_am": "የገጽታውን ቁሳቁስ ከምርቱ የታወቀ አካላዊ መግለጫ ጋር ያነጻጽሩ፤ ብክለትና ለአየር ሁኔታ መጋለጥን ይመርምሩ።",
+            "sampling_note_en": "Take a representative surface sample without mixing it with material from other positions.",
+            "sampling_note_am": "ከላይኛው ክፍል ብቻ የሚወክል ናሙና ይውሰዱ፤ ከሌሎች ክፍሎች ጋር አይቀላቅሉት።"
+          },
+          "middle": {
+            "position_en": "Middle",
+            "position_am": "መካከለኛ ክፍል",
+            "focus_en": "Middle-layer inspection: internal bulk appearance, particle-size consistency, mixture uniformity and representative material condition.",
+            "focus_am": "የመካከለኛው ክፍል ምርመራ፦ የውስጥ ቁሳቁስ ገጽታ፣ የቅንጣት መጠን ተመሳሳይነት፣ የቅልቅሉ አንድነትና የተወካይ ናሙና ሁኔታ።",
+            "observation_en": "The middle position is recorded as the central inspection point. Review whether particles and components appear evenly distributed.",
+            "observation_am": "ይህ የመካከለኛው የምርመራ ቦታ ነው። ቅንጣቶችና ክፍሎች በእኩል ሁኔታ መበተናቸውን ይመልከቱ።",
+            "recommended_check_en": "Compare the central material with the top and bottom samples to identify visible variation or mixing differences.",
+            "recommended_check_am": "የመካከለኛውን ቁሳቁስ ከላይኛውና ከታችኛው ናሙና ጋር በማነጻጸር የሚታይ ልዩነት ይፈልጉ።",
+            "sampling_note_en": "Collect a representative sample from the middle layer while keeping it separate from the other positions.",
+            "sampling_note_am": "ከመካከለኛው ክፍል የሚወክል ናሙና ይውሰዱ፤ ከሌሎች ክፍሎች ለይተው ያቆዩት።"
+          },
+          "bottom": {
+            "position_en": "Bottom",
+            "position_am": "ታችኛ ክፍል",
+            "focus_en": "Bottom-layer inspection: settling, compaction, fine-particle accumulation, moisture concentration and possible segregation.",
+            "focus_am": "የታችኛው ክፍል ምርመራ፦ መርገት፣ መጠቅጠቅ፣ ጥቃቅን ቅንጣቶች መከማቸት፣ የእርጥበት ማተኮርና የቁሳቁስ መለያየት።",
+            "observation_en": "The bottom position is recorded as the lower-layer inspection point. Review the material for settled fines, compacted masses and moisture-related changes.",
+            "observation_am": "ይህ የታችኛው ክፍል የምርመራ ቦታ ነው። የተከማቹ ጥቃቅን ቅንጣቶችን፣ የተጠቀጠቁ ክፍሎችንና ከእርጥበት ጋር የተያያዙ ለውጦችን ይመልከቱ።",
+            "recommended_check_en": "Compare the lower material with the upper layers and check whether storage or handling has caused visible separation.",
+            "recommended_check_am": "የታችኛውን ቁሳቁስ ከላይኛው ክፍሎች ጋር ያነጻጽሩ፤ በማከማቻ ወይም በአያያዝ ምክንያት የተፈጠረ መለያየት ካለ ይመርምሩ።",
+            "sampling_note_en": "Collect a separate bottom-layer sample, including representative settled material where present.",
+            "sampling_note_am": "ከታችኛው ክፍል የተለየ ናሙና ይውሰዱ፤ ካሉ የተረጉ ቁሳቁሶችንም በተወካይነት ያካትቱ።"
+          }
+        }
+      }
     },
     {
       "id": "npsb_18_9_37_7",
@@ -1123,7 +1270,56 @@
         "visual_identification_limits",
         "verification_requirements"
       ],
-      "knowledge_updated": "2026-11-05"
+      "knowledge_updated": "2026-11-05",
+      "translations": {
+        "name": "ኤንፒኤስቢ (NPSB)",
+        "classification": "ማዕድናዊ የተዋሃደ ብዙ-ንጥረ ማዳበሪያ",
+        "description": "NPSB ናይትሮጅን፣ ፎስፈረስ፣ ሰልፈርና ቦሮን የያዘ የተዋሃደ ማዳበሪያ ነው።",
+        "agricultural_uses": "ለሥር እድገት፣ ለፕሮቲን ምስረታና ለቦሮን ፍላጎት ያላቸው ሰብሎች ይጠቅማል።",
+        "crop_suitability": "እህሎች፣ ጥራጥሬዎች፣ ዘይት ሰብሎችና ቦሮን ፍላጎት ያላቸው አትክልቶች።",
+        "application_guidance": "ቦሮን በትንሽ መጠን እንኳን አስፈላጊ ስለሆነ በተመከረው መጠን ብቻ ይጠቀሙ።",
+        "soil_considerations": "የቦሮን እጥረት በአፈር ምርመራ ሲረጋገጥ ይበልጥ ተገቢ ነው።"
+      },
+      "laboratory_diagnosis": {
+        "levels": {
+          "top": {
+            "position_en": "Top",
+            "position_am": "ላይኛ ክፍል",
+            "focus_en": "Top-layer inspection: exposed surface, visible particle condition, surface distribution and exposure to air or moisture.",
+            "focus_am": "የላይኛው ክፍል ምርመራ፦ የውጭ ገጽታ፣ የቅንጣት ሁኔታ፣ የተበተነበት ሁኔታና ለአየር ወይም ለእርጥበት መጋለጥ።",
+            "observation_en": "The top position is recorded as the surface inspection point. Review visible colour, particle form, surface crusting and signs of moisture.",
+            "observation_am": "ይህ የላይኛው የምርመራ ቦታ ነው። የሚታየውን ቀለም፣ የቅንጣት ቅርጽ፣ የገጽታ መጠንጠንና የእርጥበት ምልክቶች ይመልከቱ።",
+            "recommended_check_en": "Compare the surface material with the product's known physical description and inspect for contamination or weather exposure.",
+            "recommended_check_am": "የገጽታውን ቁሳቁስ ከምርቱ የታወቀ አካላዊ መግለጫ ጋር ያነጻጽሩ፤ ብክለትና ለአየር ሁኔታ መጋለጥን ይመርምሩ።",
+            "sampling_note_en": "Take a representative surface sample without mixing it with material from other positions.",
+            "sampling_note_am": "ከላይኛው ክፍል ብቻ የሚወክል ናሙና ይውሰዱ፤ ከሌሎች ክፍሎች ጋር አይቀላቅሉት።"
+          },
+          "middle": {
+            "position_en": "Middle",
+            "position_am": "መካከለኛ ክፍል",
+            "focus_en": "Middle-layer inspection: internal bulk appearance, particle-size consistency, mixture uniformity and representative material condition.",
+            "focus_am": "የመካከለኛው ክፍል ምርመራ፦ የውስጥ ቁሳቁስ ገጽታ፣ የቅንጣት መጠን ተመሳሳይነት፣ የቅልቅሉ አንድነትና የተወካይ ናሙና ሁኔታ።",
+            "observation_en": "The middle position is recorded as the central inspection point. Review whether particles and components appear evenly distributed.",
+            "observation_am": "ይህ የመካከለኛው የምርመራ ቦታ ነው። ቅንጣቶችና ክፍሎች በእኩል ሁኔታ መበተናቸውን ይመልከቱ።",
+            "recommended_check_en": "Compare the central material with the top and bottom samples to identify visible variation or mixing differences.",
+            "recommended_check_am": "የመካከለኛውን ቁሳቁስ ከላይኛውና ከታችኛው ናሙና ጋር በማነጻጸር የሚታይ ልዩነት ይፈልጉ።",
+            "sampling_note_en": "Collect a representative sample from the middle layer while keeping it separate from the other positions.",
+            "sampling_note_am": "ከመካከለኛው ክፍል የሚወክል ናሙና ይውሰዱ፤ ከሌሎች ክፍሎች ለይተው ያቆዩት።"
+          },
+          "bottom": {
+            "position_en": "Bottom",
+            "position_am": "ታችኛ ክፍል",
+            "focus_en": "Bottom-layer inspection: settling, compaction, fine-particle accumulation, moisture concentration and possible segregation.",
+            "focus_am": "የታችኛው ክፍል ምርመራ፦ መርገት፣ መጠቅጠቅ፣ ጥቃቅን ቅንጣቶች መከማቸት፣ የእርጥበት ማተኮርና የቁሳቁስ መለያየት።",
+            "observation_en": "The bottom position is recorded as the lower-layer inspection point. Review the material for settled fines, compacted masses and moisture-related changes.",
+            "observation_am": "ይህ የታችኛው ክፍል የምርመራ ቦታ ነው። የተከማቹ ጥቃቅን ቅንጣቶችን፣ የተጠቀጠቁ ክፍሎችንና ከእርጥበት ጋር የተያያዙ ለውጦችን ይመልከቱ።",
+            "recommended_check_en": "Compare the lower material with the upper layers and check whether storage or handling has caused visible separation.",
+            "recommended_check_am": "የታችኛውን ቁሳቁስ ከላይኛው ክፍሎች ጋር ያነጻጽሩ፤ በማከማቻ ወይም በአያያዝ ምክንያት የተፈጠረ መለያየት ካለ ይመርምሩ።",
+            "sampling_note_en": "Collect a separate bottom-layer sample, including representative settled material where present.",
+            "sampling_note_am": "ከታችኛው ክፍል የተለየ ናሙና ይውሰዱ፤ ካሉ የተረጉ ቁሳቁሶችንም በተወካይነት ያካትቱ።"
+          }
+        }
+      }
     },
     {
       "id": "npszn_17_7_35_5",
@@ -1389,7 +1585,56 @@
         "visual_identification_limits",
         "verification_requirements"
       ],
-      "knowledge_updated": "2026-11-05"
+      "knowledge_updated": "2026-11-05",
+      "translations": {
+        "name": "ኤንፒኤስዜን (NPSZn)",
+        "classification": "ማዕድናዊ የተዋሃደ ብዙ-ንጥረ ማዳበሪያ",
+        "description": "NPSZn ናይትሮጅን፣ ፎስፈረስ፣ ሰልፈርና ዚንክ የያዘ የተዋሃደ ማዳበሪያ ነው።",
+        "agricultural_uses": "ለሥር እድገት፣ ለኢንዛይም ሥራና ለዚንክ እጥረት መከላከል ይጠቅማል።",
+        "crop_suitability": "በተለይ በቆሎ፣ ስንዴ፣ ሩዝ፣ ጥራጥሬዎችና አትክልቶች።",
+        "application_guidance": "የዚንክ ፍላጎትን በአፈር ምርመራ በማረጋገጥ በተመከረው መጠን ይተግብሩ።",
+        "soil_considerations": "ከፍተኛ pH ባለው አፈር ውስጥ ዚንክ ለተክሎች መገኘቱ ሊቀንስ ይችላል።"
+      },
+      "laboratory_diagnosis": {
+        "levels": {
+          "top": {
+            "position_en": "Top",
+            "position_am": "ላይኛ ክፍል",
+            "focus_en": "Top-layer inspection: exposed surface, visible particle condition, surface distribution and exposure to air or moisture.",
+            "focus_am": "የላይኛው ክፍል ምርመራ፦ የውጭ ገጽታ፣ የቅንጣት ሁኔታ፣ የተበተነበት ሁኔታና ለአየር ወይም ለእርጥበት መጋለጥ።",
+            "observation_en": "The top position is recorded as the surface inspection point. Review visible colour, particle form, surface crusting and signs of moisture.",
+            "observation_am": "ይህ የላይኛው የምርመራ ቦታ ነው። የሚታየውን ቀለም፣ የቅንጣት ቅርጽ፣ የገጽታ መጠንጠንና የእርጥበት ምልክቶች ይመልከቱ።",
+            "recommended_check_en": "Compare the surface material with the product's known physical description and inspect for contamination or weather exposure.",
+            "recommended_check_am": "የገጽታውን ቁሳቁስ ከምርቱ የታወቀ አካላዊ መግለጫ ጋር ያነጻጽሩ፤ ብክለትና ለአየር ሁኔታ መጋለጥን ይመርምሩ።",
+            "sampling_note_en": "Take a representative surface sample without mixing it with material from other positions.",
+            "sampling_note_am": "ከላይኛው ክፍል ብቻ የሚወክል ናሙና ይውሰዱ፤ ከሌሎች ክፍሎች ጋር አይቀላቅሉት።"
+          },
+          "middle": {
+            "position_en": "Middle",
+            "position_am": "መካከለኛ ክፍል",
+            "focus_en": "Middle-layer inspection: internal bulk appearance, particle-size consistency, mixture uniformity and representative material condition.",
+            "focus_am": "የመካከለኛው ክፍል ምርመራ፦ የውስጥ ቁሳቁስ ገጽታ፣ የቅንጣት መጠን ተመሳሳይነት፣ የቅልቅሉ አንድነትና የተወካይ ናሙና ሁኔታ።",
+            "observation_en": "The middle position is recorded as the central inspection point. Review whether particles and components appear evenly distributed.",
+            "observation_am": "ይህ የመካከለኛው የምርመራ ቦታ ነው። ቅንጣቶችና ክፍሎች በእኩል ሁኔታ መበተናቸውን ይመልከቱ።",
+            "recommended_check_en": "Compare the central material with the top and bottom samples to identify visible variation or mixing differences.",
+            "recommended_check_am": "የመካከለኛውን ቁሳቁስ ከላይኛውና ከታችኛው ናሙና ጋር በማነጻጸር የሚታይ ልዩነት ይፈልጉ።",
+            "sampling_note_en": "Collect a representative sample from the middle layer while keeping it separate from the other positions.",
+            "sampling_note_am": "ከመካከለኛው ክፍል የሚወክል ናሙና ይውሰዱ፤ ከሌሎች ክፍሎች ለይተው ያቆዩት።"
+          },
+          "bottom": {
+            "position_en": "Bottom",
+            "position_am": "ታችኛ ክፍል",
+            "focus_en": "Bottom-layer inspection: settling, compaction, fine-particle accumulation, moisture concentration and possible segregation.",
+            "focus_am": "የታችኛው ክፍል ምርመራ፦ መርገት፣ መጠቅጠቅ፣ ጥቃቅን ቅንጣቶች መከማቸት፣ የእርጥበት ማተኮርና የቁሳቁስ መለያየት።",
+            "observation_en": "The bottom position is recorded as the lower-layer inspection point. Review the material for settled fines, compacted masses and moisture-related changes.",
+            "observation_am": "ይህ የታችኛው ክፍል የምርመራ ቦታ ነው። የተከማቹ ጥቃቅን ቅንጣቶችን፣ የተጠቀጠቁ ክፍሎችንና ከእርጥበት ጋር የተያያዙ ለውጦችን ይመልከቱ።",
+            "recommended_check_en": "Compare the lower material with the upper layers and check whether storage or handling has caused visible separation.",
+            "recommended_check_am": "የታችኛውን ቁሳቁስ ከላይኛው ክፍሎች ጋር ያነጻጽሩ፤ በማከማቻ ወይም በአያያዝ ምክንያት የተፈጠረ መለያየት ካለ ይመርምሩ።",
+            "sampling_note_en": "Collect a separate bottom-layer sample, including representative settled material where present.",
+            "sampling_note_am": "ከታችኛው ክፍል የተለየ ናሙና ይውሰዱ፤ ካሉ የተረጉ ቁሳቁሶችንም በተወካይነት ያካትቱ።"
+          }
+        }
+      }
     },
     {
       "id": "npsznb_17_8_35_7",
@@ -1660,7 +1905,56 @@
         "visual_identification_limits",
         "verification_requirements"
       ],
-      "knowledge_updated": "2026-11-05"
+      "knowledge_updated": "2026-11-05",
+      "translations": {
+        "name": "ኤንፒኤስዜንቢ (NPSZnB)",
+        "classification": "ማዕድናዊ የተዋሃደ ብዙ-ንጥረ ማዳበሪያ",
+        "description": "NPSZnB ናይትሮጅን፣ ፎስፈረስ፣ ሰልፈር፣ ዚንክና ቦሮን የያዘ የተዋሃደ ማዳበሪያ ነው።",
+        "agricultural_uses": "ለሥር፣ ለአበባና ለዘር ምስረታ የሚያስፈልጉ ንጥረ ምግቦችን ያቀርባል።",
+        "crop_suitability": "እህሎች፣ ጥራጥሬዎች፣ ዘይት ሰብሎችና አትክልቶች።",
+        "application_guidance": "ዚንክና ቦሮን በተገቢው መጠን ብቻ እንዲገኙ በአፈር ምርመራ መሠረት ይጠቀሙ።",
+        "soil_considerations": "የዚንክና ቦሮን እጥረት ያለባቸው አፈሮች ላይ ይጠቅማል፤ ከመጠን በላይ መጠቀም ጉዳት ያስከትላል።"
+      },
+      "laboratory_diagnosis": {
+        "levels": {
+          "top": {
+            "position_en": "Top",
+            "position_am": "ላይኛ ክፍል",
+            "focus_en": "Top-layer inspection: exposed surface, visible particle condition, surface distribution and exposure to air or moisture.",
+            "focus_am": "የላይኛው ክፍል ምርመራ፦ የውጭ ገጽታ፣ የቅንጣት ሁኔታ፣ የተበተነበት ሁኔታና ለአየር ወይም ለእርጥበት መጋለጥ።",
+            "observation_en": "The top position is recorded as the surface inspection point. Review visible colour, particle form, surface crusting and signs of moisture.",
+            "observation_am": "ይህ የላይኛው የምርመራ ቦታ ነው። የሚታየውን ቀለም፣ የቅንጣት ቅርጽ፣ የገጽታ መጠንጠንና የእርጥበት ምልክቶች ይመልከቱ።",
+            "recommended_check_en": "Compare the surface material with the product's known physical description and inspect for contamination or weather exposure.",
+            "recommended_check_am": "የገጽታውን ቁሳቁስ ከምርቱ የታወቀ አካላዊ መግለጫ ጋር ያነጻጽሩ፤ ብክለትና ለአየር ሁኔታ መጋለጥን ይመርምሩ።",
+            "sampling_note_en": "Take a representative surface sample without mixing it with material from other positions.",
+            "sampling_note_am": "ከላይኛው ክፍል ብቻ የሚወክል ናሙና ይውሰዱ፤ ከሌሎች ክፍሎች ጋር አይቀላቅሉት።"
+          },
+          "middle": {
+            "position_en": "Middle",
+            "position_am": "መካከለኛ ክፍል",
+            "focus_en": "Middle-layer inspection: internal bulk appearance, particle-size consistency, mixture uniformity and representative material condition.",
+            "focus_am": "የመካከለኛው ክፍል ምርመራ፦ የውስጥ ቁሳቁስ ገጽታ፣ የቅንጣት መጠን ተመሳሳይነት፣ የቅልቅሉ አንድነትና የተወካይ ናሙና ሁኔታ።",
+            "observation_en": "The middle position is recorded as the central inspection point. Review whether particles and components appear evenly distributed.",
+            "observation_am": "ይህ የመካከለኛው የምርመራ ቦታ ነው። ቅንጣቶችና ክፍሎች በእኩል ሁኔታ መበተናቸውን ይመልከቱ።",
+            "recommended_check_en": "Compare the central material with the top and bottom samples to identify visible variation or mixing differences.",
+            "recommended_check_am": "የመካከለኛውን ቁሳቁስ ከላይኛውና ከታችኛው ናሙና ጋር በማነጻጸር የሚታይ ልዩነት ይፈልጉ።",
+            "sampling_note_en": "Collect a representative sample from the middle layer while keeping it separate from the other positions.",
+            "sampling_note_am": "ከመካከለኛው ክፍል የሚወክል ናሙና ይውሰዱ፤ ከሌሎች ክፍሎች ለይተው ያቆዩት።"
+          },
+          "bottom": {
+            "position_en": "Bottom",
+            "position_am": "ታችኛ ክፍል",
+            "focus_en": "Bottom-layer inspection: settling, compaction, fine-particle accumulation, moisture concentration and possible segregation.",
+            "focus_am": "የታችኛው ክፍል ምርመራ፦ መርገት፣ መጠቅጠቅ፣ ጥቃቅን ቅንጣቶች መከማቸት፣ የእርጥበት ማተኮርና የቁሳቁስ መለያየት።",
+            "observation_en": "The bottom position is recorded as the lower-layer inspection point. Review the material for settled fines, compacted masses and moisture-related changes.",
+            "observation_am": "ይህ የታችኛው ክፍል የምርመራ ቦታ ነው። የተከማቹ ጥቃቅን ቅንጣቶችን፣ የተጠቀጠቁ ክፍሎችንና ከእርጥበት ጋር የተያያዙ ለውጦችን ይመልከቱ።",
+            "recommended_check_en": "Compare the lower material with the upper layers and check whether storage or handling has caused visible separation.",
+            "recommended_check_am": "የታችኛውን ቁሳቁስ ከላይኛው ክፍሎች ጋር ያነጻጽሩ፤ በማከማቻ ወይም በአያያዝ ምክንያት የተፈጠረ መለያየት ካለ ይመርምሩ።",
+            "sampling_note_en": "Collect a separate bottom-layer sample, including representative settled material where present.",
+            "sampling_note_am": "ከታችኛው ክፍል የተለየ ናሙና ይውሰዱ፤ ካሉ የተረጉ ቁሳቁሶችንም በተወካይነት ያካትቱ።"
+          }
+        }
+      }
     },
     {
       "id": "mop_0_0_60",
@@ -1931,7 +2225,56 @@
         "visual_identification_limits",
         "verification_requirements"
       ],
-      "knowledge_updated": "2026-11-05"
+      "knowledge_updated": "2026-11-05",
+      "translations": {
+        "name": "ኤምኦፒ (MOP) / ፖታሽ",
+        "classification": "ማዕድናዊ የፖታስየም ማዳበሪያ",
+        "description": "MOP በአብዛኛው ፖታስየም ክሎራይድ (KCl) ሲሆን 60% K₂O የሚያመለክት ደረጃ አለው።",
+        "agricultural_uses": "የውሃ ቁጥጥርን፣ የተክል ጥንካሬንና የምርት ጥራትን ይደግፋል።",
+        "crop_suitability": "እህሎች፣ ጥጥ፣ የተለያዩ የመስክ ሰብሎችና ክሎራይድን የሚቋቋሙ አትክልቶች።",
+        "application_guidance": "በአፈር የፖታስየም ምርመራና በሰብል ምክረ-መጠን መሠረት ይተግብሩ።",
+        "soil_considerations": "ክሎራይድን የማይቋቋሙ ሰብሎችና ጨዋማ አፈሮች ላይ ጥንቃቄ ያስፈልጋል።"
+      },
+      "laboratory_diagnosis": {
+        "levels": {
+          "top": {
+            "position_en": "Top",
+            "position_am": "ላይኛ ክፍል",
+            "focus_en": "Top-layer inspection: exposed surface, visible particle condition, surface distribution and exposure to air or moisture.",
+            "focus_am": "የላይኛው ክፍል ምርመራ፦ የውጭ ገጽታ፣ የቅንጣት ሁኔታ፣ የተበተነበት ሁኔታና ለአየር ወይም ለእርጥበት መጋለጥ።",
+            "observation_en": "The top position is recorded as the surface inspection point. Review visible colour, particle form, surface crusting and signs of moisture.",
+            "observation_am": "ይህ የላይኛው የምርመራ ቦታ ነው። የሚታየውን ቀለም፣ የቅንጣት ቅርጽ፣ የገጽታ መጠንጠንና የእርጥበት ምልክቶች ይመልከቱ።",
+            "recommended_check_en": "Compare the surface material with the product's known physical description and inspect for contamination or weather exposure.",
+            "recommended_check_am": "የገጽታውን ቁሳቁስ ከምርቱ የታወቀ አካላዊ መግለጫ ጋር ያነጻጽሩ፤ ብክለትና ለአየር ሁኔታ መጋለጥን ይመርምሩ።",
+            "sampling_note_en": "Take a representative surface sample without mixing it with material from other positions.",
+            "sampling_note_am": "ከላይኛው ክፍል ብቻ የሚወክል ናሙና ይውሰዱ፤ ከሌሎች ክፍሎች ጋር አይቀላቅሉት።"
+          },
+          "middle": {
+            "position_en": "Middle",
+            "position_am": "መካከለኛ ክፍል",
+            "focus_en": "Middle-layer inspection: internal bulk appearance, particle-size consistency, mixture uniformity and representative material condition.",
+            "focus_am": "የመካከለኛው ክፍል ምርመራ፦ የውስጥ ቁሳቁስ ገጽታ፣ የቅንጣት መጠን ተመሳሳይነት፣ የቅልቅሉ አንድነትና የተወካይ ናሙና ሁኔታ።",
+            "observation_en": "The middle position is recorded as the central inspection point. Review whether particles and components appear evenly distributed.",
+            "observation_am": "ይህ የመካከለኛው የምርመራ ቦታ ነው። ቅንጣቶችና ክፍሎች በእኩል ሁኔታ መበተናቸውን ይመልከቱ።",
+            "recommended_check_en": "Compare the central material with the top and bottom samples to identify visible variation or mixing differences.",
+            "recommended_check_am": "የመካከለኛውን ቁሳቁስ ከላይኛውና ከታችኛው ናሙና ጋር በማነጻጸር የሚታይ ልዩነት ይፈልጉ።",
+            "sampling_note_en": "Collect a representative sample from the middle layer while keeping it separate from the other positions.",
+            "sampling_note_am": "ከመካከለኛው ክፍል የሚወክል ናሙና ይውሰዱ፤ ከሌሎች ክፍሎች ለይተው ያቆዩት።"
+          },
+          "bottom": {
+            "position_en": "Bottom",
+            "position_am": "ታችኛ ክፍል",
+            "focus_en": "Bottom-layer inspection: settling, compaction, fine-particle accumulation, moisture concentration and possible segregation.",
+            "focus_am": "የታችኛው ክፍል ምርመራ፦ መርገት፣ መጠቅጠቅ፣ ጥቃቅን ቅንጣቶች መከማቸት፣ የእርጥበት ማተኮርና የቁሳቁስ መለያየት።",
+            "observation_en": "The bottom position is recorded as the lower-layer inspection point. Review the material for settled fines, compacted masses and moisture-related changes.",
+            "observation_am": "ይህ የታችኛው ክፍል የምርመራ ቦታ ነው። የተከማቹ ጥቃቅን ቅንጣቶችን፣ የተጠቀጠቁ ክፍሎችንና ከእርጥበት ጋር የተያያዙ ለውጦችን ይመልከቱ።",
+            "recommended_check_en": "Compare the lower material with the upper layers and check whether storage or handling has caused visible separation.",
+            "recommended_check_am": "የታችኛውን ቁሳቁስ ከላይኛው ክፍሎች ጋር ያነጻጽሩ፤ በማከማቻ ወይም በአያያዝ ምክንያት የተፈጠረ መለያየት ካለ ይመርምሩ።",
+            "sampling_note_en": "Collect a separate bottom-layer sample, including representative settled material where present.",
+            "sampling_note_am": "ከታችኛው ክፍል የተለየ ናሙና ይውሰዱ፤ ካሉ የተረጉ ቁሳቁሶችንም በተወካይነት ያካትቱ።"
+          }
+        }
+      }
     },
     {
       "id": "compost",
@@ -2223,7 +2566,56 @@
         "visual_identification_limits",
         "verification_requirements"
       ],
-      "knowledge_updated": "2026-11-05"
+      "knowledge_updated": "2026-11-05",
+      "translations": {
+        "name": "ኮምፖስት",
+        "classification": "ኦርጋኒክ የአፈር ማሻሻያና ማዳበሪያ",
+        "description": "ኮምፖስት ከተበሰበሱ የተክል ቅሪቶችና ሌሎች ተስማሚ ኦርጋኒክ ቁሳቁሶች የሚዘጋጅ የአፈር ማሻሻያ ነው።",
+        "agricultural_uses": "የአፈር ኦርጋኒክ ንጥረ ነገርን፣ የውሃ መያዝንና የአፈር መዋቅርን ያሻሽላል።",
+        "crop_suitability": "አትክልቶች፣ ፍራፍሬ ዛፎች፣ እህሎች፣ ጥራጥሬዎችና የችግኝ ተክሎች።",
+        "application_guidance": "በደንብ የበሰበሰና የተዳበረ ኮምፖስት ይጠቀሙ፤ ከመዝራት በፊት ከአፈር ጋር ያቀላቅሉ።",
+        "soil_considerations": "የኮምፖስት ንጥረ ምግብ መጠን በጥሬ እቃውና በብስለቱ ይለያያል።"
+      },
+      "laboratory_diagnosis": {
+        "levels": {
+          "top": {
+            "position_en": "Top",
+            "position_am": "ላይኛ ክፍል",
+            "focus_en": "Top-layer inspection: exposed surface, visible particle condition, surface distribution and exposure to air or moisture.",
+            "focus_am": "የላይኛው ክፍል ምርመራ፦ የውጭ ገጽታ፣ የቅንጣት ሁኔታ፣ የተበተነበት ሁኔታና ለአየር ወይም ለእርጥበት መጋለጥ።",
+            "observation_en": "The top position is recorded as the surface inspection point. Review visible colour, particle form, surface crusting and signs of moisture.",
+            "observation_am": "ይህ የላይኛው የምርመራ ቦታ ነው። የሚታየውን ቀለም፣ የቅንጣት ቅርጽ፣ የገጽታ መጠንጠንና የእርጥበት ምልክቶች ይመልከቱ።",
+            "recommended_check_en": "Compare the surface material with the product's known physical description and inspect for contamination or weather exposure.",
+            "recommended_check_am": "የገጽታውን ቁሳቁስ ከምርቱ የታወቀ አካላዊ መግለጫ ጋር ያነጻጽሩ፤ ብክለትና ለአየር ሁኔታ መጋለጥን ይመርምሩ።",
+            "sampling_note_en": "Take a representative surface sample without mixing it with material from other positions.",
+            "sampling_note_am": "ከላይኛው ክፍል ብቻ የሚወክል ናሙና ይውሰዱ፤ ከሌሎች ክፍሎች ጋር አይቀላቅሉት።"
+          },
+          "middle": {
+            "position_en": "Middle",
+            "position_am": "መካከለኛ ክፍል",
+            "focus_en": "Middle-layer inspection: internal bulk appearance, particle-size consistency, mixture uniformity and representative material condition.",
+            "focus_am": "የመካከለኛው ክፍል ምርመራ፦ የውስጥ ቁሳቁስ ገጽታ፣ የቅንጣት መጠን ተመሳሳይነት፣ የቅልቅሉ አንድነትና የተወካይ ናሙና ሁኔታ።",
+            "observation_en": "The middle position is recorded as the central inspection point. Review whether particles and components appear evenly distributed.",
+            "observation_am": "ይህ የመካከለኛው የምርመራ ቦታ ነው። ቅንጣቶችና ክፍሎች በእኩል ሁኔታ መበተናቸውን ይመልከቱ።",
+            "recommended_check_en": "Compare the central material with the top and bottom samples to identify visible variation or mixing differences.",
+            "recommended_check_am": "የመካከለኛውን ቁሳቁስ ከላይኛውና ከታችኛው ናሙና ጋር በማነጻጸር የሚታይ ልዩነት ይፈልጉ።",
+            "sampling_note_en": "Collect a representative sample from the middle layer while keeping it separate from the other positions.",
+            "sampling_note_am": "ከመካከለኛው ክፍል የሚወክል ናሙና ይውሰዱ፤ ከሌሎች ክፍሎች ለይተው ያቆዩት።"
+          },
+          "bottom": {
+            "position_en": "Bottom",
+            "position_am": "ታችኛ ክፍል",
+            "focus_en": "Bottom-layer inspection: settling, compaction, fine-particle accumulation, moisture concentration and possible segregation.",
+            "focus_am": "የታችኛው ክፍል ምርመራ፦ መርገት፣ መጠቅጠቅ፣ ጥቃቅን ቅንጣቶች መከማቸት፣ የእርጥበት ማተኮርና የቁሳቁስ መለያየት።",
+            "observation_en": "The bottom position is recorded as the lower-layer inspection point. Review the material for settled fines, compacted masses and moisture-related changes.",
+            "observation_am": "ይህ የታችኛው ክፍል የምርመራ ቦታ ነው። የተከማቹ ጥቃቅን ቅንጣቶችን፣ የተጠቀጠቁ ክፍሎችንና ከእርጥበት ጋር የተያያዙ ለውጦችን ይመልከቱ።",
+            "recommended_check_en": "Compare the lower material with the upper layers and check whether storage or handling has caused visible separation.",
+            "recommended_check_am": "የታችኛውን ቁሳቁስ ከላይኛው ክፍሎች ጋር ያነጻጽሩ፤ በማከማቻ ወይም በአያያዝ ምክንያት የተፈጠረ መለያየት ካለ ይመርምሩ።",
+            "sampling_note_en": "Collect a separate bottom-layer sample, including representative settled material where present.",
+            "sampling_note_am": "ከታችኛው ክፍል የተለየ ናሙና ይውሰዱ፤ ካሉ የተረጉ ቁሳቁሶችንም በተወካይነት ያካትቱ።"
+          }
+        }
+      }
     },
     {
       "id": "farmyard_manure",
@@ -2507,7 +2899,56 @@
         "visual_identification_limits",
         "verification_requirements"
       ],
-      "knowledge_updated": "2026-11-05"
+      "knowledge_updated": "2026-11-05",
+      "translations": {
+        "name": "የእንስሳት ፍግ",
+        "classification": "ኦርጋኒክ ማዳበሪያና የአፈር ማሻሻያ",
+        "description": "የእንስሳት ፍግ ከእንስሳት ቆሻሻና ከአልጋ ቁሳቁሶች የሚመነጭ ኦርጋኒክ ማዳበሪያ ነው።",
+        "agricultural_uses": "የአፈር ኦርጋኒክ ንጥረ ነገርን፣ የአፈር አየር መግባትንና የውሃ መያዝን ይደግፋል።",
+        "crop_suitability": "እህሎች፣ አትክልቶች፣ ጥራጥሬዎች፣ የግጦሽ ሳሮችና ፍራፍሬ ዛፎች።",
+        "application_guidance": "በደንብ የበሰበሰ ፍግ ይጠቀሙ፤ ትኩስ ፍግን በቀጥታ ከዘር ወይም ከተክል ሥር ጋር አያንካኩ።",
+        "soil_considerations": "የንጥረ ምግብ ይዘቱ በእንስሳው፣ በአመጋገቡና በማከማቻው ሁኔታ ይለያያል።"
+      },
+      "laboratory_diagnosis": {
+        "levels": {
+          "top": {
+            "position_en": "Top",
+            "position_am": "ላይኛ ክፍል",
+            "focus_en": "Top-layer inspection: exposed surface, visible particle condition, surface distribution and exposure to air or moisture.",
+            "focus_am": "የላይኛው ክፍል ምርመራ፦ የውጭ ገጽታ፣ የቅንጣት ሁኔታ፣ የተበተነበት ሁኔታና ለአየር ወይም ለእርጥበት መጋለጥ።",
+            "observation_en": "The top position is recorded as the surface inspection point. Review visible colour, particle form, surface crusting and signs of moisture.",
+            "observation_am": "ይህ የላይኛው የምርመራ ቦታ ነው። የሚታየውን ቀለም፣ የቅንጣት ቅርጽ፣ የገጽታ መጠንጠንና የእርጥበት ምልክቶች ይመልከቱ።",
+            "recommended_check_en": "Compare the surface material with the product's known physical description and inspect for contamination or weather exposure.",
+            "recommended_check_am": "የገጽታውን ቁሳቁስ ከምርቱ የታወቀ አካላዊ መግለጫ ጋር ያነጻጽሩ፤ ብክለትና ለአየር ሁኔታ መጋለጥን ይመርምሩ።",
+            "sampling_note_en": "Take a representative surface sample without mixing it with material from other positions.",
+            "sampling_note_am": "ከላይኛው ክፍል ብቻ የሚወክል ናሙና ይውሰዱ፤ ከሌሎች ክፍሎች ጋር አይቀላቅሉት።"
+          },
+          "middle": {
+            "position_en": "Middle",
+            "position_am": "መካከለኛ ክፍል",
+            "focus_en": "Middle-layer inspection: internal bulk appearance, particle-size consistency, mixture uniformity and representative material condition.",
+            "focus_am": "የመካከለኛው ክፍል ምርመራ፦ የውስጥ ቁሳቁስ ገጽታ፣ የቅንጣት መጠን ተመሳሳይነት፣ የቅልቅሉ አንድነትና የተወካይ ናሙና ሁኔታ።",
+            "observation_en": "The middle position is recorded as the central inspection point. Review whether particles and components appear evenly distributed.",
+            "observation_am": "ይህ የመካከለኛው የምርመራ ቦታ ነው። ቅንጣቶችና ክፍሎች በእኩል ሁኔታ መበተናቸውን ይመልከቱ።",
+            "recommended_check_en": "Compare the central material with the top and bottom samples to identify visible variation or mixing differences.",
+            "recommended_check_am": "የመካከለኛውን ቁሳቁስ ከላይኛውና ከታችኛው ናሙና ጋር በማነጻጸር የሚታይ ልዩነት ይፈልጉ።",
+            "sampling_note_en": "Collect a representative sample from the middle layer while keeping it separate from the other positions.",
+            "sampling_note_am": "ከመካከለኛው ክፍል የሚወክል ናሙና ይውሰዱ፤ ከሌሎች ክፍሎች ለይተው ያቆዩት።"
+          },
+          "bottom": {
+            "position_en": "Bottom",
+            "position_am": "ታችኛ ክፍል",
+            "focus_en": "Bottom-layer inspection: settling, compaction, fine-particle accumulation, moisture concentration and possible segregation.",
+            "focus_am": "የታችኛው ክፍል ምርመራ፦ መርገት፣ መጠቅጠቅ፣ ጥቃቅን ቅንጣቶች መከማቸት፣ የእርጥበት ማተኮርና የቁሳቁስ መለያየት።",
+            "observation_en": "The bottom position is recorded as the lower-layer inspection point. Review the material for settled fines, compacted masses and moisture-related changes.",
+            "observation_am": "ይህ የታችኛው ክፍል የምርመራ ቦታ ነው። የተከማቹ ጥቃቅን ቅንጣቶችን፣ የተጠቀጠቁ ክፍሎችንና ከእርጥበት ጋር የተያያዙ ለውጦችን ይመልከቱ።",
+            "recommended_check_en": "Compare the lower material with the upper layers and check whether storage or handling has caused visible separation.",
+            "recommended_check_am": "የታችኛውን ቁሳቁስ ከላይኛው ክፍሎች ጋር ያነጻጽሩ፤ በማከማቻ ወይም በአያያዝ ምክንያት የተፈጠረ መለያየት ካለ ይመርምሩ።",
+            "sampling_note_en": "Collect a separate bottom-layer sample, including representative settled material where present.",
+            "sampling_note_am": "ከታችኛው ክፍል የተለየ ናሙና ይውሰዱ፤ ካሉ የተረጉ ቁሳቁሶችንም በተወካይነት ያካትቱ።"
+          }
+        }
+      }
     },
     {
       "id": "vermicompost",
@@ -2779,7 +3220,56 @@
         "visual_identification_limits",
         "verification_requirements"
       ],
-      "knowledge_updated": "2026-11-05"
+      "knowledge_updated": "2026-11-05",
+      "translations": {
+        "name": "ቨርሚኮምፖስት",
+        "classification": "በትል የተዘጋጀ ኦርጋኒክ ማዳበሪያ",
+        "description": "ቨርሚኮምፖስት ኦርጋኒክ ቁሳቁሶች በምድር ትሎችና በማይክሮ ሕዋሳት ተቀነባብረው የሚፈጠሩት የበሰለ ኦርጋኒክ ማሻሻያ ነው።",
+        "agricultural_uses": "የአፈር መዋቅርን፣ የማይክሮብ እንቅስቃሴንና የንጥረ ምግብ ዑደትን ይደግፋል።",
+        "crop_suitability": "ችግኞች፣ አትክልቶች፣ የቤት ውስጥ ተክሎች፣ ፍራፍሬ ዛፎችና የመስክ ሰብሎች።",
+        "application_guidance": "በደንብ የተዘጋጀ ቨርሚኮምፖስት በአፈር ወይም በችግኝ ማቀላቀያ ውስጥ በተመጣጣኝ መጠን ይጠቀሙ።",
+        "soil_considerations": "የንጥረ ምግብ ይዘቱ እንደ ጥሬ እቃውና የማምረቻ ሂደቱ ይለያያል።"
+      },
+      "laboratory_diagnosis": {
+        "levels": {
+          "top": {
+            "position_en": "Top",
+            "position_am": "ላይኛ ክፍል",
+            "focus_en": "Top-layer inspection: exposed surface, visible particle condition, surface distribution and exposure to air or moisture.",
+            "focus_am": "የላይኛው ክፍል ምርመራ፦ የውጭ ገጽታ፣ የቅንጣት ሁኔታ፣ የተበተነበት ሁኔታና ለአየር ወይም ለእርጥበት መጋለጥ።",
+            "observation_en": "The top position is recorded as the surface inspection point. Review visible colour, particle form, surface crusting and signs of moisture.",
+            "observation_am": "ይህ የላይኛው የምርመራ ቦታ ነው። የሚታየውን ቀለም፣ የቅንጣት ቅርጽ፣ የገጽታ መጠንጠንና የእርጥበት ምልክቶች ይመልከቱ።",
+            "recommended_check_en": "Compare the surface material with the product's known physical description and inspect for contamination or weather exposure.",
+            "recommended_check_am": "የገጽታውን ቁሳቁስ ከምርቱ የታወቀ አካላዊ መግለጫ ጋር ያነጻጽሩ፤ ብክለትና ለአየር ሁኔታ መጋለጥን ይመርምሩ።",
+            "sampling_note_en": "Take a representative surface sample without mixing it with material from other positions.",
+            "sampling_note_am": "ከላይኛው ክፍል ብቻ የሚወክል ናሙና ይውሰዱ፤ ከሌሎች ክፍሎች ጋር አይቀላቅሉት።"
+          },
+          "middle": {
+            "position_en": "Middle",
+            "position_am": "መካከለኛ ክፍል",
+            "focus_en": "Middle-layer inspection: internal bulk appearance, particle-size consistency, mixture uniformity and representative material condition.",
+            "focus_am": "የመካከለኛው ክፍል ምርመራ፦ የውስጥ ቁሳቁስ ገጽታ፣ የቅንጣት መጠን ተመሳሳይነት፣ የቅልቅሉ አንድነትና የተወካይ ናሙና ሁኔታ።",
+            "observation_en": "The middle position is recorded as the central inspection point. Review whether particles and components appear evenly distributed.",
+            "observation_am": "ይህ የመካከለኛው የምርመራ ቦታ ነው። ቅንጣቶችና ክፍሎች በእኩል ሁኔታ መበተናቸውን ይመልከቱ።",
+            "recommended_check_en": "Compare the central material with the top and bottom samples to identify visible variation or mixing differences.",
+            "recommended_check_am": "የመካከለኛውን ቁሳቁስ ከላይኛውና ከታችኛው ናሙና ጋር በማነጻጸር የሚታይ ልዩነት ይፈልጉ።",
+            "sampling_note_en": "Collect a representative sample from the middle layer while keeping it separate from the other positions.",
+            "sampling_note_am": "ከመካከለኛው ክፍል የሚወክል ናሙና ይውሰዱ፤ ከሌሎች ክፍሎች ለይተው ያቆዩት።"
+          },
+          "bottom": {
+            "position_en": "Bottom",
+            "position_am": "ታችኛ ክፍል",
+            "focus_en": "Bottom-layer inspection: settling, compaction, fine-particle accumulation, moisture concentration and possible segregation.",
+            "focus_am": "የታችኛው ክፍል ምርመራ፦ መርገት፣ መጠቅጠቅ፣ ጥቃቅን ቅንጣቶች መከማቸት፣ የእርጥበት ማተኮርና የቁሳቁስ መለያየት።",
+            "observation_en": "The bottom position is recorded as the lower-layer inspection point. Review the material for settled fines, compacted masses and moisture-related changes.",
+            "observation_am": "ይህ የታችኛው ክፍል የምርመራ ቦታ ነው። የተከማቹ ጥቃቅን ቅንጣቶችን፣ የተጠቀጠቁ ክፍሎችንና ከእርጥበት ጋር የተያያዙ ለውጦችን ይመልከቱ።",
+            "recommended_check_en": "Compare the lower material with the upper layers and check whether storage or handling has caused visible separation.",
+            "recommended_check_am": "የታችኛውን ቁሳቁስ ከላይኛው ክፍሎች ጋር ያነጻጽሩ፤ በማከማቻ ወይም በአያያዝ ምክንያት የተፈጠረ መለያየት ካለ ይመርምሩ።",
+            "sampling_note_en": "Collect a separate bottom-layer sample, including representative settled material where present.",
+            "sampling_note_am": "ከታችኛው ክፍል የተለየ ናሙና ይውሰዱ፤ ካሉ የተረጉ ቁሳቁሶችንም በተወካይነት ያካትቱ።"
+          }
+        }
+      }
     }
   ],
   "physical_intelligence": {
@@ -2808,5 +3298,29 @@
     "profile_count": 10,
     "dimensions_per_profile": 14,
     "updated": "2026-11-05"
+  },
+  "laboratory_system": {
+    "version": "2.0",
+    "positions": {
+      "1": {
+        "key": "top",
+        "name_en": "Top",
+        "name_am": "ላይኛ ክፍል"
+      },
+      "2": {
+        "key": "middle",
+        "name_en": "Middle",
+        "name_am": "መካከለኛ ክፍል"
+      },
+      "3": {
+        "key": "bottom",
+        "name_en": "Bottom",
+        "name_am": "ታችኛ ክፍል"
+      }
+    },
+    "code_format": "position number + fertilizer code",
+    "record_count": 30,
+    "note_en": "Position records define inspection focus and sampling guidance. They are not independent chemical measurements.",
+    "note_am": "የክፍል መዝገቦቹ የምርመራ ትኩረትንና የናሙና አወሳሰድን ይገልጻሉ፤ የተለየ የኬሚካል መለኪያ ውጤት አይደሉም።"
   }
 }

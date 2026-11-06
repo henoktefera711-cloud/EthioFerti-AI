@@ -1663,132 +1663,78 @@ def _ef_family_summary(family):
 
 
 @app.get("/api/v1/laboratory/diagnose/{code}")
-def laboratory_diagnose(code: str):
-    code_map = {
-        "1": ("white_fertilizer", "White fertilizer category", "White"),
-        "2": ("black_fertilizer", "Dark organic soil amendment", "Black"),
-        "3": ("organic_amendment", "Brown organic fertilizer", "Brown"),
-        "4": ("compound_nps", "Yellow compound fertilizer category", "Yellow"),
-        "5": ("compound_nps", "Red / pink compound fertilizer category", "Red / Pink"),
-        "11": ("fertilizer_material", "Mixed-colour fertilizer category", "Mixed colours"),
+def laboratory_diagnose(code: str, lang: str = "am"):
+    import re
+
+    normalized = str(code).strip().upper()
+    match = re.fullmatch(r"(1|2|3)(NPSZNB|NPSZN|NPSB|NPS|U|D|M|C|F|V)", normalized)
+    if not match:
+        raise HTTPException(status_code=422, detail="Enter a valid fertilizer sensor code.")
+
+    position_number, fertilizer_code = match.groups()
+    fertilizer_ids = {
+        "U": "urea",
+        "D": "dap",
+        "NPS": "nps_19_38_0_7s",
+        "NPSB": "npsb_18_9_37_7",
+        "NPSZN": "npszn_17_7_35_5",
+        "NPSZNB": "npsznb_17_8_35_7",
+        "M": "mop_0_0_60",
+        "C": "compost",
+        "F": "farmyard_manure",
+        "V": "vermicompost",
     }
 
-    selected = code_map.get(str(code).strip())
-    if not selected:
-        raise HTTPException(status_code=422, detail="Enter a supported colour code.")
+    fertilizer_id = fertilizer_ids[fertilizer_code]
+    language = "en" if str(lang).lower() == "en" else "am"
+    database = _load_fertilizer_knowledge()
 
-    family, label, colour = selected
-    profile = _ef_family_summary(family)
-
+    profile = next(
+        (p for p in database["profiles"] if p.get("id") == fertilizer_id),
+        None
+    )
     if not profile:
-        raise HTTPException(status_code=503, detail="Laboratory profile unavailable.")
+        raise HTTPException(status_code=503, detail="Fertilizer profile unavailable.")
 
     profile = dict(profile)
+    translated = profile.get("translations", {}).get(language, {})
+    profile.update(translated)
 
-    # Clear, useful category descriptions for the laboratory report.
-    if family == "white_fertilizer":
-        profile.update({
-            "name": "White mineral fertilizer category",
-            "classification": "Mineral / inorganic fertilizer category",
-            "chemical_name": "Mineral nutrient compounds",
-            "formula": "Product-specific mineral formulation",
-            "grade": "Nutrient grade varies by fertilizer product",
-            "description": "White mineral fertilizer materials are widely used to supply essential plant nutrients and support crop development.",
-            "nutrients": {
-                "Nitrogen (N)": "Promotes leaf growth, stem development and chlorophyll production.",
-                "Phosphorus (P)": "Supports strong roots, early crop establishment and flowering.",
-                "Potassium (K)": "Strengthens plants, regulates water balance and supports grain and fruit development.",
-                "Sulfur and micronutrients": "Support protein formation and essential plant metabolic processes."
-            },
-            "nutrient_functions": [
-                "Supports healthy vegetative growth.",
-                "Promotes root establishment and crop development.",
-                "Supports plant strength, flowering and crop quality."
-            ],
-            "crop_suitability": "Cereals, maize, wheat, teff, vegetables, legumes and fruit crops.",
-            "agricultural_uses": "Basal fertilization, crop nutrition and supplementary nutrient application.",
-            "application_guidance": "Select the fertilizer product and application rate according to crop requirements and its product instructions."
-        })
+    positions = {
+        "1": ("Top", "ላይኛ ክፍል"),
+        "2": ("Middle", "መካከለኛ ክፍል"),
+        "3": ("Bottom", "ታችኛ ክፍል"),
+    }
+    position_en, position_am = positions[position_number]
+    position_label = position_en if language == "en" else position_am
 
-    elif family == "black_fertilizer":
-        profile.update({
-            "name": "Dark organic soil amendment",
-            "classification": "Organic-matter soil amendment",
-            "description": "Dark organic soil amendments enrich agricultural soil, support soil organisms and improve soil structure.",
-            "nutrients": {
-                "Organic matter": "Improves soil structure, aggregation and water retention.",
-                "Nitrogen (N)": "Supports leaf development and vegetative growth.",
-                "Phosphorus (P)": "Supports root development and flowering.",
-                "Potassium (K)": "Supports water regulation and plant resilience.",
-                "Secondary nutrients": "Contribute to balanced crop nutrition."
-            },
-            "nutrient_functions": [
-                "Enriches soil with organic matter.",
-                "Supports beneficial soil microorganisms.",
-                "Improves soil structure and moisture retention.",
-                "Contributes nutrients to crop growth."
-            ],
-            "crop_suitability": "Maize, wheat, teff, vegetables, legumes, root crops and fruit trees.",
-            "agricultural_uses": "Soil enrichment, organic matter addition, soil conditioning and supplementary nutrient supply.",
-            "application_guidance": "Mix mature, well-decomposed material into the root-zone soil before planting or around established crops."
-        })
-
-    elif family == "organic_amendment":
-        profile.update({
-            "name": "Brown organic fertilizer and soil amendment",
-            "classification": "Organic fertilizer / soil amendment",
-            "description": "Brown organic materials such as compost and processed manure contribute organic matter and support productive soil.",
-            "nutrients": {
-                "Organic matter": "Builds soil structure and improves moisture retention.",
-                "Nitrogen (N)": "Supports vegetative growth.",
-                "Phosphorus (P)": "Supports root development.",
-                "Potassium (K)": "Supports plant strength and water regulation."
-            },
-            "crop_suitability": "Cereals, vegetables, legumes, root crops and fruit trees.",
-            "agricultural_uses": "Composting, soil enrichment, planting-bed preparation and organic nutrient management.",
-            "application_guidance": "Incorporate mature organic material into the soil before planting."
-        })
-
-    elif family == "compound_nps":
-        profile.update({
-            "name": label,
-            "classification": "Compound mineral fertilizer category",
-            "description": "Compound fertilizers combine essential plant nutrients to support crop establishment, root development and productive growth.",
-            "nutrients": {
-                "Nitrogen (N)": "Supports leaf and stem growth.",
-                "Phosphorus (P)": "Supports root growth and early crop establishment.",
-                "Potassium (K)": "Supports water regulation and crop resilience.",
-                "Sulfur (S)": "Supports protein synthesis and plant metabolism."
-            },
-            "crop_suitability": "Cereals, maize, wheat, teff, pulses and vegetables.",
-            "agricultural_uses": "Basal fertilization and balanced crop nutrient supply.",
-            "application_guidance": "Use the selected compound fertilizer according to its confirmed grade and local crop recommendations."
-        })
-
-    elif family == "fertilizer_material":
-        profile.update({
-            "name": "Mixed-colour compound fertilizer category",
-            "classification": "Compound fertilizer category",
-            "description": "Mixed-colour fertilizer materials are presented as a compound fertilizer category for crop nutrition and soil fertility management.",
-            "nutrients": {
-                "Nitrogen (N)": "Supports vegetative growth.",
-                "Phosphorus (P)": "Supports root development.",
-                "Potassium (K)": "Supports plant strength and water regulation.",
-                "Sulfur and micronutrients": "Support balanced plant nutrition."
-            },
-            "crop_suitability": "Cereals, maize, wheat, teff, vegetables and legumes.",
-            "agricultural_uses": "Crop nutrition and soil fertility management.",
-            "application_guidance": "Select the product grade and application rate according to crop needs and product instructions."
-        })
+    position_focus = {
+        "en": {
+            "1": "Inspection focus: surface-layer particle appearance, outer surface and exposure conditions.",
+            "2": "Inspection focus: particle uniformity and consistency in the central material.",
+            "3": "Inspection focus: lower-layer particle settling, compaction and moisture conditions."
+        },
+        "am": {
+            "1": "የላይኛው ክፍል የቅንጣት መልክ፣ የውጫዊ ገጽታና የእርጥበት ሁኔታ ምርመራ።",
+            "2": "የመካከለኛው ክፍል የቅንጣት ተመሳሳይነትና የድብልቅ ወጥነት ምርመራ።",
+            "3": "የታችኛው ክፍል የቅንጣት መሰብሰብ፣ መጠቅጠቅና የእርጥበት ሁኔታ ምርመራ።"
+        }
+    }[language][position_number]
 
     return {
         "success": True,
         "diagnosis_mode": "laboratory_simulation",
-        "code": str(code),
-        "colour": colour,
-        "category": label,
+        "code": normalized,
+        "fertilizer_code": fertilizer_code,
+        "fertilizer_id": fertilizer_id,
+        "sensor_position": position_label,
+        "sensor_position_number": int(position_number),
+        "sensor_position_focus": position_focus,
+        "language": language,
+        "category": profile.get("name"),
+        "colour": position_label,
         "profile": profile,
-        "database": "offline_fertilizer_knowledge"
+        "database": database.get("database_name", "offline_fertilizer_knowledge")
     }
 
 

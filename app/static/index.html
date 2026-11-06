@@ -313,6 +313,373 @@ a{color:#155c3b;font-weight:bold}
   margin: 0;
 }
 
+
+/* ETHIOFERTI GLASS TERMINAL LAB */
+.terminal-console {
+  width:100%; box-sizing:border-box; overflow:hidden;
+  border:1px solid rgba(125,255,170,.22);
+  border-radius:17px; color:#8cffae;
+  background:linear-gradient(145deg,rgba(255,255,255,.09),transparent 35%),rgba(5,12,9,.96);
+  box-shadow:0 20px 50px rgba(0,0,0,.28),inset 0 1px 0 rgba(255,255,255,.09);
+  backdrop-filter:blur(22px); -webkit-backdrop-filter:blur(22px);
+}
+.terminal-topbar {
+  min-height:43px; display:flex; align-items:center; justify-content:space-between;
+  gap:8px; padding:0 12px; border-bottom:1px solid rgba(130,255,165,.16);
+  background:rgba(255,255,255,.045); color:#a9cdb4;
+  font:700 9px monospace; letter-spacing:.8px;
+}
+.terminal-lights {display:flex;gap:5px;flex-shrink:0}
+.terminal-lights i {width:7px;height:7px;border-radius:50%;background:#72e99a;box-shadow:0 0 8px #72e99a80}
+.terminal-lights i:nth-child(2){background:#d8c36e}
+.terminal-lights i:nth-child(3){background:#75b9ed}
+.terminal-live {color:#70f49b;white-space:nowrap}
+.terminal-device {padding:17px 13px 10px}
+.terminal-system {color:#c2ffd1;font:800 11px/1.5 monospace;letter-spacing:1px;margin-bottom:8px}
+.terminal-system span {color:#75a989;font-weight:500}
+.terminal-init {color:#6db98a;font:11px/1.6 monospace;margin-bottom:13px}
+#labTerminalLog {
+  display:block;width:100%;height:290px;max-height:38vh;min-height:210px;
+  overflow-y:auto;box-sizing:border-box;margin:0;padding:5px 0;
+  color:#80f5a2;background:transparent;border:0;white-space:pre-wrap;
+  overflow-wrap:anywhere;font-family:"Roboto Mono","Courier New",monospace;
+  font-size:10px;line-height:1.85;text-shadow:0 0 7px #4bff8540;
+  scrollbar-width:thin;scrollbar-color:#326c49 transparent;
+}
+.terminal-bottom {padding:14px;border-top:1px solid #82ffa526;background:#ffffff09}
+.terminal-progress-info {display:flex;justify-content:space-between;margin-bottom:9px;color:#8bb69a;font:800 9px monospace;letter-spacing:1px}
+#labPercent {color:#8cffae;font-size:15px}
+.terminal-bottom .lab-progress-track {height:7px;background:#1a2b20;border:1px solid #82ffa51f}
+.terminal-bottom #labProgressBar {background:linear-gradient(90deg,#28a65c,#9affb2);box-shadow:0 0 12px #4bff8573}
+.terminal-bottom #labStep {color:#78a889;font:10px/1.5 monospace;text-align:left;margin:10px 0 0}
+#labReport:not(.hidden) {
+  position:fixed;z-index:9999;top:50%;left:50%;transform:translate(-50%,-50%);
+  width:min(620px,calc(100vw - 28px));max-height:82vh;overflow-y:auto;
+  box-sizing:border-box;padding:20px 16px;border:1px solid #d5e3d9;
+  border-radius:18px;background:#f8fbf8;
+  box-shadow:0 0 0 100vmax rgba(2,10,6,.76),0 25px 80px #0006;
+}
+@media(max-width:380px) {
+  #labTerminalLog {font-size:9px;height:260px}
+  .terminal-topbar {font-size:8px;padding:0 8px}
+}
+
+
+/* FULL-SCREEN FIXED LABORATORY TERMINAL */
+#labProgress:not(.hidden) {
+  position:fixed !important;
+  inset:0 !important;
+  z-index:9998 !important;
+  width:100vw !important;
+  height:100vh !important;
+  height:100dvh !important;
+  max-width:none !important;
+  max-height:none !important;
+  margin:0 !important;
+  padding:0 !important;
+  box-sizing:border-box !important;
+  overflow:hidden !important;
+  display:flex !important;
+  align-items:stretch !important;
+  justify-content:stretch !important;
+  background:#030906 !important;
+}
+#labProgress .terminal-console {
+  position:relative !important;
+  width:100% !important;
+  max-width:none !important;
+  height:100% !important;
+  min-height:100vh !important;
+  min-height:100dvh !important;
+  margin:0 !important;
+  border-radius:0 !important;
+  border:0 !important;
+  display:flex !important;
+  flex-direction:column !important;
+  box-sizing:border-box !important;
+}
+#labProgress .terminal-topbar {
+  flex:0 0 auto;
+  min-height:52px;
+  padding-left:15px;
+  padding-right:15px;
+}
+#labProgress .terminal-device {
+  flex:1 1 auto;
+  min-height:0;
+  display:flex;
+  flex-direction:column;
+  padding:20px 15px 12px;
+}
+#labProgress #labTerminalLog {
+  flex:1 1 auto;
+  width:100%;
+  height:auto;
+  max-height:none;
+  min-height:0;
+  font-size:11px;
+  line-height:2;
+  text-align:left !important;
+  overflow-y:auto;
+}
+#labProgress .terminal-bottom {
+  flex:0 0 auto;
+  padding:18px 15px max(22px, env(safe-area-inset-bottom));
+}
+#labProgress .terminal-system,
+#labProgress .terminal-init,
+#labProgress .terminal-bottom,
+#labProgress .terminal-bottom p,
+#labProgress .terminal-progress-info {
+  text-align:left !important;
+}
+#labProgress .terminal-progress-info {
+  align-items:center;
+}
+#labReport:not(.hidden) {
+  text-align:left !important;
+  text-align-last:left !important;
+}
+#labReport:not(.hidden) * {
+  text-align:left !important;
+  text-align-last:left !important;
+}
+#labReport #labReportContent {
+  width:100%;
+  text-align:left !important;
+}
+@media(max-width:480px) {
+  #labProgress .terminal-topbar {
+    font-size:9px;
+    gap:6px;
+  }
+  #labProgress #labTerminalLog {
+    font-size:10px;
+    line-height:1.9;
+  }
+}
+
+
+/* REFINED LAB CONSOLE SPACING AND OUTPUT */
+#labProgress:not(.hidden) {
+  position:fixed !important;
+  inset:0 !important;
+  z-index:9998 !important;
+  width:100% !important;
+  height:100vh !important;
+  height:100dvh !important;
+  padding:12px 14px !important;
+  box-sizing:border-box !important;
+  display:flex !important;
+  align-items:stretch !important;
+  justify-content:center !important;
+  background:rgba(2,8,5,.97) !important;
+}
+#labProgress .terminal-console {
+  width:100% !important;
+  max-width:760px !important;
+  height:100% !important;
+  min-height:0 !important;
+  margin:0 auto !important;
+  border:1px solid rgba(125,255,170,.24) !important;
+  border-radius:18px !important;
+  overflow:hidden !important;
+  display:flex !important;
+  flex-direction:column !important;
+  box-sizing:border-box !important;
+}
+#labProgress .terminal-device {
+  flex:1 1 auto !important;
+  min-height:0 !important;
+  display:flex !important;
+  flex-direction:column !important;
+  padding:20px 16px 12px !important;
+}
+#labProgress #labTerminalLog {
+  flex:1 1 auto !important;
+  min-height:0 !important;
+  height:auto !important;
+  max-height:none !important;
+  overflow-y:auto !important;
+  text-align:left !important;
+  white-space:pre-wrap !important;
+  overflow-wrap:anywhere !important;
+  font-family:"Roboto Mono","Courier New",monospace !important;
+  font-size:10px !important;
+  line-height:2.15 !important;
+  letter-spacing:.1px !important;
+}
+#labProgress .terminal-bottom {
+  flex:0 0 auto !important;
+  padding:16px 16px max(18px,env(safe-area-inset-bottom)) !important;
+}
+#labProgress .terminal-system,
+#labProgress .terminal-init,
+#labProgress .terminal-bottom,
+#labProgress .terminal-bottom p,
+#labProgress .terminal-progress-info,
+#labReport:not(.hidden),
+#labReport #labReportContent {
+  text-align:left !important;
+}
+#labReport:not(.hidden) {
+  left:50% !important;
+  width:calc(100% - 28px) !important;
+  max-width:620px !important;
+  box-sizing:border-box !important;
+}
+#labReport:not(.hidden) * {
+  text-align:left !important;
+}
+@media(max-width:380px) {
+  #labProgress:not(.hidden) {padding:9px !important}
+  #labProgress .terminal-topbar {padding-left:9px;padding-right:9px}
+  #labProgress .terminal-device {padding-left:11px;padding-right:11px}
+  #labProgress #labTerminalLog {font-size:9px;line-height:2}
+}
+
+
+/* CLEAN, CARD-FREE LABORATORY WELCOME */
+#labPanel {
+  background:transparent !important;
+  border:0 !important;
+  box-shadow:none !important;
+  padding:0 !important;
+}
+#labWelcome {
+  display:block;
+  width:100%;
+  max-width:560px;
+  margin:0 auto;
+  padding:25px 20px 30px;
+  box-sizing:border-box;
+  background:transparent !important;
+  border:0 !important;
+  border-radius:0 !important;
+  box-shadow:none !important;
+  color:var(--text,#192c25);
+}
+#labWelcome .welcome-eyebrow {
+  display:flex;
+  align-items:center;
+  gap:9px;
+  color:#648071;
+  font-size:10px;
+  font-weight:800;
+  letter-spacing:1.8px;
+  margin-bottom:22px;
+}
+#labWelcome .welcome-status-dot {
+  width:8px;
+  height:8px;
+  border-radius:50%;
+  background:#26965b;
+  box-shadow:0 0 0 4px #26965b1c;
+}
+#labWelcome .welcome-title {
+  margin:0;
+  color:#173b2b;
+  font-size:clamp(29px,8vw,39px);
+  font-weight:800;
+  letter-spacing:-1.5px;
+  line-height:1.12;
+}
+#labWelcome .welcome-subtitle {
+  margin:10px 0 24px;
+  color:#78877e;
+  font-size:14px;
+}
+#labWelcome .setup-steps {
+  display:flex;
+  flex-direction:column;
+  margin:0 0 23px;
+}
+#labWelcome .setup-step {
+  position:relative;
+  display:grid;
+  grid-template-columns:46px minmax(0,1fr);
+  align-items:center;
+  column-gap:14px;
+  min-height:78px;
+  padding:9px 0;
+}
+#labWelcome .setup-step:not(:last-child):after {
+  content:"";
+  position:absolute;
+  left:22px;
+  top:62px;
+  height:26px;
+  border-left:1px solid #dce6df;
+}
+#labWelcome .setup-icon {
+  width:44px;
+  height:44px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  color:#286344;
+  background:#edf4ef;
+  border-radius:13px;
+}
+#labWelcome .setup-icon svg {
+  width:28px;
+  height:28px;
+}
+#labWelcome .setup-copy {
+  min-width:0;
+  display:grid;
+  grid-template-columns:24px minmax(0,1fr);
+  align-items:baseline;
+  column-gap:6px;
+}
+#labWelcome .setup-number {
+  color:#8b9d91;
+  font-size:10px;
+  font-weight:800;
+}
+#labWelcome .setup-copy strong {
+  color:#203d2e;
+  font-size:14px;
+  font-weight:750;
+  line-height:1.4;
+}
+#labWelcome .setup-copy p {
+  grid-column:2;
+  margin:3px 0 0;
+  color:#78847d;
+  font-size:12px;
+  line-height:1.5;
+}
+#labWelcome .lab-start-wide {
+  width:100% !important;
+  min-height:56px;
+  display:flex !important;
+  align-items:center;
+  justify-content:space-between;
+  padding:0 20px !important;
+  border:0 !important;
+  border-radius:12px !important;
+  background:#193f32 !important;
+  color:#fff !important;
+  box-shadow:0 4px 12px #193f3220 !important;
+  font-size:13px !important;
+  font-weight:850 !important;
+  letter-spacing:1.2px;
+}
+#labWelcome .lab-start-wide:active {
+  transform:scale(.985);
+}
+#labWelcome .lab-start-wide svg {
+  width:21px;
+  height:21px;
+}
+@media(max-width:380px) {
+  #labWelcome {padding:21px 15px 25px}
+  #labWelcome .setup-step {column-gap:11px}
+  #labWelcome .setup-copy strong {font-size:13px}
+  #labWelcome .setup-copy p {font-size:11px}
+}
+
 </style>
 <link rel="manifest" href="/manifest.webmanifest"><meta name="theme-color" content="#155c3b">
 <style>
@@ -951,34 +1318,113 @@ input {
   <div class="lab-heading">
     <div class="lab-symbol">🧪</div>
     <h2>Fertilizer Laboratory</h2>
-    <p>PRECISION DIAGNOSTIC UNIT</p>
+    <p></p>
   </div>
 
-  <div id="labWelcome" class="lab-welcome">
-    <h3>Diagnostic unit ready</h3>
-    <p>Prepare the diagnostic sensor, then press START NOW to initialize the laboratory sequence.</p>
-    <button class="primary" id="labStart">START NOW</button>
+    <div id="labWelcome" class="lab-welcome">
+
+    <div class="setup-steps">
+      <div class="setup-step">
+        <div class="setup-icon">
+          <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M8 35h32M12 35V25l12-9 12 9v10"/>
+            <circle cx="24" cy="28" r="4"/>
+            <path d="M24 16V7m-4 4 4-4 4 4"/>
+          </svg>
+        </div>
+        <div class="setup-copy">
+          <span class="setup-number">01</span>
+          <strong>Position the sensor</strong>
+          <p>Place the sensor directly on the fertilizer.</p>
+        </div>
+      </div>
+
+      <div class="setup-step">
+        <div class="setup-icon">
+          <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="4" y="17" width="12" height="14" rx="3"/>
+            <rect x="32" y="17" width="12" height="14" rx="3"/>
+            <path d="M16 24h16M21 20v8m6-8v8M8 13v4m4-4v4m24-4v4m4-4v4"/>
+          </svg>
+        </div>
+        <div class="setup-copy">
+          <span class="setup-number">02</span>
+          <strong>Connect both cable ends</strong>
+          <p>Connect the sensor to your device using the cable.</p>
+        </div>
+      </div>
+
+      <div class="setup-step">
+        <div class="setup-icon">
+          <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="13" y="5" width="22" height="38" rx="4"/>
+            <path d="M20 10h8m-7 27h6"/>
+            <path d="m19 23 4 4 7-8"/>
+          </svg>
+        </div>
+        <div class="setup-copy">
+          <span class="setup-number">03</span>
+          <strong>Open EthioFerti AI</strong>
+          <p>Launch the app and select Laboratory.</p>
+        </div>
+      </div>
+
+      <div class="setup-step">
+        <div class="setup-icon">
+          <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="24" cy="24" r="18"/>
+            <path d="m20 16 13 8-13 8V16z"/>
+          </svg>
+        </div>
+        <div class="setup-copy">
+          <span class="setup-number">04</span>
+          <strong>Start the analysis</strong>
+          <p>Press Start Now to continue.</p>
+        </div>
+      </div>
+    </div>
+
+    <button class="primary lab-start-wide" id="labStart">
+      <span>START NOW</span>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M5 12h14m-6-6 6 6-6 6"/>
+      </svg>
+    </button>
   </div>
 
   <div id="labEntry" class="hidden">
-    <label for="labCode">Enter diagnostic code</label>
-    <input id="labCode" type="number" inputmode="numeric"
-      pattern="[0-9]*" placeholder="Enter sensor code"
-      min="1" max="11">
-    <button class="primary" id="labRun">RUN DIAGNOSIS</button>
+
+    <input id="labCode" type="text" inputmode="text" autocomplete="off" autocapitalize="characters" spellcheck="false" maxlength="7" placeholder="የማዳበሪያ መለያ ያስገቡ">
+    <button class="primary" id="labRun">ምርመራ ጀምር</button>
   </div>
 
   <div id="labProgress" class="hidden">
-    <div class="lab-orbit"><span>🧪</span></div>
-    <h3>Laboratory analysis</h3>
-    <div class="lab-progress-track"><div id="labProgressBar"></div></div>
-    <p id="labStep">Initializing diagnostic system...</p>
+    <div class="terminal-console">
+      <div class="terminal-topbar">
+        <div class="terminal-lights"><i></i><i></i><i></i></div>
+        <span>የማዳበሪያ ምርመራ</span>
+        <span class="terminal-live">● LIVE</span>
+      </div>
+      <div class="terminal-device">
+        <div class="terminal-system">የማዳበሪያ ምርመራ <span>v1.0</span></div>
+        <div class="terminal-init">የምርመራ ዝግጅት</div>
+        <pre id="labTerminalLog" aria-live="polite"></pre>
+      </div>
+      <div class="terminal-bottom">
+        <div class="terminal-progress-info">
+          <span>ANALYSIS PROGRESS</span>
+          <strong id="labPercent">0%</strong>
+        </div>
+        <div class="lab-progress-track"><div id="labProgressBar"></div></div>
+        <p id="labStep">የምርመራ ዝግጅት</p>
+      </div>
+    </div>
   </div>
 
   <div id="labReport" class="hidden">
-    <div class="lab-report-title">LABORATORY REPORT</div>
+    <div class="lab-report-title">የምርመራ ውጤት</div>
     <div id="labReportContent"></div>
-    <button class="primary" id="labAgain">NEW DIAGNOSIS</button>
+    <button class="primary" id="labAgain">አዲስ ምርመራ</button>
   </div>
 </section>
 
@@ -2112,109 +2558,535 @@ if ("serviceWorker" in navigator) {
 <script src="/language.js"></script>
 
 <script>
-/* ETHIOFERTI_LABORATORY_HANDLERS_V1 */
+/* ETHIOFERTI_LABORATORY_HANDLERS_V3 */
 (()=>{
+ "use strict";
  const $=id=>document.getElementById(id);
  const panel=$("labPanel");
- if(!panel || panel.dataset.handlersReady==="1")return;
- panel.dataset.handlersReady="1";
+ if(!panel || panel.dataset.handlersReady==="3")return;
+ panel.dataset.handlersReady="3";
 
  const sections=["labWelcome","labEntry","labProgress","labReport"];
+ const language=()=>localStorage.getItem("ethioferti-language")==="en"?"en":"am";
+ const am=()=>language()==="am";
+
  function showSection(id){
-  sections.forEach(name=>$(name).classList.toggle("hidden",name!==id));
+  sections.forEach(name=>$(name)?.classList.toggle("hidden",name!==id));
  }
+
  function activate(mode){
-  $("aiPanel").classList.toggle("hidden",mode!=="ai");
-  $("qrPanel").classList.toggle("hidden",mode!=="qr");
+  $("aiPanel")?.classList.toggle("hidden",mode!=="ai");
+  $("qrPanel")?.classList.toggle("hidden",mode!=="qr");
   panel.classList.toggle("hidden",mode!=="lab");
-  $("showAI").classList.toggle("active",mode==="ai");
-  $("showQR").classList.toggle("active",mode==="qr");
-  $("showLab").classList.toggle("active",mode==="lab");
+  $("showAI")?.classList.toggle("active",mode==="ai");
+  $("showQR")?.classList.toggle("active",mode==="qr");
+  $("showLab")?.classList.toggle("active",mode==="lab");
   if(mode==="lab"){
    if(typeof stopQR==="function")stopQR();
    $("stop")?.click();
   }
  }
 
- $("showLab").addEventListener("click",()=>activate("lab"));
- $("showAI").addEventListener("click",()=>panel.classList.add("hidden"));
- $("showQR").addEventListener("click",()=>panel.classList.add("hidden"));
+ $("showLab")?.addEventListener("click",()=>activate("lab"));
+ $("showAI")?.addEventListener("click",()=>activate("ai"));
+ $("showQR")?.addEventListener("click",()=>activate("qr"));
+
+ const text={
+  am:{
+   entry:"የማዳበሪያ መለያ ያስገቡ",
+   placeholder:"የማዳበሪያ መለያ",
+   run:"ምርመራ ጀምር",
+   progressTitle:"የማዳበሪያ ምርመራ",
+   live:"በቀጥታ በመተንተን ላይ",
+   progress:"የምርመራ ሂደት",
+   report:"የምርመራ ውጤት",
+   again:"አዲስ ምርመራ",
+   invalid:"ትክክለኛ የማዳበሪያ መለያ ያስገቡ።",
+   failed:"ምርመራው ሊጠናቀቅ አልቻለም። እንደገና ይሞክሩ።",
+   stages:[
+    "የማዳበሪያውን መረጃ በማጣራት ላይ",
+    "የኬሚካል ይዘቱን በመተንተን ላይ",
+    "የንጥረ ነገሮቹን ተግባር በመገምገም ላይ",
+    "የአካላዊ ባህሪያትን በመመርመር ላይ",
+    "ለተለያዩ ሰብሎች ያለውን ተስማሚነት በመገምገም ላይ",
+    "የአፈር አጠቃቀምን በመተንተን ላይ",
+    "የአተገባበር መመሪያን በማዘጋጀት ላይ",
+    "የመጨረሻ ውጤቱን በማጠናቀር ላይ"
+   ],
+   labels:{
+    position:"የናሙና ቦታ",focus:"የምርመራ ትኩረት",
+    observation:"የተመለከቱ ባህሪያት",
+    check:"ተጨማሪ ምርመራ",
+    sampling:"የናሙና አወሳሰድ",
+    name:"የማዳበሪያ ስም",chemical:"የኬሚካል ስም",
+    formula:"ኬሚካላዊ ቀመር",grade:"የንጥረ ነገር ደረጃ",
+    classification:"የማዳበሪያ ምድብ",description:"መግለጫ",
+    nutrients:"የንጥረ ነገር ይዘት",
+    physical:"አካላዊ ባህሪያት",forms:"አካላዊ ቅርጾች",
+    crops:"ተስማሚ ሰብሎች",uses:"የግብርና አጠቃቀም",
+    soil:"የአፈር አስተዳደር",
+    application:"የአተገባበር መመሪያ",
+    compatibility:"የማዳበሪያ ተስማሚነት",
+    deficiency:"የንጥረ ነገር እጥረት ምልክቶች",
+    risks:"ከመጠን በላይ አጠቃቀምና አደጋዎች",
+    storage:"የማከማቻ ሁኔታ",
+    functions:"የንጥረ ነገሮች ተግባር"
+   }
+  },
+  en:{
+   entry:"Enter fertilizer identification",
+   placeholder:"Fertilizer identification",
+   run:"START ANALYSIS",
+   progressTitle:"Fertilizer analysis",
+   live:"ANALYSIS IN PROGRESS",
+   progress:"ANALYSIS PROGRESS",
+   report:"ANALYSIS REPORT",
+   again:"NEW ANALYSIS",
+   invalid:"Enter a valid fertilizer identification.",
+   failed:"The analysis could not be completed. Please try again.",
+   stages:[
+    "Reviewing fertilizer information",
+    "Examining chemical composition",
+    "Evaluating nutrient functions",
+    "Examining physical characteristics",
+    "Evaluating crop suitability",
+    "Reviewing soil management",
+    "Preparing application guidance",
+    "Compiling the final report"
+   ],
+   labels:{
+    position:"Sample position",focus:"Inspection focus",
+    observation:"Observed characteristics",check:"Additional examination",
+    sampling:"Sampling guidance",name:"Fertilizer name",
+    chemical:"Chemical name",formula:"Chemical formula",
+    grade:"Nutrient grade",classification:"Classification",
+    description:"Description",nutrients:"Nutrient composition",
+    physical:"Physical characteristics",forms:"Physical forms",
+    crops:"Suitable crops",uses:"Agricultural uses",
+    soil:"Soil management",application:"Application guidance",
+    compatibility:"Compatibility",deficiency:"Nutrient deficiency indicators",
+    risks:"Excess use and risks",storage:"Storage",
+    functions:"Nutrient functions"
+   }
+  }
+ };
+
+ const durations={
+  urea:60000,dap:75000,nps_19_38_0_7s:90000,
+  npsb_18_9_37_7:100000,npszn_17_7_35_5:110000,
+  npsznb_17_8_35_7:120000,mop_0_0_60:80000,
+  compost:150000,farmyard_manure:180000,vermicompost:160000
+ };
+
+ const valid=/^(1|2|3)(NPSZNB|NPSZN|NPSB|NPS|U|D|M|C|F|V)$/i;
+ const escape=value=>String(value??"").replace(/[&<>"']/g,c=>({
+  "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"
+ }[c]));
+
+ const valueTranslations={
+  white:"ነጭ",off_white:"ነጭ ወደ ጥቁር የሚያደላ",cream:"ክሬም ቀለም",
+  brown:"ቡናማ",dark_brown:"ጥቁር ቡናማ",black:"ጥቁር",
+  grey:"ግራጫ",gray:"ግራጫ",pink:"ሮዝ",red:"ቀይ",
+  granular:"በእህል ቅርጽ",granules:"ጥራጥሬ",
+  prilled:"በትንንሽ ክብ እህሎች",crystalline:"ክሪስታል ቅርጽ",
+  powder:"ዱቄት",dust:"ቀላል ዱቄት",moist:"እርጥብ",
+  dry:"ደረቅ",rounded:"ክብ",spherical:"ሉላዊ",
+  smooth:"ለስላሳ",rough:"ሻካራ",fibrous:"ቃጫማ",
+  uniform:"ተመሳሳይ መጠን ያለው",variable:"ተለዋዋጭ"
+ };
+
+ const keyTranslations={
+  family:"የቁሳቁስ ቤተሰብ",colors:"ቀለሞች",texture:"የንክኪ ገጽታ",
+  particle_shape:"የእህል ቅርጽ",uniformity:"የእህሎች ተመሳሳይነት",
+  visual_traits:"በዓይን የሚታዩ ባህሪያት",
+  particle_forms:"የእህል ዓይነቶች",surface:"የውጭ ገጽታ",
+  particle_consistency:"የእህል ተመሳሳይነት",
+  visual_clues:"የመለያ ምልክቶች",
+  colour_variation:"የቀለም ልዩነት",
+  N:"ናይትሮጅን",P2O5:"ፎስፈረስ",K2O:"ፖታስየም",
+  S:"ሰልፈር",Zn:"ዚንክ",B:"ቦሮን"
+ };
+
+ function format(value, key=""){
+  if(value===null||value===undefined||value==="")return "";
+  if(Array.isArray(value)){
+   return value.map(v=>format(v,key)).filter(Boolean).join("፣ ");
+  }
+  if(typeof value==="object"){
+   return Object.entries(value).map(([k,v])=>{
+    const label=am()?(keyTranslations[k]||k):k;
+    const result=format(v,k);
+    return result?label+": "+result:"";
+   }).filter(Boolean).join("፤ ");
+  }
+  if(typeof value==="number")return String(value)+(key==="N"||key==="P2O5"||key==="K2O"||key==="S"||key==="Zn"||key==="B"?"%":"");
+  if(am()){
+   const normalized=String(value).toLowerCase().replace(/[\s-]+/g,"_");
+   if(valueTranslations[normalized])return valueTranslations[normalized];
+  }
+  return String(value);
+ }
+
+ function setProgressUI(){
+  const t=text[language()];
+  $("labTerminalLog").textContent="";
+  $("labPercent").textContent="0%";
+  $("labProgressBar").style.width="0%";
+  $("labStep").textContent=t.stages[0];
+  const top=$("labProgress")?.querySelector(".terminal-topbar");
+  if(top)top.innerHTML=`<strong>${escape(t.progressTitle)}</strong><span>${escape(t.live)}</span>`;
+  const system=$("labProgress")?.querySelector(".terminal-system");
+  if(system)system.textContent=t.progressTitle;
+  const init=$("labProgress")?.querySelector(".terminal-init");
+  if(init)init.textContent=t.stages[0];
+  const info=$("labProgress")?.querySelector(".terminal-progress-info span");
+  if(info)info.textContent=t.progress;
+  const title=$("labReport")?.querySelector(".lab-report-title");
+  if(title)title.textContent=t.report;
+  $("labAgain").textContent=t.again;
+  $("labRun").textContent=t.run;
+  $("labCode").placeholder=t.placeholder;
+ }
 
  $("labStart").addEventListener("click",()=>{
   $("labCode").value="";
+  setProgressUI();
   showSection("labEntry");
   $("labCode").focus();
  });
 
+ $("labCode").addEventListener("input",()=>{
+  $("labCode").value=$("labCode").value.toUpperCase().replace(/[^A-Z0-9]/g,"");
+ });
+
  $("labRun").addEventListener("click",async()=>{
-  const code=$("labCode").value.trim();
-  if(!["1","2","3","4","5","11"].includes(code)){
-   $("labCode").setCustomValidity("Enter one of the listed colour codes.");
+  const code=$("labCode").value.trim().toUpperCase();
+  const t=text[language()];
+  if(!valid.test(code)){
+   $("labCode").setCustomValidity(t.invalid);
    $("labCode").reportValidity();
    return;
   }
   $("labCode").setCustomValidity("");
   showSection("labProgress");
+  setProgressUI();
 
-  const steps=[
-   "Initializing diagnostic unit...",
-   "Processing sensor input...",
-   "Analyzing fertilizer properties...",
-   "Preparing laboratory report..."
-  ];
-  let step=0;
-  $("labStep").textContent=steps[0];
-  $("labProgressBar").style.width="8%";
-  const timer=setInterval(()=>{
-   step=Math.min(step+1,steps.length-1);
-   $("labStep").textContent=steps[step];
-   $("labProgressBar").style.width=(20+step*23)+"%";
-  },650);
-
+  let timer=null;
   try{
-   const response=await fetch("/api/v1/laboratory/diagnose/"+encodeURIComponent(code));
+   const response=await fetch("/api/v1/laboratory/diagnose/"+encodeURIComponent(code)+"?lang="+language());
    const data=await response.json();
-   if(!response.ok)throw new Error(data.detail||"Diagnosis could not be completed.");
-   await new Promise(resolve=>setTimeout(resolve,2600));
-   clearInterval(timer);
-   $("labProgressBar").style.width="100%";
+   if(!response.ok)throw new Error(t.failed);
 
    const p=data.profile||{};
-   const esc=value=>String(value??"—").replace(/[&<>"']/g,c=>({
-    "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"
-   }[c]));
-   const list=value=>Array.isArray(value)?value.join(" · "):value;
+   const duration=durations[p.id]||90000;
+   const started=Date.now();
+   const log=$("labTerminalLog");
+   const stages=t.stages;
+   let lastStage=-1;
+
+   timer=setInterval(()=>{
+    const elapsed=Date.now()-started;
+    const percent=Math.min(99,Math.floor(elapsed/duration*100));
+    const stage=Math.min(stages.length-1,Math.floor(percent/100*stages.length));
+    $("labPercent").textContent=percent+"%";
+    $("labProgressBar").style.width=percent+"%";
+    $("labStep").textContent=stages[stage];
+    if(stage!==lastStage){
+     log.textContent=stages.slice(0,stage+1).join("\n");
+     lastStage=stage;
+    }
+   },500);
+
+   await new Promise(resolve=>setTimeout(resolve,duration));
+   clearInterval(timer);
+   $("labPercent").textContent="100%";
+   $("labProgressBar").style.width="100%";
+   $("labStep").textContent=stages[stages.length-1];
+
+   const labels=t.labels;
+   const translations=p.translations||{};
+   const levelKey=({"1":"top","2":"middle","3":"bottom"})[code.charAt(0)];
+   const level=p.laboratory_diagnosis?.levels?.[levelKey]||{};
+   const intelligence=p.intelligence||{};
+   const physical=p.physical_characteristics||{};
+   const physicalAm={
+    colors:physical.colors,texture:physical.texture,
+    particle_shape:physical.particle_shape,
+    uniformity:physical.uniformity,
+    visual_traits:physical.visual_traits,
+    particle_forms:physical.particle_forms,
+    surface:physical.surface,
+    particle_consistency:physical.particle_consistency,
+    visual_clues:physical.visual_clues,
+    colour_variation:physical.colour_variation
+   };
+
    const rows=[
-    ["Sensor input",data.colour],
-    ["Fertilizer category",data.category||p.name],
-    ["Chemical identity",p.chemical_name||p.name],
-    ["Nutrient grade",p.grade],
-    ["Composition",list(p.nutrients)],
-    ["Nutrient functions",list(p.nutrient_functions)],
-    ["Suitable crops",list(p.crop_suitability)],
-    ["Agricultural uses",list(p.agricultural_uses)],
-    ["Soil management",list(p.soil_considerations)],
-    ["Application guidance",list(p.application_guidance)],
-    ["Storage",list(p.storage)]
+    [labels.position,am()?level.position_am:level.position_en],
+    [labels.focus,am()?level.focus_am:level.focus_en],
+    [labels.observation,am()?level.observation_am:level.observation_en],
+    [labels.check,am()?level.recommended_check_am:level.recommended_check_en],
+    [labels.sampling,am()?level.sampling_note_am:level.sampling_note_en],
+    [labels.name,am()?(translations.name||p.name):p.name],
+    [labels.chemical,p.chemical_name],
+    [labels.formula,p.formula],
+    [labels.grade,p.grade],
+    [labels.classification,am()?(translations.classification||""):p.classification],
+    [labels.description,am()?(translations.description||""):p.description],
+    [labels.nutrients,format(p.nutrients)],
+    [labels.functions,am()?(translations.nutrient_functions||""):format(p.nutrient_functions)],
+    [labels.physical,am()?format(physicalAm):format(physical)],
+    [labels.forms,am()?format(p.physical_forms):format(p.physical_forms)],
+    [labels.crops,am()?(translations.crop_suitability||""):format(p.crop_suitability)],
+    [labels.uses,am()?(translations.agricultural_uses||""):format(p.agricultural_uses)],
+    [labels.soil,am()?(translations.soil_considerations||""):format(p.soil_considerations)],
+    [labels.application,am()?(translations.application_guidance||""):format(p.application_guidance)],
+    [labels.compatibility,am()?(translations.compatibility||""):format(p.compatibility)],
+    [labels.deficiency,am()?(translations.deficiency_indicators||""):format(p.deficiency_indicators)],
+    [labels.risks,am()?(translations.excess_and_risks||""):format(p.excess_and_risks)],
+    [labels.storage,am()?(translations.storage||""):format(p.storage)]
    ];
-   $("labReportContent").innerHTML=rows.map(([label,value])=>
-    `<article class="lab-result-row"><h4>${esc(label)}</h4><p>${esc(value)}</p></article>`
-   ).join("");
+
+   $("labReportContent").innerHTML=
+    `<h3 class="lab-report-heading">${escape(t.report)}</h3>`+
+    rows.filter(([,v])=>v!==undefined&&v!==null&&v!=="").map(([label,value])=>
+     `<article class="lab-result-row"><h4>${escape(label)}</h4><p>${escape(format(value))}</p></article>`
+    ).join("");
    showSection("labReport");
   }catch(error){
-   clearInterval(timer);
-   $("labStep").textContent=error.message;
-   setTimeout(()=>showSection("labEntry"),1800);
+   if(timer)clearInterval(timer);
+   $("labStep").textContent=t.failed;
+   $("labPercent").textContent="0%";
+   $("labProgressBar").style.width="0%";
+   setTimeout(()=>showSection("labEntry"),2500);
   }
  });
 
  $("labAgain").addEventListener("click",()=>{
   $("labCode").value="";
+  setProgressUI();
   showSection("labEntry");
   $("labCode").focus();
  });
+
+ setProgressUI();
 })();
 </script>
 
 </body>
 </html>
+
+<style>
+/* CLEAN LABORATORY HEADER AND ICON */
+.lab-symbol {
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+</style>
+
+
+<style>
+/* FINAL LABORATORY HEADER SPACING */
+.lab-heading {
+  margin-bottom: 8px !important;
+  padding-bottom: 0 !important;
+  gap: 4px !important;
+}
+
+.lab-heading p {
+  display: none !important;
+}
+
+.lab-symbol {
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+  border-radius: 0 !important;
+  margin-bottom: 2px !important;
+}
+
+.lab-welcome {
+  margin-top: 0 !important;
+  padding-top: 4px !important;
+}
+
+.lab-welcome h3 {
+  display: none !important;
+}
+
+.lab-welcome > p {
+  display: none !important;
+}
+
+.lab-steps {
+  margin-top: 4px !important;
+}
+</style>
+
+<style>
+/* REMOVE LABORATORY PULSING DECORATION */
+.lab-heading::before,
+.lab-heading::after,
+.lab-symbol::before,
+.lab-symbol::after,
+.lab-welcome::before,
+.lab-welcome::after {
+  content: none !important;
+  display: none !important;
+  animation: none !important;
+  box-shadow: none !important;
+}
+
+.lab-heading .pulse,
+.lab-heading .pulse-dot,
+.lab-heading .status-dot,
+.lab-heading .live-indicator,
+.lab-symbol .pulse,
+.lab-symbol .pulse-dot,
+.lab-symbol .status-dot,
+.lab-symbol .live-indicator {
+  display: none !important;
+  animation: none !important;
+}
+
+.lab-heading,
+.lab-symbol {
+  background: transparent !important;
+  box-shadow: none !important;
+}
+</style>
+
+<style>
+/* FINAL CLEAN LABORATORY SPACING */
+.welcome-eyebrow,
+.welcome-status-dot {
+  display: none !important;
+}
+.lab-heading {
+  margin-bottom: 0 !important;
+  padding-bottom: 0 !important;
+}
+.lab-welcome {
+  margin-top: 0 !important;
+  padding-top: 0 !important;
+}
+.setup-steps {
+  margin-top: 8px !important;
+}
+</style>
+
+<style>
+/* CLEAN, PRECISE LABORATORY INPUT */
+#labEntry {
+  max-width: 560px;
+  margin: 22px auto 0 !important;
+  padding: 0 2px !important;
+}
+
+#labEntry label {
+  display: none !important;
+}
+
+#labCode {
+  width: 100% !important;
+  min-height: 62px !important;
+  height: 62px !important;
+  padding: 0 20px !important;
+  border: 1.5px solid #cbd5ce !important;
+  border-radius: 10px !important;
+  background: #fff !important;
+  color: #192c25 !important;
+  font-size: 18px !important;
+  font-weight: 500 !important;
+  letter-spacing: .3px !important;
+  outline: none !important;
+  box-shadow: 0 2px 5px rgba(20,40,30,.04) !important;
+  box-sizing: border-box !important;
+}
+
+#labCode:focus {
+  border-color: #193f32 !important;
+  box-shadow: 0 0 0 3px rgba(25,63,50,.09) !important;
+}
+
+#labCode::placeholder {
+  color: #8a948d !important;
+  opacity: 1 !important;
+  font-size: 16px !important;
+  font-weight: 400 !important;
+}
+
+#labRun {
+  width: 100% !important;
+  min-height: 56px !important;
+  margin-top: 14px !important;
+  border-radius: 9px !important;
+  font-size: 15px !important;
+  font-weight: 700 !important;
+  letter-spacing: .5px !important;
+  box-shadow: none !important;
+  transition: background .18s ease, transform .18s ease !important;
+}
+
+#labRun:active {
+  transform: scale(.985) !important;
+}
+</style>
+
+
+<style>
+/* MAIN CONTAINER IS THE TERMINAL */
+#labProgress:not(.hidden) {
+  position: fixed !important;
+  inset: 0 !important;
+  width: 100% !important;
+  height: 100vh !important;
+  height: 100dvh !important;
+  max-width: none !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  background: #050906 !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  z-index: 9999 !important;
+  overflow: auto !important;
+}
+
+#labProgress .terminal-console {
+  width: 100% !important;
+  max-width: 760px !important;
+  min-height: 100% !important;
+  margin: 0 auto !important;
+  border: 1px solid #244b32 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  background: #050906 !important;
+  overflow: hidden !important;
+}
+
+#labProgress .terminal-topbar,
+#labProgress .terminal-device,
+#labProgress .terminal-bottom {
+  border-radius: 0 !important;
+}
+
+#labProgress .terminal-device {
+  min-height: 0 !important;
+}
+
+@media (min-width: 780px) {
+  #labProgress:not(.hidden) {
+    padding: 18px !important;
+  }
+  #labProgress .terminal-console {
+    min-height: 0 !important;
+    height: calc(100% - 36px) !important;
+    border: 1px solid #244b32 !important;
+  }
+}
+</style>
