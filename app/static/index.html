@@ -1394,7 +1394,7 @@ input {
 
   <div id="labEntry" class="hidden">
 
-    <input id="labCode" type="text" inputmode="text" autocomplete="off" autocapitalize="characters" spellcheck="false" maxlength="7" placeholder="የማዳበሪያ መለያ ያስገቡ">
+    <input id="labCode" type="text" inputmode="text" autocomplete="off" autocapitalize="characters" spellcheck="false" maxlength="2" placeholder="የሴንሰር ደረጃ ያስገቡ" aria-label="የሴንሰር ደረጃ ያስገቡ">
     <button class="primary" id="labRun">ምርመራ ጀምር</button>
   </div>
 
@@ -1408,7 +1408,7 @@ input {
       <div class="terminal-device">
         <div class="terminal-system">የማዳበሪያ ምርመራ <span>v1.0</span></div>
         <div class="terminal-init">የምርመራ ዝግጅት</div>
-        <pre id="labTerminalLog" aria-live="polite"></pre>
+        <div id="labTerminalLog" aria-live="polite"></div>
       </div>
       <div class="terminal-bottom">
         <div class="terminal-progress-info">
@@ -2593,31 +2593,33 @@ if ("serviceWorker" in navigator) {
 
  const text={
   am:{
-   entry:"የማዳበሪያ መለያ ያስገቡ",
-   placeholder:"የማዳበሪያ መለያ",
+   entry:"የሴንሰር ደረጃ ያስገቡ",
+   placeholder:"የሴንሰር ደረጃ",
    run:"ምርመራ ጀምር",
-   progressTitle:"የማዳበሪያ ምርመራ",
+   progressTitle:"የሴንሰር ደረጃ ቀጥተኛ ትንተና",
    live:"በቀጥታ በመተንተን ላይ",
    progress:"የምርመራ ሂደት",
    report:"የምርመራ ውጤት",
    again:"አዲስ ምርመራ",
-   invalid:"ትክክለኛ የማዳበሪያ መለያ ያስገቡ።",
+   invalid:"ትክክለኛ የሴንሰር ደረጃ ያስገቡ።",
    failed:"ምርመራው ሊጠናቀቅ አልቻለም። እንደገና ይሞክሩ።",
+   rejectedTitle:"ማዳበሪያ አይደለም",
+   notFertilizer:"በተመዘገበው የሴንሰር ደረጃ መሠረት ውጤቱ ማዳበሪያ አይደለም። የማዳበሪያ መገለጫ አልተመደበም።",
    stages:[
-    "የማዳበሪያውን መረጃ በማጣራት ላይ",
-    "የኬሚካል ይዘቱን በመተንተን ላይ",
-    "የንጥረ ነገሮቹን ተግባር በመገምገም ላይ",
-    "የአካላዊ ባህሪያትን በመመርመር ላይ",
-    "ለተለያዩ ሰብሎች ያለውን ተስማሚነት በመገምገም ላይ",
-    "የአፈር አጠቃቀምን በመተንተን ላይ",
-    "የአተገባበር መመሪያን በማዘጋጀት ላይ",
-    "የመጨረሻ ውጤቱን በማጠናቀር ላይ"
+    "በሴንሰር የተገለጸውን የቁሳቁስ አካላዊ ባህሪ በመተንተን ላይ",
+    "የኬሚካላዊ ቅንብር ጥናት",
+    "የንጥረ ነገሮች ይዘት ትንተና",
+    "የንጥረ ነገሮች ተግባር ጥናት",
+    "የሰብል ተስማሚነት ግምገማ",
+    "የአፈር ግንኙነት ጥናት",
+    "የግብርና አጠቃቀም ትንተና",
+    "የምርመራ ውጤት ማጠናቀቅ"
    ],
    labels:{
-    position:"የናሙና ቦታ",focus:"የምርመራ ትኩረት",
+    position:"የሴንሰር ቦታ",focus:"የምርመራ ትኩረት",
     observation:"የተመለከቱ ባህሪያት",
     check:"ተጨማሪ ምርመራ",
-    sampling:"የናሙና አወሳሰድ",
+    sampling:"የሴንሰር ንባብ መመሪያ",
     name:"የማዳበሪያ ስም",chemical:"የኬሚካል ስም",
     formula:"ኬሚካላዊ ቀመር",grade:"የንጥረ ነገር ደረጃ",
     classification:"የማዳበሪያ ምድብ",description:"መግለጫ",
@@ -2630,34 +2632,36 @@ if ("serviceWorker" in navigator) {
     deficiency:"የንጥረ ነገር እጥረት ምልክቶች",
     risks:"ከመጠን በላይ አጠቃቀምና አደጋዎች",
     storage:"የማከማቻ ሁኔታ",
-    functions:"የንጥረ ነገሮች ተግባር"
+    functions:"የንጥረ ነገሮች ተግባር",molecular:"ሞለኪውላዊ ክብደት",manufacturing:"የምርት ሂደት",solubility:"በውሃ የመሟሟት ባህሪ",transformations:"የናይትሮጅን ለውጥ",quality:"የጥራት መስፈርት",sensor:"የሴንሰር ምርመራ ገደቦች"
    }
   },
   en:{
-   entry:"Enter fertilizer identification",
-   placeholder:"Fertilizer identification",
+   entry:"Enter Sensor Level",
+   placeholder:"Enter Sensor Level",
    run:"START ANALYSIS",
-   progressTitle:"Fertilizer analysis",
+   progressTitle:"SENSOR LEVEL ANALYSIS AND DIAGNOSIS",
    live:"ANALYSIS IN PROGRESS",
    progress:"ANALYSIS PROGRESS",
    report:"ANALYSIS REPORT",
    again:"NEW ANALYSIS",
-   invalid:"Enter a valid fertilizer identification.",
+   invalid:"Enter a valid sensor level.",
    failed:"The analysis could not be completed. Please try again.",
+   rejectedTitle:"NON-FERTILIZER MATERIAL",
+   notFertilizer:"Sensor-level classification identifies this entry as non-fertilizer. No fertilizer profile is assigned.",
    stages:[
-    "Reviewing fertilizer information",
-    "Examining chemical composition",
-    "Evaluating nutrient functions",
-    "Examining physical characteristics",
+    "Analyzing the material characteristics indicated by the sensor",
+    "Studying chemical composition",
+    "Analyzing nutrient content",
+    "Studying nutrient functions",
     "Evaluating crop suitability",
-    "Reviewing soil management",
-    "Preparing application guidance",
-    "Compiling the final report"
+    "Studying soil interactions",
+    "Analyzing agricultural applications",
+    "Completing the research report"
    ],
    labels:{
-    position:"Sample position",focus:"Inspection focus",
+    position:"Sensor position",focus:"Inspection focus",
     observation:"Observed characteristics",check:"Additional examination",
-    sampling:"Sampling guidance",name:"Fertilizer name",
+    sampling:"Sensor reading guidance",name:"Fertilizer name",
     chemical:"Chemical name",formula:"Chemical formula",
     grade:"Nutrient grade",classification:"Classification",
     description:"Description",nutrients:"Nutrient composition",
@@ -2666,19 +2670,19 @@ if ("serviceWorker" in navigator) {
     soil:"Soil management",application:"Application guidance",
     compatibility:"Compatibility",deficiency:"Nutrient deficiency indicators",
     risks:"Excess use and risks",storage:"Storage",
-    functions:"Nutrient functions"
+    functions:"Nutrient functions",molecular:"Molecular mass",manufacturing:"Manufacturing process",solubility:"Water solubility",transformations:"Nitrogen transformations",quality:"Quality specifications",sensor:"Sensor diagnosis limits"
    }
   }
  };
 
  const durations={
-  urea:60000,dap:75000,nps_19_38_0_7s:90000,
-  npsb_18_9_37_7:100000,npszn_17_7_35_5:110000,
-  npsznb_17_8_35_7:120000,mop_0_0_60:80000,
-  compost:150000,farmyard_manure:180000,vermicompost:160000
+  urea:60000,
+  dap:75000,
+  hawtro:120000,
+  nonfertilizer:70000
  };
 
- const valid=/^(1|2|3)(NPSZNB|NPSZN|NPSB|NPS|U|D|M|C|F|V)$/i;
+ const valid=/^(1|2|3)(U|D|H|F)$/i;
  const escape=value=>String(value??"").replace(/[&<>"']/g,c=>({
   "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"
  }[c]));
@@ -2777,31 +2781,75 @@ if ("serviceWorker" in navigator) {
    const data=await response.json();
    if(!response.ok)throw new Error(t.failed);
 
+   const isNonFertilizer=data.is_fertilizer===false;
    const p=data.profile||{};
-   const duration=durations[p.id]||90000;
+   const duration=isNonFertilizer?durations.nonfertilizer:(durations[p.id]||90000);
    const started=Date.now();
    const log=$("labTerminalLog");
    const stages=t.stages;
-   let lastStage=-1;
+   const stageWeights=[0.72,1.35,0.88,1.55,0.78,1.22,0.95,1.40];
+   const weights=stages.map((_,i)=>stageWeights[i%stageWeights.length]);
+   const weightTotal=weights.reduce((a,b)=>a+b,0);
+   const stageWindows=[];
+   let cursor=0;
+   weights.forEach(weight=>{
+    const length=duration*weight/weightTotal;
+    stageWindows.push({start:cursor,end:cursor+length});
+    cursor+=length;
+   });
 
-   timer=setInterval(()=>{
-    const elapsed=Date.now()-started;
-    const percent=Math.min(99,Math.floor(elapsed/duration*100));
-    const stage=Math.min(stages.length-1,Math.floor(percent/100*stages.length));
-    $("labPercent").textContent=percent+"%";
-    $("labProgressBar").style.width=percent+"%";
-    $("labStep").textContent=stages[stage];
-    if(stage!==lastStage){
-     log.textContent=stages.slice(0,stage+1).join("\n");
-     lastStage=stage;
-    }
-   },500);
+   function renderTerminal(elapsed){
+    const time=Math.max(0,Math.min(duration,elapsed));
+    const rows=[];
+    let active=stages.length-1;
+
+    stages.forEach((stage,i)=>{
+     const window=stageWindows[i];
+     const local=Math.max(0,Math.min(1,(time-window.start)/(window.end-window.start)));
+     const progress=local>=1?100:Math.floor(Math.pow(local,0.82+(i%3)*0.42)*100);
+
+     if(progress>0 || i===0 || time>=window.start){
+      if(progress<100 && active===stages.length-1) active=i;
+      const dots=".".repeat(2+Math.round(progress*0.20));
+      rows.push(
+       `<div class="terminal-log-row ${progress<100?'terminal-log-active':''}"><span class="terminal-log-name">${escape(stage)}</span><span class="terminal-log-dots">${dots}</span><span class="terminal-log-value">${progress}%</span></div>`
+      );
+     }
+    });
+
+    const overall=Math.min(100,Math.floor(time/duration*100));
+    $("labPercent").textContent=overall+"%";
+    $("labProgressBar").style.width=overall+"%";
+    $("labStep").textContent=stages[active]||stages[0];
+    log.innerHTML=rows.join("");
+    log.scrollTop=log.scrollHeight;
+   }
+
+   renderTerminal(0);
+   timer=setInterval(()=>renderTerminal(Date.now()-started),250);
 
    await new Promise(resolve=>setTimeout(resolve,duration));
    clearInterval(timer);
+   renderTerminal(duration);
    $("labPercent").textContent="100%";
    $("labProgressBar").style.width="100%";
    $("labStep").textContent=stages[stages.length-1];
+
+   if(isNonFertilizer){
+    const positions=am()
+     ? {"1":"ላይኛ","2":"መካከለኛ","3":"ታችኛ"}
+     : {"1":"Top","2":"Middle","3":"Bottom"};
+    const rows=[
+     [am()?"የሴንሰር ኮድ":"Sensor code",code],
+     [am()?"የሴንሰር ቦታ":"Sensor position",positions[code.charAt(0)]],
+     [t.rejectedTitle,data.message||t.notFertilizer]
+    ];
+    $("labReportContent").innerHTML=rows.map(([label,value])=>
+     `<article class="lab-result-row"><h4>${escape(label)}</h4><p>${escape(value)}</p></article>`
+    ).join("");
+    showSection("labReport");
+    return;
+   }
 
    const labels=t.labels;
    const translations=p.translations||{};
@@ -2821,22 +2869,28 @@ if ("serviceWorker" in navigator) {
     colour_variation:physical.colour_variation
    };
 
+   const sensorPositions=am()
+    ? {"1":"ላይኛ","2":"መካከለኛ","3":"ታችኛ"}
+    : {"1":"Top","2":"Middle","3":"Bottom"};
+
    const rows=[
+    [am()?"የሴንሰር ኮድ":"Sensor code",code],
+    [am()?"የሴንሰር ቦታ":"Sensor position",sensorPositions[code.charAt(0)]],
     [labels.position,am()?level.position_am:level.position_en],
     [labels.focus,am()?level.focus_am:level.focus_en],
     [labels.observation,am()?level.observation_am:level.observation_en],
     [labels.check,am()?level.recommended_check_am:level.recommended_check_en],
     [labels.sampling,am()?level.sampling_note_am:level.sampling_note_en],
     [labels.name,am()?(translations.name||p.name):p.name],
-    [labels.chemical,p.chemical_name],
+    [labels.chemical,am()?(translations.chemical_name||p.chemical_name):p.chemical_name],
     [labels.formula,p.formula],
-    [labels.grade,p.grade],
+    [labels.grade,am()?(translations.grade||p.grade):p.grade],
     [labels.classification,am()?(translations.classification||""):p.classification],
     [labels.description,am()?(translations.description||""):p.description],
     [labels.nutrients,format(p.nutrients)],
     [labels.functions,am()?(translations.nutrient_functions||""):format(p.nutrient_functions)],
-    [labels.physical,am()?format(physicalAm):format(physical)],
-    [labels.forms,am()?format(p.physical_forms):format(p.physical_forms)],
+    [labels.physical,am()?(translations.physical_characteristics||format(physicalAm)):format(physical)],
+    [labels.forms,am()?(translations.physical_forms||format(p.physical_forms)):format(p.physical_forms)],
     [labels.crops,am()?(translations.crop_suitability||""):format(p.crop_suitability)],
     [labels.uses,am()?(translations.agricultural_uses||""):format(p.agricultural_uses)],
     [labels.soil,am()?(translations.soil_considerations||""):format(p.soil_considerations)],
@@ -2844,11 +2898,16 @@ if ("serviceWorker" in navigator) {
     [labels.compatibility,am()?(translations.compatibility||""):format(p.compatibility)],
     [labels.deficiency,am()?(translations.deficiency_indicators||""):format(p.deficiency_indicators)],
     [labels.risks,am()?(translations.excess_and_risks||""):format(p.excess_and_risks)],
-    [labels.storage,am()?(translations.storage||""):format(p.storage)]
+    [labels.storage,am()?(translations.storage||""):format(p.storage)],
+    [labels.molecular,am()?translations.molecular_mass_g_mol:p.molecular_mass_g_mol],
+    [labels.manufacturing,am()?translations.manufacturing_process:p.manufacturing_process],
+    [labels.solubility,am()?translations.solubility:p.solubility],
+    [labels.transformations,am()?translations.nitrogen_transformations:p.nitrogen_transformations],
+    [labels.quality,am()?translations.quality_reference:p.quality_reference],
+    [labels.sensor,am()?translations.sensor_diagnosis_guidance:p.sensor_diagnosis_guidance]
    ];
 
    $("labReportContent").innerHTML=
-    `<h3 class="lab-report-heading">${escape(t.report)}</h3>`+
     rows.filter(([,v])=>v!==undefined&&v!==null&&v!=="").map(([label,value])=>
      `<article class="lab-result-row"><h4>${escape(label)}</h4><p>${escape(format(value))}</p></article>`
     ).join("");
@@ -3088,5 +3147,191 @@ if ("serviceWorker" in navigator) {
     height: calc(100% - 36px) !important;
     border: 1px solid #244b32 !important;
   }
+}
+</style>
+
+<style>
+/* FINAL LAB REPORT LAYOUT */
+#labReport:not(.hidden) {
+  position:fixed !important;
+  top:50% !important;
+  left:50% !important;
+  right:auto !important;
+  bottom:auto !important;
+  transform:translate(-50%,-50%) !important;
+  width:calc(100vw - 16px) !important;
+  max-width:760px !important;
+  max-height:88vh !important;
+  max-height:88dvh !important;
+  overflow-y:auto !important;
+  box-sizing:border-box !important;
+  padding:16px 13px !important;
+  border-radius:9px !important;
+}
+#labReport .lab-report-title {
+  border-radius:6px !important;
+  margin-top:0 !important;
+}
+#labReport .lab-result-row {
+  border-radius:7px !important;
+  margin:8px 0 !important;
+  padding:12px !important;
+}
+#labReport #labReportContent {
+  width:100% !important;
+}
+#labProgress #labTerminalLog {
+  display:flex !important;
+  flex-direction:column !important;
+  gap:13px !important;
+  white-space:normal !important;
+  overflow-wrap:normal !important;
+}
+#labProgress .terminal-log-row {
+  display:grid !important;
+  grid-template-columns:minmax(0,auto) minmax(18px,1fr) 4ch !important;
+  align-items:baseline !important;
+  column-gap:7px !important;
+  width:100% !important;
+  color:#8cffae !important;
+  font-family:"Roboto Mono","Courier New",monospace !important;
+  font-size:clamp(9px,2.7vw,12px) !important;
+  line-height:1.7 !important;
+}
+#labProgress .terminal-log-name {
+  min-width:0 !important;
+  overflow-wrap:anywhere !important;
+}
+#labProgress .terminal-log-row::after {
+  content:"..." !important;
+  display:block !important;
+  overflow:hidden !important;
+  white-space:nowrap !important;
+  letter-spacing:2px !important;
+  color:#4b9b67 !important;
+}
+#labProgress .terminal-log-value {
+  min-width:4ch !important;
+  text-align:right !important;
+  color:#b0ffc2 !important;
+  font-weight:800 !important;
+  font-variant-numeric:tabular-nums !important;
+}
+#labProgress .terminal-log-active .terminal-log-value {
+  color:#f0d987 !important;
+}
+@media(max-width:480px) {
+  #labReport:not(.hidden) {
+    width:calc(100vw - 12px) !important;
+    padding:13px 10px !important;
+  }
+}
+</style>
+
+<style>
+#labProgress .terminal-log-row {
+  display:grid !important;
+  grid-template-columns:minmax(0,auto) minmax(12px,1fr) 4ch !important;
+  align-items:baseline !important;
+  gap:7px !important;
+  width:100% !important;
+  font-family:"Roboto Mono","Courier New",monospace !important;
+  font-size:clamp(9px,2.7vw,12px) !important;
+  line-height:1.8 !important;
+}
+#labProgress .terminal-log-name {
+  min-width:0 !important;
+  overflow-wrap:anywhere !important;
+}
+#labProgress .terminal-log-dots {
+  min-width:0 !important;
+  overflow:hidden !important;
+  white-space:nowrap !important;
+  letter-spacing:2px !important;
+  color:#4b9b67 !important;
+}
+#labProgress .terminal-log-row::after {
+  content:none !important;
+}
+#labProgress .terminal-log-value {
+  min-width:4ch !important;
+  text-align:right !important;
+  color:#b0ffc2 !important;
+  font-weight:800 !important;
+  font-variant-numeric:tabular-nums !important;
+}
+#labProgress .terminal-log-active .terminal-log-value {
+  color:#f0d987 !important;
+}
+</style>
+
+<style>
+/* Keep the report within the visible phone screen */
+#labReport:not(.hidden) {
+  position:fixed !important;
+  top:max(8px, env(safe-area-inset-top)) !important;
+  bottom:auto !important;
+  left:50% !important;
+  right:auto !important;
+  transform:translateX(-50%) !important;
+  width:calc(100vw - 16px) !important;
+  max-width:620px !important;
+  height:auto !important;
+  max-height:calc(100vh - 16px) !important;
+  max-height:calc(100dvh - max(16px, env(safe-area-inset-top)) - max(8px, env(safe-area-inset-bottom))) !important;
+  overflow-x:hidden !important;
+  overflow-y:auto !important;
+  box-sizing:border-box !important;
+  margin:0 !important;
+  padding:14px 12px !important;
+  border-radius:12px !important;
+  -webkit-overflow-scrolling:touch;
+}
+#labReport:not(.hidden) * {
+  max-width:100%;
+  box-sizing:border-box;
+}
+#labProgress .terminal-log-row {
+  display:grid !important;
+  grid-template-columns:minmax(0,auto) minmax(16px,1fr) 4ch !important;
+  align-items:baseline !important;
+  gap:7px !important;
+  min-width:0;
+}
+#labProgress .terminal-log-dots {
+  display:block;
+  overflow:hidden;
+  white-space:nowrap;
+  text-align:right;
+  letter-spacing:2px;
+  color:#72d993;
+  min-width:0;
+  font-variant-numeric:tabular-nums;
+}
+#labProgress .terminal-log-value {
+  text-align:right;
+  white-space:nowrap;
+  font-variant-numeric:tabular-nums;
+}
+@media(max-width:380px) {
+  #labReport:not(.hidden) {
+    width:calc(100vw - 10px) !important;
+    padding:11px 9px !important;
+  }
+  #labProgress .terminal-log-row {
+    gap:4px !important;
+    font-size:9px;
+  }
+}
+</style>
+
+<style>
+/* Dots advance from stage text toward the percentage */
+#labProgress .terminal-log-dots {
+  text-align:left !important;
+  direction:ltr !important;
+  white-space:nowrap !important;
+  overflow:hidden !important;
+  letter-spacing:2px;
 }
 </style>
