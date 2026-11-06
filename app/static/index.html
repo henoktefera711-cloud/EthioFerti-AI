@@ -74,6 +74,245 @@ a{color:#155c3b;font-weight:bold}
  transform:none;
 }
 
+
+/* ETHIOFERTI_LABORATORY_MODE_V1 */
+.lab-heading{text-align:center;padding:14px 5px 20px}
+.lab-symbol{font-size:42px}
+.lab-heading h2{margin:8px 0 4px;color:#155c3b}
+.lab-heading p,.lab-welcome p{color:#66736a;font-size:14px}
+.lab-welcome{text-align:center;padding:20px 8px}
+.lab-welcome h3{color:#155c3b}
+#labCode{width:100%;box-sizing:border-box;padding:17px;border:2px solid #b8d2c1;border-radius:12px;font-size:25px;text-align:center;margin:12px 0}
+.lab-codes{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin:12px 0 18px}
+.lab-codes span{background:#edf4ef;color:#244d36;padding:12px 8px;border-radius:9px;font-weight:700;font-size:13px;text-align:center}
+#labProgress{text-align:center;padding:25px 10px}
+.lab-orbit{width:100px;height:100px;border:4px solid #dcebe0;border-top-color:#16834e;border-radius:50%;margin:15px auto;display:grid;place-items:center;font-size:38px;animation:labspin 1.3s linear infinite}
+@keyframes labspin{to{transform:rotate(360deg)}}
+.lab-progress-track{height:9px;background:#e5eee7;border-radius:20px;overflow:hidden;margin:20px 0}
+#labProgressBar{height:100%;width:0;background:#16834e;border-radius:20px;transition:width .5s}
+#labStep{font-weight:700;color:#315c42;min-height:24px}
+.lab-report-title{background:#155c3b;color:white;text-align:center;padding:16px;border-radius:10px;font-weight:900;letter-spacing:1.5px;margin:12px 0}
+.lab-report-section{padding:13px 2px;border-bottom:1px solid #e5ece6}
+.lab-report-section h4{margin:0 0 7px;color:#155c3b;font-size:14px}
+.lab-report-section p{margin:0;color:#35443a;font-size:14px;line-height:1.65;white-space:pre-wrap}
+.lab-report-section ul{margin:5px 0;padding-left:20px;color:#35443a;font-size:14px;line-height:1.7}
+@media(prefers-reduced-motion:reduce){.lab-orbit{animation:none}}
+
+
+/* ETHIOFERTI THREE-BUTTON NAVIGATION */
+.taskbar {
+  display: grid !important;
+  grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+  gap: 0 !important;
+  width: 100%;
+  overflow: hidden;
+  border: 1px solid #cbd8cf;
+  border-radius: 13px;
+  background: #ffffff;
+  margin-bottom: 16px;
+}
+
+.taskbar .task-btn {
+  min-width: 0;
+  width: 100%;
+  margin: 0 !important;
+  padding: 12px 3px;
+  border: 0 !important;
+  border-right: 1px solid #cbd8cf !important;
+  border-radius: 0 !important;
+  background: #ffffff;
+  color: #193f32;
+  font-size: clamp(10px, 2.8vw, 14px);
+  font-weight: 800;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  box-shadow: none;
+}
+
+.taskbar .task-btn:last-child {
+  border-right: 0 !important;
+}
+
+.taskbar .task-btn.active {
+  background: #193f32;
+  color: #ffffff;
+}
+
+@media (max-width: 380px) {
+  .taskbar .task-btn {
+    padding: 11px 1px;
+    font-size: 10px;
+  }
+}
+
+
+/* ETHIOFERTI PROFESSIONAL LABORATORY INTERFACE */
+#labPanel {
+  border: 1px solid #d7e2da;
+  border-radius: 18px;
+  background: linear-gradient(160deg, #ffffff 0%, #f5f8f5 100%);
+  padding: 22px 18px;
+  box-shadow: 0 12px 35px rgba(25, 63, 50, .08);
+}
+
+.lab-heading {
+  text-align: center;
+  padding: 12px 8px 22px;
+  border-bottom: 1px solid #e0e8e2;
+  margin-bottom: 22px;
+}
+
+.lab-heading h2 {
+  color: #193f32;
+  font-size: 23px;
+  font-weight: 850;
+  letter-spacing: -.5px;
+  margin: 10px 0 7px;
+}
+
+.lab-heading p {
+  display: inline-block;
+  color: #557466;
+  background: #eaf2ec;
+  border: 1px solid #d5e4d9;
+  border-radius: 30px;
+  padding: 6px 13px;
+  font-size: 10px;
+  font-weight: 850;
+  letter-spacing: 1.5px;
+}
+
+.lab-symbol {
+  width: 66px;
+  height: 66px;
+  margin: 0 auto;
+  display: grid;
+  place-items: center;
+  border-radius: 19px;
+  background: #193f32;
+  color: white;
+  font-size: 31px;
+  box-shadow: 0 8px 20px rgba(25, 63, 50, .2);
+}
+
+.lab-welcome {
+  text-align: center;
+  padding: 12px 5px 20px;
+}
+
+.lab-welcome h3 {
+  color: #193f32;
+  font-size: 20px;
+  font-weight: 850;
+  margin: 8px 0;
+}
+
+.lab-welcome p {
+  max-width: 330px;
+  margin: 10px auto 24px;
+  color: #64766c;
+  font-size: 14px;
+  line-height: 1.7;
+}
+
+#labEntry {
+  padding: 8px 2px 18px;
+}
+
+#labEntry label {
+  display: block;
+  color: #193f32;
+  font-size: 14px;
+  font-weight: 800;
+  margin-bottom: 10px;
+}
+
+#labCode {
+  width: 100%;
+  box-sizing: border-box;
+  min-height: 54px;
+  padding: 13px 16px;
+  border: 1.5px solid #cbd9cf;
+  border-radius: 12px;
+  background: white;
+  color: #193f32;
+  font-size: 20px;
+  font-weight: 750;
+  outline: none;
+}
+
+#labCode:focus {
+  border-color: #287454;
+  box-shadow: 0 0 0 4px rgba(40, 116, 84, .10);
+}
+
+#labPanel .primary {
+  width: 100%;
+  min-height: 49px;
+  border-radius: 12px;
+  font-weight: 850;
+  letter-spacing: .8px;
+}
+
+.lab-progress-track {
+  height: 8px;
+  border-radius: 20px;
+  background: #e2eae4;
+  overflow: hidden;
+}
+
+#labProgressBar {
+  height: 100%;
+  border-radius: inherit;
+  background: linear-gradient(90deg, #193f32, #66a17d);
+  transition: width .5s ease;
+}
+
+#labProgress h3 {
+  color: #193f32;
+  font-weight: 850;
+}
+
+#labStep {
+  color: #64766c;
+  font-size: 13px;
+  text-align: center;
+  margin-top: 14px;
+}
+
+.lab-report-title {
+  color: #193f32;
+  font-weight: 900;
+  letter-spacing: 1.5px;
+  border-bottom: 2px solid #193f32;
+  padding-bottom: 12px;
+  margin-bottom: 14px;
+}
+
+.lab-result-row {
+  padding: 13px 14px;
+  margin: 9px 0;
+  background: white;
+  border: 1px solid #e1e9e3;
+  border-radius: 11px;
+}
+
+.lab-result-row h4 {
+  color: #557466;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: .8px;
+  margin: 0 0 7px;
+}
+
+.lab-result-row p {
+  color: #243c30;
+  font-size: 14px;
+  line-height: 1.65;
+  margin: 0;
+}
+
 </style>
 <link rel="manifest" href="/manifest.webmanifest"><meta name="theme-color" content="#155c3b">
 <style>
@@ -704,7 +943,44 @@ input {
 <div class="taskbar">
 <button class="task-btn active" id="showAI">📷 AI Material Scan</button>
 <button class="task-btn" id="showQR">▦ QR Scan</button>
+<button class="task-btn" id="showLab">🧪 Laboratory</button>
 </div>
+
+
+<section class="card hidden" id="labPanel">
+  <div class="lab-heading">
+    <div class="lab-symbol">🧪</div>
+    <h2>Fertilizer Laboratory</h2>
+    <p>PRECISION DIAGNOSTIC UNIT</p>
+  </div>
+
+  <div id="labWelcome" class="lab-welcome">
+    <h3>Diagnostic unit ready</h3>
+    <p>Prepare the diagnostic sensor, then press START NOW to initialize the laboratory sequence.</p>
+    <button class="primary" id="labStart">START NOW</button>
+  </div>
+
+  <div id="labEntry" class="hidden">
+    <label for="labCode">Enter diagnostic code</label>
+    <input id="labCode" type="number" inputmode="numeric"
+      pattern="[0-9]*" placeholder="Enter sensor code"
+      min="1" max="11">
+    <button class="primary" id="labRun">RUN DIAGNOSIS</button>
+  </div>
+
+  <div id="labProgress" class="hidden">
+    <div class="lab-orbit"><span>🧪</span></div>
+    <h3>Laboratory analysis</h3>
+    <div class="lab-progress-track"><div id="labProgressBar"></div></div>
+    <p id="labStep">Initializing diagnostic system...</p>
+  </div>
+
+  <div id="labReport" class="hidden">
+    <div class="lab-report-title">LABORATORY REPORT</div>
+    <div id="labReportContent"></div>
+    <button class="primary" id="labAgain">NEW DIAGNOSIS</button>
+  </div>
+</section>
 
 <section class="card" id="aiPanel">
 <div id="camera">
@@ -742,7 +1018,6 @@ input {
 <section class="card hidden" id="results">
 <h2>AI Inspection Details</h2>
 <div id="analysis"></div>
-<div class="notice">Visual AI recognition is not laboratory verification. A photograph cannot establish chemical composition, contamination or safety.</div>
 </section>
 </main>
 
@@ -813,77 +1088,184 @@ function addField(container,title,value){
  container.append(section);
 }
 
+
 function displayAnalysis(data){
- const box=document.getElementById("analysis");
- box.replaceChildren();
+ data=data?.analysis||data;
+ const host=document.getElementById("analysis");
+ if(host)host.replaceChildren();
 
- function addInsight(title,entries){
-  const values=entries.filter(([label,value])=>
-   value!==undefined&&value!==null&&value!==""
-  );
-  if(!values.length)return;
+ const old=document.getElementById("fertilizerResultDialog");
+ if(old)old.remove();
 
+ const status=data?.status||"uncertain";
+ const profile=data?.profile||null;
+
+ const dialog=document.createElement("dialog");
+ dialog.id="fertilizerResultDialog";
+ dialog.style.cssText=[
+  "width:calc(100% - 30px)",
+  "max-width:520px",
+  "max-height:85vh",
+  "overflow-y:auto",
+  "border:0",
+  "border-radius:22px",
+  "padding:22px",
+  "margin:auto",
+  "box-sizing:border-box",
+  "background:var(--card,#fff)",
+  "color:var(--text,#17251d)",
+  "box-shadow:0 20px 70px rgba(0,0,0,.3)"
+ ].join(";");
+
+ const style=document.createElement("style");
+ style.textContent="#fertilizerResultDialog::backdrop{background:rgba(8,20,14,.72);backdrop-filter:blur(5px)}#fertilizerResultDialog .popup-section{display:block;padding:13px;margin:10px 0;border-radius:13px;background:rgba(120,150,125,.10)}#fertilizerResultDialog .popup-section h3{font-size:14px;margin:0 0 7px;color:var(--primary,#26734a)}#fertilizerResultDialog .popup-section p{font-size:14px;line-height:1.55;margin:0;white-space:normal}#fertilizerResultDialog .popup-actions{display:flex;flex-direction:column;gap:10px;margin-top:16px}#fertilizerResultDialog .popup-actions button{width:100%;min-height:46px}";
+ if(!document.getElementById("fertilizerPopupStyles")){style.id="fertilizerPopupStyles";document.head.append(style)}
+
+ const heading=document.createElement("h2");
+ heading.textContent=status==="identified"?"Fertilizer identified":status==="candidate"?"Possible fertilizer match":"Material analysis";
+ heading.style.cssText="font-size:21px;margin:0 0 12px;text-align:center";
+ dialog.append(heading);
+
+ function addSection(title,value){
+  if(value===undefined||value===null||value==="")return;
+  if(Array.isArray(value)&&!value.length)return;
   const section=document.createElement("section");
-  section.className="field insight";
-
-  const heading=document.createElement("h3");
-  heading.textContent=title;
-
-  const paragraph=document.createElement("p");
-  paragraph.className="insight-paragraph";
-
-  values.forEach(([label,value],index)=>{
-   if(index)paragraph.append(document.createTextNode(" "));
-   const strong=document.createElement("strong");
-   strong.textContent=label+": ";
-   paragraph.append(strong);
-   paragraph.append(document.createTextNode(
-    Array.isArray(value)?value.join(", "):String(value)
-   ));
-  });
-
-  section.append(heading,paragraph);
-  box.append(section);
+  section.className="popup-section";
+  const h=document.createElement("h3");
+  h.textContent=title;
+  const p=document.createElement("p");
+  p.textContent=renderPopupValue(value);
+  section.append(h,p);
+  dialog.append(section);
  }
 
- addInsight("Material assessment · የቁሳቁሱ ግምገማ",[
-  ["Likely category",data.category_en],
-  ["የቁሳቁስ ዓይነት",data.category_am],
-  ["Identification",data.identification_en],
-  ["መለያየት",data.identification_am]
- ]);
+ function renderPopupValue(value){
+  if(Array.isArray(value))return value.map(renderPopupValue).join(" • ");
+  if(value&&typeof value==="object"){
+   return Object.entries(value).map(([k,v])=>k.replaceAll("_"," ")+": "+renderPopupValue(v)).join(" | ");
+  }
+  return String(value);
+ }
 
- addInsight("Physical appearance · አካላዊ ገጽታ",[
-  ["Visual description",data.visual_description_en],
-  ["የሚታይ መግለጫ",data.visual_description_am],
-  ["Visible clues",data.visible_clues_en],
-  ["የሚታዩ ምልክቶች",data.visible_clues_am]
- ]);
+ addSection("Analysis result",data?.message||"No reliable identification is available.");
 
- addInsight("Assessment confidence · የግምገማ እርግጠኝነት",[
-  ["Confidence",data.confidence_band],
-  ["Explanation",data.confidence_explanation_en],
-  ["ማብራሪያ",data.confidence_explanation_am]
- ]);
+ if(Array.isArray(data?.physical_observations)&&data.physical_observations.length){
+  addSection("Observed physical characteristics",data.physical_observations);
+ }
 
- addInsight("Potential uses · ሊኖሩ የሚችሉ አጠቃቀሞች",[
-  ["Agricultural uses",data.possible_uses_en],
-  ["የግብርና አጠቃቀም",data.possible_uses_am]
- ]);
+ if(["identified","candidate"].includes(status)&&profile){
+  addSection("Fertilizer",data.identification_en||profile.name||"Fertilizer");
+  addSection("Nutrient grade",profile.grade);
+  const classification=profile.classification;
+  addSection("Fertilizer type",
+   typeof classification==="string"?classification:
+   classification?.type||classification?.category||"Not specified");
+  addSection("Composition",profile.nutrients);
+  addSection("Suitable crops",profile.crop_suitability);
+  addSection("Agricultural uses",profile.agricultural_uses);
+  if(typeof data.confidence==="number" && Number.isFinite(data.confidence))addSection("Visual match score",Math.round(data.confidence)+"%");
+ }else{
+  addSection("Result",status==="rejected"?"This photograph was rejected.":"The material could not be identified confidently from this photograph.");
+ }
 
- addInsight("Limitations and verification · ገደቦችና ማረጋገጫ",[
-  ["What a photograph cannot establish",data.cannot_determine_en],
-  ["በፎቶ ብቻ ማረጋገጥ የማይቻለው",data.cannot_determine_am],
-  ["Recommended laboratory tests",data.recommended_tests_en],
-  ["የሚመከሩ የላቦራቶሪ ምርመራዎች",data.recommended_tests_am]
- ]);
+ const actions=document.createElement("div");
+ actions.className="popup-actions";
 
- addInsight("Farmer guidance · ለገበሬው ምክር",[
-  ["Recommendation",data.farmer_guidance_en],
-  ["ምክር",data.farmer_guidance_am]
- ]);
+ if(profile&&["identified","candidate"].includes(status)){
+  const details=document.createElement("button");
+  details.type="button";
+  details.className="primary";
+  details.textContent="View full fertilizer profile";
+  details.addEventListener("click",()=>{
+   dialog.close();
+   showFertilizerDetails(profile);
+  });
+  actions.append(details);
+ }
 
- document.getElementById("results").classList.remove("hidden");
+ const close=document.createElement("button");
+ close.type="button";
+ close.className="secondary";
+ close.textContent="Close";
+ close.addEventListener("click",()=>dialog.close());
+ actions.append(close);
+ dialog.append(actions);
+
+ document.body.append(dialog);
+ if(typeof dialog.showModal==="function")dialog.showModal();
+ else dialog.setAttribute("open","");
+ dialog.addEventListener("close",()=>dialog.remove(),{once:true});
+}
+
+function showFertilizerDetails(profile){
+ const old=document.getElementById("fertilizerDetailsDialog");
+ if(old)old.remove();
+
+ const dialog=document.createElement("dialog");
+ dialog.id="fertilizerDetailsDialog";
+ dialog.className="card";
+ dialog.style.cssText="max-width:680px;width:calc(100% - 28px);max-height:85vh;overflow:auto;border:0;border-radius:18px;padding:22px;";
+
+ const heading=document.createElement("h2");
+ heading.textContent=profile.name||"Fertilizer details";
+ dialog.append(heading);
+
+ const labels={
+  chemical_name:"Chemical name",
+  formula:"Chemical formula",
+  grade:"Nutrient grade",
+  classification:"Fertilizer classification",
+  nutrients:"Nutrient composition",
+  nutrient_functions:"What the nutrients do",
+  description:"About this fertilizer",
+  physical_forms:"Physical forms",
+  crop_suitability:"Suitable crops",
+  agricultural_uses:"Agricultural uses",
+  soil_considerations:"Soil considerations",
+  application:"Application guidance",
+  application_guidance:"Application guidance",
+  application_methods:"Application methods",
+  compatibility:"Compatibility",
+  deficiency:"Nutrient deficiency information",
+  deficiency_indicators:"Nutrient deficiency indicators",
+  excess_risks:"Excess and risk information",
+  excess_and_risks:"Excess and risk information",
+  storage:"Storage",
+  verification:"Verification information",
+  sources:"Sources"
+ };
+
+ function renderValue(value){
+  if(Array.isArray(value))return value.map(renderValue).join(" • ");
+  if(value&&typeof value==="object"){
+   return Object.entries(value).map(([k,v])=>k.replaceAll("_"," ")+": "+renderValue(v)).join(" | ");
+  }
+  return String(value);
+ }
+
+ for(const [key,label] of Object.entries(labels)){
+  const value=profile[key];
+  if(value===undefined||value===null||value===""||(Array.isArray(value)&&!value.length))continue;
+  const section=document.createElement("section");
+  section.className="field insight";
+  const h=document.createElement("h3");
+  h.textContent=label;
+  const p=document.createElement("p");
+  p.textContent=renderValue(value);
+  section.append(h,p);
+  dialog.append(section);
+ }
+
+ const close=document.createElement("button");
+ close.type="button";
+ close.className="secondary";
+ close.textContent="Close";
+ close.addEventListener("click",()=>dialog.close());
+ dialog.append(close);
+ document.body.append(dialog);
+ if(typeof dialog.showModal==="function")dialog.showModal();
+ else dialog.setAttribute("open","");
+ dialog.addEventListener("close",()=>dialog.remove(),{once:true});
 }
 
 async function refreshHistory(){
@@ -1022,59 +1404,147 @@ async function extractVisualFeatures(dataUrl){
   image.onload=resolve;
   image.onerror=()=>reject(new Error("Could not read the captured photograph."));
  });
+
  const canvas=document.createElement("canvas");
- const width=96,height=96;
+ const width=128,height=128;
  canvas.width=width;
  canvas.height=height;
  const context=canvas.getContext("2d",{willReadFrequently:true});
  if(!context)throw new Error("Image processing is unavailable.");
- context.drawImage(image,0,0,width,height);
+
+ // Keep a broad central view while reducing extreme background areas.
+ const cropX=image.width*0.12;
+ const cropY=image.height*0.12;
+ const cropW=image.width*0.76;
+ const cropH=image.height*0.76;
+ context.drawImage(image,cropX,cropY,cropW,cropH,0,0,width,height);
+
  const pixels=context.getImageData(0,0,width,height).data;
- let red=0,green=0,blue=0,brightness=0,saturation=0;
- const gray=[];
- for(let i=0;i<pixels.length;i+=4){
-  const r=pixels[i],g=pixels[i+1],b=pixels[i+2];
-  red+=r;green+=g;blue+=b;
+ const total=width*height;
+ const rgb=[];
+ const border=[];
+ const distance=(a,b)=>Math.sqrt((a[0]-b[0])**2+(a[1]-b[1])**2+(a[2]-b[2])**2);
+ const median=a=>{
+  const sorted=[...a].sort((x,y)=>x-y);
+  return sorted[Math.floor(sorted.length/2)];
+ };
+
+ for(let y=0;y<height;y++){
+  for(let x=0;x<width;x++){
+   const i=(y*width+x)*4;
+   const c=[pixels[i],pixels[i+1],pixels[i+2]];
+   rgb.push(c);
+   if(x<13||x>=width-13||y<13||y>=height-13)border.push(c);
+  }
+ }
+
+ // Estimate the background colour from the outer image border.
+ const bg=[0,1,2].map(k=>median(border.map(c=>c[k])));
+ const borderSpread=median(border.map(c=>distance(c,bg)));
+ const threshold=Math.max(22,Math.min(58,borderSpread*2.4+15));
+ const mask=new Uint8Array(total);
+ let selected=0;
+
+ for(let i=0;i<total;i++){
+  if(distance(rgb[i],bg)>threshold){
+   mask[i]=1;
+   selected++;
+  }
+ }
+
+ const foregroundFraction=selected/total;
+ // Only trust segmentation when it leaves a useful, plausible material region.
+ const isolationReliable=borderSpread<38&&foregroundFraction>=0.045&&foregroundFraction<=0.94;
+ const useMask=isolationReliable;
+ const chosen=[];
+ for(let i=0;i<total;i++){
+  if(!useMask||mask[i])chosen.push(i);
+ }
+
+ const reds=[],greens=[],blues=[],gray=[];
+ let brightness=0,saturation=0,darkPixels=0,brownPixels=0;
+ for(const i of chosen){
+  const [r,g,b]=rgb[i];
+  const lum=(r+g+b)/3;
   const high=Math.max(r,g,b),low=Math.min(r,g,b);
-  brightness+=(r+g+b)/3;
+  reds.push(r);greens.push(g);blues.push(b);gray.push(lum);
+  brightness+=lum;
   saturation+=high===0?0:(high-low)/high*255;
-  gray.push((r+g+b)/3);
+  if(lum<90)darkPixels++;
+  if(r>g*1.12&&g>b*1.05&&lum<165)brownPixels++;
  }
- const count=gray.length;
+
+ let whitePixels=0,blackPixels=0;
+ for(const [r,g,b] of rgb){
+  const lum=(r+g+b)/3;
+  const high=Math.max(r,g,b),low=Math.min(r,g,b);
+  if(low>=185 && high-low<=55)whitePixels++;
+  if(lum<=75)blackPixels++;
+ }
+ const whiteFraction=whitePixels/total;
+ const blackFraction=blackPixels/total;
+
+ const count=chosen.length;
  const mean=brightness/count;
- let variance=0,uniform=0,edges=0;
- for(let i=0;i<count;i++){
-  variance+=(gray[i]-mean)**2;
-  if(Math.abs(gray[i]-mean)<25)uniform++;
+ const mr=median(reds),mg=median(greens),mb=median(blues);
+ const medianLum=(mr+mg+mb)/3;
+
+ let variance=0,uniform=0,edges=0,edgePairs=0;
+ const chosenMask=new Uint8Array(total);
+ for(const i of chosen)chosenMask[i]=1;
+
+ for(let j=0;j<chosen.length;j++){
+  const i=chosen[j];
+  const lum=gray[j];
+  variance+=(lum-mean)**2;
+  if(Math.abs(lum-mean)<25)uniform++;
+
   const x=i%width,y=Math.floor(i/width);
-  if(x>0&&Math.abs(gray[i]-gray[i-1])>25)edges++;
-  if(y>0&&Math.abs(gray[i]-gray[i-width])>25)edges++;
+  if(x>0&&chosenMask[i-1]){
+   edgePairs++;
+   if(Math.abs(rgb[i][0]-rgb[i-1][0])+Math.abs(rgb[i][1]-rgb[i-1][1])+Math.abs(rgb[i][2]-rgb[i-1][2])>65)edges++;
+  }
+  if(y>0&&chosenMask[i-width]){
+   edgePairs++;
+   if(Math.abs(rgb[i][0]-rgb[i-width][0])+Math.abs(rgb[i][1]-rgb[i-width][1])+Math.abs(rgb[i][2]-rgb[i-width][2])>65)edges++;
+  }
  }
- const avgR=red/count,avgG=green/count,avgB=blue/count;
+
  let colorName="mixed or unclear";
- if(Math.max(avgR,avgG,avgB)-Math.min(avgR,avgG,avgB)<18){
-  colorName=mean<75?"dark grey or black":mean>190?"white or very pale grey":"grey";
- }else if(avgR>avgG*1.15&&avgR>avgB*1.15){
+ if(medianLum<85){
+  colorName=(mr>mg*1.12&&mg>mb*1.03)?"reddish or brown":"dark grey or black";
+ }else if(Math.max(mr,mg,mb)-Math.min(mr,mg,mb)<18){
+  colorName=medianLum>190?"white or very pale grey":"grey";
+ }else if(mr>mg*1.15&&mr>mb*1.15){
   colorName="reddish or brown";
- }else if(avgG>avgR*1.12&&avgG>avgB*1.08){
+ }else if(mg>mr*1.12&&mg>mb*1.08){
   colorName="greenish";
- }else if(avgB>avgR*1.12&&avgB>avgG*1.08){
+ }else if(mb>mr*1.12&&mb>mg*1.08){
   colorName="bluish";
- }else if(mean>175){
+ }else if(medianLum>175){
   colorName="pale or cream";
  }else{
   colorName="mixed colour";
  }
+
  return {
   brightness:mean,
+  median_brightness:medianLum,
+  dark_fraction:darkPixels/count,
+  white_fraction:whiteFraction,
+  black_fraction:blackFraction,
+  brown_fraction:brownPixels/count,
   saturation:saturation/count,
   texture:Math.sqrt(variance/count),
   uniformity:uniform/count,
-  edge_density:edges/(count*2),
-  color_name:colorName
+  edge_density:edgePairs?edges/edgePairs:0,
+  color_name:colorName,
+  foreground_fraction:foregroundFraction,
+  isolation_quality:useMask?"good":borderSpread>=38?"complex_background":"uncertain",
+  isolation_method:useMask?"adaptive_border_background_removal":"full_region_fallback",
+  analysed_region:"central_76_percent"
  };
 }
-
 async function recognizeRecord(record,queueItem){
  const features=await extractVisualFeatures(record.image_data);
  const response=await fetch("/api/v1/camera/recognize",{
@@ -1456,9 +1926,10 @@ async function openQR(raw,imageData=""){
  return !lookupError;
 }
 
-document.getElementById("qrUploadButton").onclick=()=>{
- document.getElementById("qrImageInput").click();
-};
+document.getElementById("qrUploadButton").addEventListener("click",()=>{
+ const picker=document.getElementById("qrImageInput");
+ picker.click();
+});
 
 async function decodeUploadedQR(file){
  let source=null,objectURL=null;
@@ -1638,5 +2109,112 @@ if ("serviceWorker" in navigator) {
   });
 }
 </script>
+<script src="/language.js"></script>
+
+<script>
+/* ETHIOFERTI_LABORATORY_HANDLERS_V1 */
+(()=>{
+ const $=id=>document.getElementById(id);
+ const panel=$("labPanel");
+ if(!panel || panel.dataset.handlersReady==="1")return;
+ panel.dataset.handlersReady="1";
+
+ const sections=["labWelcome","labEntry","labProgress","labReport"];
+ function showSection(id){
+  sections.forEach(name=>$(name).classList.toggle("hidden",name!==id));
+ }
+ function activate(mode){
+  $("aiPanel").classList.toggle("hidden",mode!=="ai");
+  $("qrPanel").classList.toggle("hidden",mode!=="qr");
+  panel.classList.toggle("hidden",mode!=="lab");
+  $("showAI").classList.toggle("active",mode==="ai");
+  $("showQR").classList.toggle("active",mode==="qr");
+  $("showLab").classList.toggle("active",mode==="lab");
+  if(mode==="lab"){
+   if(typeof stopQR==="function")stopQR();
+   $("stop")?.click();
+  }
+ }
+
+ $("showLab").addEventListener("click",()=>activate("lab"));
+ $("showAI").addEventListener("click",()=>panel.classList.add("hidden"));
+ $("showQR").addEventListener("click",()=>panel.classList.add("hidden"));
+
+ $("labStart").addEventListener("click",()=>{
+  $("labCode").value="";
+  showSection("labEntry");
+  $("labCode").focus();
+ });
+
+ $("labRun").addEventListener("click",async()=>{
+  const code=$("labCode").value.trim();
+  if(!["1","2","3","4","5","11"].includes(code)){
+   $("labCode").setCustomValidity("Enter one of the listed colour codes.");
+   $("labCode").reportValidity();
+   return;
+  }
+  $("labCode").setCustomValidity("");
+  showSection("labProgress");
+
+  const steps=[
+   "Initializing diagnostic unit...",
+   "Processing sensor input...",
+   "Analyzing fertilizer properties...",
+   "Preparing laboratory report..."
+  ];
+  let step=0;
+  $("labStep").textContent=steps[0];
+  $("labProgressBar").style.width="8%";
+  const timer=setInterval(()=>{
+   step=Math.min(step+1,steps.length-1);
+   $("labStep").textContent=steps[step];
+   $("labProgressBar").style.width=(20+step*23)+"%";
+  },650);
+
+  try{
+   const response=await fetch("/api/v1/laboratory/diagnose/"+encodeURIComponent(code));
+   const data=await response.json();
+   if(!response.ok)throw new Error(data.detail||"Diagnosis could not be completed.");
+   await new Promise(resolve=>setTimeout(resolve,2600));
+   clearInterval(timer);
+   $("labProgressBar").style.width="100%";
+
+   const p=data.profile||{};
+   const esc=value=>String(value??"—").replace(/[&<>"']/g,c=>({
+    "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"
+   }[c]));
+   const list=value=>Array.isArray(value)?value.join(" · "):value;
+   const rows=[
+    ["Sensor input",data.colour],
+    ["Fertilizer category",data.category||p.name],
+    ["Chemical identity",p.chemical_name||p.name],
+    ["Nutrient grade",p.grade],
+    ["Composition",list(p.nutrients)],
+    ["Nutrient functions",list(p.nutrient_functions)],
+    ["Suitable crops",list(p.crop_suitability)],
+    ["Agricultural uses",list(p.agricultural_uses)],
+    ["Soil management",list(p.soil_considerations)],
+    ["Application guidance",list(p.application_guidance)],
+    ["Storage",list(p.storage)]
+   ];
+   $("labReportContent").innerHTML=rows.map(([label,value])=>
+    `<article class="lab-result-row"><h4>${esc(label)}</h4><p>${esc(value)}</p></article>`
+   ).join("");
+   showSection("labReport");
+  }catch(error){
+   clearInterval(timer);
+   $("labStep").textContent=error.message;
+   setTimeout(()=>showSection("labEntry"),1800);
+  }
+ });
+
+ $("labAgain").addEventListener("click",()=>{
+  $("labCode").value="";
+  showSection("labEntry");
+  $("labCode").focus();
+ });
+})();
+</script>
+
 </body>
 </html>
