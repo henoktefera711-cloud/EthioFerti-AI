@@ -36,14 +36,15 @@ jobs:
       - name: Install Android SDK
         run: sdkmanager 'platforms;android-36' 'build-tools;36.0.0'
 
-      - name: Package latest app files
+      - name: Package latest application files
         run: |
-          mkdir -p android/app/src/main/assets/runtime/app/static android/app/src/main/assets/runtime/data
+          mkdir -p android/app/src/main/assets/runtime/app/static
+          mkdir -p android/app/src/main/assets/runtime/data/knowledge
           cp app/main.py android/app/src/main/assets/runtime/app/main.py
           touch android/app/src/main/assets/runtime/app/__init__.py
           cp -a app/static/. android/app/src/main/assets/runtime/app/static/
+          cp -a data/knowledge/. android/app/src/main/assets/runtime/data/knowledge/
           if [ -f data/ethioferti.db ]; then cp data/ethioferti.db android/app/src/main/assets/runtime/data/ethioferti.db; fi
-          if [ -d data/uploads ]; then mkdir -p android/app/src/main/assets/runtime/data/uploads; cp -a data/uploads/. android/app/src/main/assets/runtime/data/uploads/; fi
 
       - name: Set up Python for Chaquopy
         uses: actions/setup-python@v5
