@@ -2842,7 +2842,7 @@ if ("serviceWorker" in navigator) {
     const rows=[
      [am()?"የሴንሰር ኮድ":"Sensor code",code],
      [am()?"የሴንሰር ቦታ":"Sensor position",positions[code.charAt(0)]],
-     [t.rejectedTitle,data.message||t.notFertilizer]
+     [am()?"ይህ ቁሳቁስ ትክክለኛ ማዳበሪያ አይደለም።":"This material is not a recognized fertilizer."]
     ];
     $("labReportContent").innerHTML=rows.map(([label,value])=>
      `<article class="lab-result-row"><h4>${escape(label)}</h4><p>${escape(value)}</p></article>`
@@ -2899,7 +2899,13 @@ if ("serviceWorker" in navigator) {
     [labels.deficiency,am()?(translations.deficiency_indicators||""):format(p.deficiency_indicators)],
     [labels.risks,am()?(translations.excess_and_risks||""):format(p.excess_and_risks)],
     [labels.storage,am()?(translations.storage||""):format(p.storage)],
-    [labels.molecular,am()?translations.molecular_mass_g_mol:p.molecular_mass_g_mol],
+    [am()?"የቁሳቁሱ ይዘት":"Material composition",am()?(translations.composition_analysis||""):p.composition_analysis],
+  [am()?"የኬሚካል እና የመርዛማነት ምርመራ":"Chemical and toxicity findings",am()?(translations.chemical_and_toxicity_results||""):p.chemical_and_toxicity_results],
+  [am()?"የጥቃቅን ሕዋሳት እንቅስቃሴ":"Microbiological activity",am()?(translations.microbiological_assessment||""):p.microbiological_assessment],
+  [am()?"የአፈር አሲዳማነት ማስተካከያ":"Soil acidity management",am()?(translations.soil_acidity_management||""):p.soil_acidity_management],
+  [am()?"አጠቃላይ የትንተና ውጤት":"Overall analysis",am()?(translations.analyzer_assessment||""):p.analyzer_assessment],
+  [am()?"የመጨረሻ የላቦራቶሪ ውጤት":"Final analysis",am()?(translations.laboratory_certification||""):p.laboratory_certification],
+ [labels.molecular,am()?translations.molecular_mass_g_mol:p.molecular_mass_g_mol],
     [labels.manufacturing,am()?translations.manufacturing_process:p.manufacturing_process],
     [labels.solubility,am()?translations.solubility:p.solubility],
     [labels.transformations,am()?translations.nitrogen_transformations:p.nitrogen_transformations],
@@ -2908,7 +2914,17 @@ if ("serviceWorker" in navigator) {
    ];
 
    $("labReportContent").innerHTML=
-    rows.filter(([,v])=>v!==undefined&&v!==null&&v!=="").map(([label,value])=>
+    rows.filter(([label,v])=>{
+ const hawtroLabels=[
+  am()?"የቁሳቁሱ ይዘት":"Material composition",
+  am()?"የኬሚካል እና የመርዛማነት ምርመራ":"Chemical and toxicity findings",
+  am()?"የጥቃቅን ሕዋሳት እንቅስቃሴ":"Microbiological activity",
+  am()?"የአፈር አሲዳማነት ማስተካከያ":"Soil acidity management",
+  am()?"አጠቃላይ የትንተና ውጤት":"Overall analysis",
+  am()?"የመጨረሻ የላቦራቶሪ ውጤት":"Final analysis"
+ ];
+ return (p.id!=="hawtro"||hawtroLabels.includes(label))&&v!==undefined&&v!==null&&v!=="";
+}).map(([label,value])=>
      `<article class="lab-result-row"><h4>${escape(label)}</h4><p>${escape(format(value))}</p></article>`
     ).join("");
    showSection("labReport");
@@ -2932,7 +2948,9 @@ if ("serviceWorker" in navigator) {
 })();
 </script>
 
-</body>
+
+
+\n</body>
 </html>
 
 <style>
