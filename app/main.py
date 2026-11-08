@@ -1667,38 +1667,15 @@ def laboratory_diagnose(code: str, lang: str = "am"):
     import re
 
     normalized = str(code).strip().upper()
-    match = re.fullmatch(r"(1|2|3)(NPSZNB|NPSZN|NPSB|NPS|U|D|M|C|F|V)", normalized)
+    match = re.fullmatch(r"(1|2|3)(U|D|H|F)", normalized)
     if not match:
-        raise HTTPException(status_code=422, detail="Enter a valid fertilizer sensor code.")
+        raise HTTPException(
+            status_code=422,
+            detail="Enter a valid laboratory code: U, D, H or F."
+        )
 
     position_number, fertilizer_code = match.groups()
-    fertilizer_ids = {
-        "U": "urea",
-        "D": "dap",
-        "NPS": "nps_19_38_0_7s",
-        "NPSB": "npsb_18_9_37_7",
-        "NPSZN": "npszn_17_7_35_5",
-        "NPSZNB": "npsznb_17_8_35_7",
-        "M": "mop_0_0_60",
-        "C": "compost",
-        "F": "farmyard_manure",
-        "V": "vermicompost",
-    }
-
-    fertilizer_id = fertilizer_ids[fertilizer_code]
     language = "en" if str(lang).lower() == "en" else "am"
-    database = _load_fertilizer_knowledge()
-
-    profile = next(
-        (p for p in database["profiles"] if p.get("id") == fertilizer_id),
-        None
-    )
-    if not profile:
-        raise HTTPException(status_code=503, detail="Fertilizer profile unavailable.")
-
-    profile = dict(profile)
-    translated = profile.get("translations", {}).get(language, {})
-    profile.update(translated)
 
     positions = {
         "1": ("Top", "ላይኛ ክፍል"),
@@ -1708,21 +1685,70 @@ def laboratory_diagnose(code: str, lang: str = "am"):
     position_en, position_am = positions[position_number]
     position_label = position_en if language == "en" else position_am
 
+    # F means non-fertilizer. It must never map to farmyard manure.
+    if fertilizer_code == "F":
+        messages = {
+            "en": (
+                "The submitted material is classified as non-fertilizer. "
+                "No fertilizer analysis report has been generated."
+            ),
+            "am": (
+                "የቀረበው ቁሳቁስ ማዳበሪያ እንዳልሆነ ተመድቧል። "
+                "የማዳበሪያ ምርመራ ሪፖርት አልተዘጋጀም።"
+            )
+        }
+        return {
+            "success": True,
+            "is_fertilizer": False,
+            "diagnosis_mode": "laboratory_classification",
+            "code": normalized,
+            "fertilizer_code": "F",
+            "sensor_position": position_label,
+            "sensor_position_number": int(position_number),
+            "language": language,
+            "message": messages[language],
+        }
+
+    fertilizer_ids = {
+        "U": "urea",
+        "D": "dap",
+        "H": "hawtro",
+    }
+    fertilizer_id = fertilizer_ids[fertilizer_code]
+
+    database = _load_fertilizer_knowledge()
+    profile = next(
+        (p for p in database.get("profiles", [])
+         if p.get("id") == fertilizer_id),
+        None
+    )
+
+    if not profile:
+        raise HTTPException(
+            status_code=503,
+            detail="Fertilizer profile unavailable."
+        )
+
+    profile = dict(profile)
+    translated = profile.get("translations", {}).get(language, {})
+    profile.update(translated)
+
     position_focus = {
         "en": {
-            "1": "Inspection focus: surface-layer particle appearance, outer surface and exposure conditions.",
-            "2": "Inspection focus: particle uniformity and consistency in the central material.",
-            "3": "Inspection focus: lower-layer particle settling, compaction and moisture conditions."
+            "1": "Analyze the material characteristics and surface conditions indicated at the upper sensor position.",
+            "2": "Analyze material consistency and uniformity indicated at the middle sensor position.",
+            "3": "Analyze settling, compaction and moisture characteristics indicated at the lower sensor position."
         },
         "am": {
-            "1": "የላይኛው ክፍል የቅንጣት መልክ፣ የውጫዊ ገጽታና የእርጥበት ሁኔታ ምርመራ።",
-            "2": "የመካከለኛው ክፍል የቅንጣት ተመሳሳይነትና የድብልቅ ወጥነት ምርመራ።",
-            "3": "የታችኛው ክፍል የቅንጣት መሰብሰብ፣ መጠቅጠቅና የእርጥበት ሁኔታ ምርመራ።"
+            "1": "በላይኛው የሴንሰር ቦታ የቁሳቁሱን አካላዊ ባህሪና የገጽታ ሁኔታ መተንተን።",
+            "2": "በመካከለኛው የሴንሰር ቦታ የቁሳቁሱን ወጥነትና ተመሳሳይነት መተንተን።",
+            "3": "በታችኛው የሴንሰር ቦታ የቁሳቁሱን መጠቅጠቅና የእርጥበት ባህሪ መተንተን።"
         }
     }[language][position_number]
 
     return {
         "success": True,
+        "is_fertilizer": True,
         "diagnosis_mode": "laboratory_simulation",
         "code": normalized,
         "fertilizer_code": fertilizer_code,
@@ -1734,7 +1760,10 @@ def laboratory_diagnose(code: str, lang: str = "am"):
         "category": profile.get("name"),
         "colour": position_label,
         "profile": profile,
-        "database": database.get("database_name", "offline_fertilizer_knowledge")
+        "database": database.get(
+            "database_name",
+            "offline_fertilizer_knowledge"
+        )
     }
 
 

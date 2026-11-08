@@ -715,344 +715,111 @@
       "id": "hawtro",
       "name": "Hawtro",
       "aliases": [
-        "Hawtro",
-        "ሃውትሮ"
+        "HAWOTIRO Premium Natural Organic Fertilizer Pellets"
       ],
-      "chemical_name": "Variable natural organic material; exact composition depends on the Hawtro material specification.",
-      "formula": "No single fixed chemical formula",
-      "grade": "Variable organic nutrient content; exact grade not yet specified",
+      "chemical_name": "Natural organic biomass fertilizer mixture",
+      "formula": "Natural organic biomass mixture; no single chemical formula",
+      "grade": "NPK concentrations are not provided in the analyzer report.",
       "classification": [
-        "organic",
-        "soil amendment",
-        "biological material"
+        "100% Bio-Organic Soil Conditioner",
+        "100% Chemical-Free",
+        "Zero Synthetic Chemicals",
+        "100% Pure Natural Organic Biomass"
       ],
-      "nutrients": {
-        "N": null,
-        "P2O5": null,
-        "K2O": null,
-        "organic_matter": "variable"
-      },
-      "nutrient_functions": {
-        "organic_matter": "Can improve soil aggregation, water retention, biological activity and nutrient cycling.",
-        "N": "May release nitrogen gradually as organic matter decomposes.",
-        "P": "May contribute phosphorus depending on feedstock and composting process.",
-        "K": "May contribute potassium depending on feedstock."
-      },
-      "description": "Hawtro is treated in this knowledge base as a natural organic fertilizer. This provisional profile uses general organic compost knowledge for soil improvement, organic matter management, crop suitability and application. Its exact ingredients, nutrient percentages and chemical composition have not yet been specified.",
-      "physical_forms": [
-        "dark crumbly material",
-        "coarse compost",
-        "screened compost"
-      ],
-      "crop_suitability": [
-        "vegetables",
-        "fruits",
-        "cereals",
-        "coffee",
-        "nursery plants",
-        "many field and garden crops"
-      ],
-      "agricultural_uses": [
-        "improving soil organic matter",
-        "improving soil structure",
-        "supporting water retention",
-        "recycling organic nutrients"
-      ],
-      "soil_considerations": [
-        "Maturity, salinity, pH, carbon-to-nitrogen ratio and contamination affect suitability.",
-        "Compost is not a standardized replacement for a mineral fertilizer without nutrient analysis."
-      ],
-      "application_guidance": [
-        "Use mature, stable compost.",
-        "Base application quantity on compost analysis, crop requirements and soil condition.",
-        "Avoid applying immature or contaminated compost to sensitive crops."
-      ],
-      "compatibility": [
-        "Consider maturity, salinity and nutrient content before combining with mineral fertilizers."
-      ],
-      "deficiency_indicators": [
-        "Compost is not a direct diagnosis or guaranteed cure for a specific nutrient deficiency."
-      ],
-      "excess_and_risks": [
-        "Immature compost can immobilize nitrogen or harm seedlings.",
-        "High-salinity or contaminated compost can damage crops or soil."
-      ],
-      "storage": [
-        "Protect from contamination and excessive rain.",
-        "Maintain appropriate moisture and aeration during composting."
-      ],
-      "verification": {
-        "visual_identity": "Dark colour and crumbly texture do not prove that material is mature compost.",
-        "grade_verification": "Nutrient percentages require laboratory analysis.",
-        "tests": [
-          "maturity or stability",
-          "moisture",
-          "pH",
-          "electrical conductivity",
-          "organic matter",
-          "C:N ratio",
-          "nutrient analysis",
-          "contaminants where relevant"
+      "description": "Hawtro is a natural organic fertilizer pellet identified by the analyzer as a 100% bio-organic soil conditioner made from 100% pure natural organic biomass. The reported chemical purity result is 100% free from synthetic chemicals.",
+      "composition_analysis": {
+        "source_material": "100% Pure Natural Organic Biomass",
+        "identified_raw_inputs": [
+          "Warka leaves",
+          "Besana leaves",
+          "Banana peels",
+          "Wood ash",
+          "Agricultural lime"
+        ],
+        "source_material_am": "100% ንጹህ የተፈጥሮ ኦርጋኒክ ባዮማስ",
+        "identified_raw_inputs_am": [
+          "የዋርካ ቅጠሎች",
+          "የበሳና ቅጠሎች",
+          "የሙዝ ልጣጭ",
+          "የእንጨት አመድ",
+          "የግብርና ኖራ"
         ]
       },
-      "sources": [
-        "FAO soil organic matter and plant nutrition resources"
-      ],
-      "source_urls": [
-        "https://www.fao.org/soils-portal/soil-management/soil-organic-matter/en/"
-      ],
-      "physical_characteristics": {
-        "family": "organic_amendment",
-        "colors": [
-          "dark brown",
-          "brown",
-          "black",
-          "very dark brown"
-        ],
-        "texture": [
-          "crumbly",
-          "fibrous",
-          "heterogeneous",
-          "fine organic particles"
-        ],
-        "particle_shape": [
-          "irregular fragments",
-          "fibres",
-          "decomposed organic pieces"
-        ],
-        "uniformity": "usually heterogeneous",
-        "visual_traits": [
-          "dark decomposed organic matter",
-          "irregular particles",
-          "visible fibres or plant fragments"
-        ],
-        "nonvisual_traits": [
-          "earthy smell",
-          "variable moisture",
-          "organic matter"
-        ],
-        "lookalikes": [
-          "farmyard manure",
-          "vermicompost",
-          "dark soil",
-          "decomposed mulch"
-        ],
-        "visual_identification": "Compost-like organic material; maturity and nutrient content cannot be established visually.",
-        "colour_variation": "Colour depends on feedstock, decomposition, moisture and maturity.",
-        "particle_forms": [
-          "crumbs",
-          "fragments",
-          "fibres",
-          "aggregates"
-        ],
-        "surface": [
-          "rough",
-          "porous",
-          "irregular"
-        ],
-        "particle_consistency": "Usually heterogeneous, with a mixture of particle sizes.",
-        "visual_clues": [
-          "dark decomposed material",
-          "plant fragments",
-          "fibres",
-          "uneven organic particles"
-        ],
-        "visual_limits": "Dark colour alone does not distinguish compost from soil, manure or other organic matter."
+      "chemical_and_toxicity_results": {
+        "chemical_status": "100% CHEMICAL-FREE (ZERO SYNTHETIC CHEMICALS)",
+        "synthetic_npk_chemicals": "NOT DETECTED",
+        "synthetic_npk_percentage": "0.00%",
+        "heavy_metals_and_toxic_residues": "BELOW DETECTION LIMIT (SAFE)",
+        "chemical_purity_standard": "100% Free from Synthetic Chemicals",
+        "nitrogen_concentration": "Not provided in the report.",
+        "phosphorus_concentration": "Not provided in the report.",
+        "potassium_concentration": "Not provided in the report."
       },
-      "identification_method": {
-        "visual_evidence": [
-          "dark decomposed organic matter",
-          "irregular particles",
-          "visible fibres or plant fragments"
-        ],
-        "non_visual_evidence": [
-          "earthy smell",
-          "variable moisture",
-          "organic matter"
-        ],
-        "lookalikes": [
-          "farmyard manure",
-          "vermicompost",
-          "dark soil"
-        ],
-        "identification_limit": "Compost-like organic material; maturity and nutrient content cannot be established visually."
+      "microbiological_assessment": {
+        "active_beneficial_microorganisms": "PRESENT",
+        "nitrogen_fixing_microbes": "POSITIVE (+)",
+        "phosphate_solubilizing_microbes": "POSITIVE (+)"
       },
-      "intelligence": {
-        "identity": {
-          "chemical_identity": "Compost",
-          "chemical_name": "Decomposed organic material",
-          "formula": "No fixed chemical formula",
-          "grade": "Variable; no universal NPK grade",
-          "classification": "Organic soil amendment",
-          "source_materials": [
-            "plant residues",
-            "crop residues",
-            "leaves",
-            "food and other suitable biodegradable organic materials"
-          ],
-          "composition": "Variable organic matter, partially decomposed material, nutrients and biological components."
-        },
-        "physical_fingerprint": {
-          "typical_colours": [
-            "dark brown",
-            "brown",
-            "black",
-            "very dark brown"
-          ],
-          "colour_variation": "Colour depends on feedstock, decomposition, moisture and maturity.",
-          "particle_forms": [
-            "crumbs",
-            "fragments",
-            "fibres",
-            "aggregates"
-          ],
-          "particle_shapes": [
-            "irregular fragments",
-            "fibres",
-            "decomposed plant pieces"
-          ],
-          "surface": [
-            "rough",
-            "porous",
-            "irregular"
-          ],
-          "particle_consistency": "Usually heterogeneous, with a mixture of particle sizes.",
-          "texture": "Crumbly, fibrous, earthy or fine organic material.",
-          "visual_clues": [
-            "dark decomposed material",
-            "plant fragments",
-            "fibres",
-            "uneven organic particles"
-          ],
-          "lookalikes": [
-            "farmyard manure",
-            "vermicompost",
-            "dark soil",
-            "decomposed mulch"
-          ],
-          "nonvisual_properties": [
-            "earthy smell when mature",
-            "variable moisture",
-            "organic matter"
-          ],
-          "visual_limits": "Dark colour alone does not distinguish compost from soil, manure or other organic matter."
-        },
-        "agronomy": {
-          "main_function": "Adds organic matter, supports soil structure and can contribute nutrients as decomposition proceeds.",
-          "plant_effects": [
-            "supports root-zone conditions",
-            "can improve aggregation",
-            "can improve water retention in suitable soils",
-            "contributes slowly available nutrients"
-          ],
-          "common_crop_groups": [
-            "vegetables",
-            "cereals",
-            "fruit crops",
-            "nursery plants",
-            "field crops"
-          ],
-          "soil_behaviour": "Effects depend on maturity, salinity, feedstock, carbon-to-nitrogen ratio and soil conditions.",
-          "management": "Use mature, clean compost. Nutrient content and application rate should be based on analysis and local recommendations.",
-          "risks": [
-            "immature compost may temporarily immobilize nitrogen or harm sensitive plants",
-            "contaminated feedstock can introduce unwanted substances",
-            "high salinity compost may damage sensitive crops"
-          ]
-        },
-        "identification": {
-          "strong_visual_evidence": [
-            "heterogeneous dark organic particles",
-            "visible plant fibres or fragments",
-            "crumbly irregular structure"
-          ],
-          "weak_evidence": [
-            "dark colour alone",
-            "irregular texture alone"
-          ],
-          "distinguish_from": [
-            "farmyard manure",
-            "vermicompost",
-            "dark soil"
-          ],
-          "cannot_determine_visually": [
-            "maturity",
-            "pathogen status",
-            "nutrient grade",
-            "feedstock safety",
-            "salinity"
-          ],
-          "best_result": "Compost-like organic material; maturity and nutrient composition require separate assessment."
-        }
+      "soil_acidity_management": {
+        "soil_acidity_ph_neutralization_capacity": "HIGH",
+        "mechanism": "Effectively neutralizes acidic soil via natural mineral buffers."
       },
-      "knowledge_dimensions": [
-        "chemical_identity",
-        "nutrient_composition",
-        "physical_appearance",
-        "particle_morphology",
-        "manufacturing_and_material_form",
-        "visual_variation",
-        "lookalikes_and_differentiation",
-        "plant_nutrient_functions",
-        "crop_suitability",
-        "soil_interactions",
-        "agricultural_management",
-        "risks_and_misuse",
-        "visual_identification_limits",
-        "verification_requirements"
-      ],
-      "knowledge_updated": "2026-11-05",
+      "analyzer_assessment": {
+        "analysis_type": "Automated Analyzer Test Result",
+        "product_identification": "Hawtro — natural organic fertilizer pellets",
+        "category_result": "100% Bio-Organic Soil Conditioner",
+        "biomass_result": "100% Pure Natural Organic Biomass",
+        "chemical_purity_result": "100% Chemical-Free; zero synthetic chemicals",
+        "synthetic_npk_result": "NOT DETECTED (0.00%)",
+        "toxicity_result": "Heavy metals and toxic residues BELOW DETECTION LIMIT (SAFE)",
+        "microbiology_result": "Active beneficial microorganisms PRESENT",
+        "nitrogen_fixation_result": "POSITIVE (+)",
+        "phosphate_solubilization_result": "POSITIVE (+)",
+        "soil_acidity_result": "HIGH neutralization capacity",
+        "soil_acidity_mechanism": "Natural mineral buffers",
+        "overall_result": "RESULTS VERIFIED",
+        "interpretation": "The analyzer report identifies Hawtro as a natural, chemical-free organic fertilizer pellet containing active beneficial microorganisms and having high soil-acidity neutralization capacity.",
+        "quantitative_npk_status": "NPK concentrations are not provided in the report."
+      },
+      "laboratory_certification": {
+        "status": "RESULTS VERIFIED",
+        "certification_text": "The lab analysis confirms that this sample is a 100% natural, chemical-free organic fertilizer pellet. It contains active beneficial microorganisms capable of enhancing soil fertility and naturally neutralizing soil acidity without any synthetic chemical ingredients."
+      },
+      "verification": {
+        "source": "Automated Analyzer Test Result",
+        "product_name_in_report": "HAWOTIRO Premium Natural Organic Fertilizer Pellets",
+        "knowledge_base_product_name": "Hawtro",
+        "reported_category": "100% Bio-Organic Soil Conditioner",
+        "final_laboratory_certification": "RESULTS VERIFIED"
+      },
       "translations": {
         "name": "ሃውትሮ",
-        "classification": "ኦርጋኒክ የአፈር ማሻሻያና ማዳበሪያ",
-        "description": "ሃውትሮ በዚህ የመረጃ መዝገብ ውስጥ እንደ ተፈጥሯዊ ኦርጋኒክ ማዳበሪያ ተወስዷል። ጊዜያዊው መግለጫ በአጠቃላይ የኮምፖስት እውቀት ላይ ተመስርቶ የአፈር ማሻሻያ፣ የኦርጋኒክ ቁስ አያያዝ፣ የሰብል ተስማሚነትና አተገባበርን ይመለከታል። ትክክለኛው የሃውትሮ ይዘት፣ የንጥረ ነገር መቶኛና ኬሚካላዊ ቅንብር ገና አልተገለጸም።",
-        "agricultural_uses": "የአፈር ኦርጋኒክ ንጥረ ነገርን፣ የውሃ መያዝንና የአፈር መዋቅርን ያሻሽላል።",
-        "crop_suitability": "አትክልቶች፣ ፍራፍሬ ዛፎች፣ እህሎች፣ ጥራጥሬዎችና የችግኝ ተክሎች።",
-        "application_guidance": "በደንብ የበሰበሰና የተዳበረ ኮምፖስት ይጠቀሙ፤ ከመዝራት በፊት ከአፈር ጋር ያቀላቅሉ።",
-        "soil_considerations": "የኮምፖስት ንጥረ ምግብ መጠን በጥሬ እቃውና በብስለቱ ይለያያል።"
-      },
-      "laboratory_diagnosis": {
-        "levels": {
-          "top": {
-            "position_en": "Top",
-            "position_am": "ላይኛ ክፍል",
-            "focus_en": "Top-layer inspection: exposed surface, visible particle condition, surface distribution and exposure to air or moisture.",
-            "focus_am": "የላይኛው ክፍል ምርመራ፦ የውጭ ገጽታ፣ የቅንጣት ሁኔታ፣ የተበተነበት ሁኔታና ለአየር ወይም ለእርጥበት መጋለጥ።",
-            "observation_en": "The top position is recorded as the surface inspection point. Review visible colour, particle form, surface crusting and signs of moisture.",
-            "observation_am": "ይህ የላይኛው የምርመራ ቦታ ነው። የሚታየውን ቀለም፣ የቅንጣት ቅርጽ፣ የገጽታ መጠንጠንና የእርጥበት ምልክቶች ይመልከቱ።",
-            "recommended_check_en": "Compare the surface material with the product's known physical description and inspect for contamination or weather exposure.",
-            "recommended_check_am": "የገጽታውን ቁሳቁስ ከምርቱ የታወቀ አካላዊ መግለጫ ጋር ያነጻጽሩ፤ ብክለትና ለአየር ሁኔታ መጋለጥን ይመርምሩ።",
-            "sampling_note_en": "Take a representative surface sample without mixing it with material from other positions.",
-            "sampling_note_am": "ከላይኛው ክፍል ብቻ የሚወክል ናሙና ይውሰዱ፤ ከሌሎች ክፍሎች ጋር አይቀላቅሉት።"
-          },
-          "middle": {
-            "position_en": "Middle",
-            "position_am": "መካከለኛ ክፍል",
-            "focus_en": "Middle-layer inspection: internal bulk appearance, particle-size consistency, mixture uniformity and representative material condition.",
-            "focus_am": "የመካከለኛው ክፍል ምርመራ፦ የውስጥ ቁሳቁስ ገጽታ፣ የቅንጣት መጠን ተመሳሳይነት፣ የቅልቅሉ አንድነትና የተወካይ ናሙና ሁኔታ።",
-            "observation_en": "The middle position is recorded as the central inspection point. Review whether particles and components appear evenly distributed.",
-            "observation_am": "ይህ የመካከለኛው የምርመራ ቦታ ነው። ቅንጣቶችና ክፍሎች በእኩል ሁኔታ መበተናቸውን ይመልከቱ።",
-            "recommended_check_en": "Compare the central material with the top and bottom samples to identify visible variation or mixing differences.",
-            "recommended_check_am": "የመካከለኛውን ቁሳቁስ ከላይኛውና ከታችኛው ናሙና ጋር በማነጻጸር የሚታይ ልዩነት ይፈልጉ።",
-            "sampling_note_en": "Collect a representative sample from the middle layer while keeping it separate from the other positions.",
-            "sampling_note_am": "ከመካከለኛው ክፍል የሚወክል ናሙና ይውሰዱ፤ ከሌሎች ክፍሎች ለይተው ያቆዩት።"
-          },
-          "bottom": {
-            "position_en": "Bottom",
-            "position_am": "ታችኛ ክፍል",
-            "focus_en": "Bottom-layer inspection: settling, compaction, fine-particle accumulation, moisture concentration and possible segregation.",
-            "focus_am": "የታችኛው ክፍል ምርመራ፦ መርገት፣ መጠቅጠቅ፣ ጥቃቅን ቅንጣቶች መከማቸት፣ የእርጥበት ማተኮርና የቁሳቁስ መለያየት።",
-            "observation_en": "The bottom position is recorded as the lower-layer inspection point. Review the material for settled fines, compacted masses and moisture-related changes.",
-            "observation_am": "ይህ የታችኛው ክፍል የምርመራ ቦታ ነው። የተከማቹ ጥቃቅን ቅንጣቶችን፣ የተጠቀጠቁ ክፍሎችንና ከእርጥበት ጋር የተያያዙ ለውጦችን ይመልከቱ።",
-            "recommended_check_en": "Compare the lower material with the upper layers and check whether storage or handling has caused visible separation.",
-            "recommended_check_am": "የታችኛውን ቁሳቁስ ከላይኛው ክፍሎች ጋር ያነጻጽሩ፤ በማከማቻ ወይም በአያያዝ ምክንያት የተፈጠረ መለያየት ካለ ይመርምሩ።",
-            "sampling_note_en": "Collect a separate bottom-layer sample, including representative settled material where present.",
-            "sampling_note_am": "ከታችኛው ክፍል የተለየ ናሙና ይውሰዱ፤ ካሉ የተረጉ ቁሳቁሶችንም በተወካይነት ያካትቱ።"
-          }
-        }
-      },
-      "knowledge_status": "provisional_organic_knowledge",
-      "knowledge_basis": "Provisional guidance adapted from general organic compost knowledge. Replace with Hawtro-specific information supplied by the user."
+        "chemical_name": "የተፈጥሮ ኦርጋኒክ ባዮማስ የማዳበሪያ ድብልቅ",
+        "formula": "የተፈጥሮ ኦርጋኒክ ባዮማስ ድብልቅ ስለሆነ አንድ የኬሚካል ቀመር የለውም።",
+        "grade": "የNPK መጠኖች በላብራቶሪ ሪፖርቱ ውስጥ አልተገለጹም።",
+        "classification": "100% ባዮ-ኦርጋኒክ የአፈር ማሻሻያ፤ 100% ከሰው ሠራሽ ኬሚካሎች ነፃ፤ ከ100% ንጹህ የተፈጥሮ ኦርጋኒክ ባዮማስ የተሠራ።",
+        "description": "ሃውትሮ በአናላይዘሩ የተለየው 100% ባዮ-ኦርጋኒክ የአፈር ማሻሻያ የሆነ የተፈጥሮ ኦርጋኒክ የማዳበሪያ ፔሌት ነው። ሪፖርቱ ከሰው ሠራሽ ኬሚካሎች 100% ነፃ መሆኑን ያሳያል።",
+        "nutrients": "ሰው ሠራሽ N-P-K ኬሚካሎች አልተገኙም (0.00%)። የጠቅላላ ናይትሮጅን፣ ፎስፈረስ እና ፖታስየም መጠኖች በሪፖርቱ አልተገለጹም።",
+        "nutrient_functions": "ሪፖርቱ ናይትሮጅንን የሚያያዙ እና ፎስፌትን የሚያሟሟ ጠቃሚ ረቂቅ ሕዋሳት መኖራቸውን አረጋግጧል።",
+        "physical_forms": "የኦርጋኒክ ማዳበሪያ ፔሌቶች።",
+        "crop_suitability": "ለተወሰኑ ሰብሎች የሚመከር የአጠቃቀም ዝርዝር በሪፖርቱ አልተሰጠም።",
+        "agricultural_uses": "ሪፖርቱ ሃውትሮን የአፈር ማሻሻያ እና የተፈጥሮ ኦርጋኒክ ማዳበሪያ ብሎ ይገልጸዋል።",
+        "soil_considerations": "ሪፖርቱ በተፈጥሯዊ ማዕድናዊ ማቋቋሚያ ንጥረ ነገሮች አማካኝነት አሲዳማ አፈርን የማስተካከል ከፍተኛ አቅም መኖሩን ያሳያል።",
+        "application_guidance": "የአጠቃቀም መጠንና የመተግበሪያ መመሪያ በሪፖርቱ አልተሰጠም።",
+        "compatibility": "የሌሎች ማዳበሪያዎች ወይም ንጥረ ነገሮች ተስማሚነት በሪፖርቱ አልተገለጸም።",
+        "deficiency_indicators": "የንጥረ ምግብ እጥረት ምልክቶች በሪፖርቱ አልተገለጹም።",
+        "excess_and_risks": "የትርፍ መጠን ወይም የአጠቃቀም አደጋዎች በሪፖርቱ አልተገለጹም።",
+        "storage": "የማከማቻ መመሪያ በሪፖርቱ አልተሰጠም።",
+        "composition_analysis": "የተጠቀሰው ጥሬ እቃ 100% ንጹህ የተፈጥሮ ኦርጋኒክ ባዮማስ ነው። የተለዩት ግብዓቶች የዋርካ ቅጠሎች፣ የበሳና ቅጠሎች፣ የሙዝ ልጣጭ፣ የእንጨት አመድ እና የግብርና ኖራ ናቸው።",
+        "chemical_and_toxicity_results": "የሰው ሠራሽ N-P-K ኬሚካሎች አልተገኙም (0.00%)። ከባድ ብረቶችና መርዛማ ቅሪቶች ከመለያ ገደቡ በታች ናቸው (SAFE)። የኬሚካል ንጽህና መስፈርቱ 100% ከሰው ሠራሽ ኬሚካሎች ነፃ መሆን ነው።",
+        "microbiological_assessment": "ጠቃሚ ንቁ ረቂቅ ሕዋሳት ተገኝተዋል። ናይትሮጅንን የሚያያዙ ረቂቅ ሕዋሳት POSITIVE (+) ናቸው። ፎስፌትን የሚያሟሟ ረቂቅ ሕዋሳትም POSITIVE (+) ናቸው።",
+        "soil_acidity_management": "የአፈር አሲዳማነት (pH) የማስተካከል አቅሙ HIGH ነው። በተፈጥሯዊ ማዕድናዊ ማቋቋሚያ ንጥረ ነገሮች አማካኝነት አሲዳማ አፈርን ያስተካክላል።",
+        "analyzer_assessment": "የአውቶማቲክ አናላይዘር ውጤት፦ ሃውትሮ 100% ባዮ-ኦርጋኒክ የአፈር ማሻሻያ ነው። የሰው ሠራሽ N-P-K ኬሚካሎች አልተገኙም (0.00%)። ጠቃሚ ረቂቅ ሕዋሳት ተገኝተዋል፤ የናይትሮጅን ማያያዝና የፎስፌት ማሟሟት ምርመራዎች POSITIVE (+) ናቸው። የአፈር አሲዳማነት የማስተካከል አቅሙ HIGH ነው።",
+        "laboratory_certification": "የላብራቶሪ ትንተናው ይህ ናሙና 100% የተፈጥሮ፣ ከኬሚካሎች ነፃ የሆነ ኦርጋኒክ የማዳበሪያ ፔሌት መሆኑን ያረጋግጣል። የአፈርን ለምነት ሊያሻሽሉ እና የአፈር አሲዳማነትን በተፈጥሮ ሊያስተካክሉ የሚችሉ ንቁ ጠቃሚ ረቂቅ ሕዋሳትን ይዟል፤ ምንም ዓይነት ሰው ሠራሽ ኬሚካል ንጥረ ነገር የለውም።",
+        "verification": "ምንጭ፦ የአውቶማቲክ አናላይዘር የምርመራ ውጤት። በሪፖርቱ ያለው የምርት ስም HAWOTIRO Premium Natural Organic Fertilizer Pellets ሲሆን በዚህ የእውቀት መረጃ ማዕከል Hawtro ተብሎ ተመዝግቧል። የመጨረሻ የላብራቶሪ ማረጋገጫ፦ RESULTS VERIFIED።",
+        "nutrient_summary": "የሰው ሠራሽ N-P-K ኬሚካሎች አልተገኙም (0.00%)። የጠቅላላ N፣ P እና K መጠኖች በሪፖርቱ አልተሰጡም።",
+        "soil_acidity_summary": "ከፍተኛ የአሲዳማነት ማስተካከያ አቅም፤ በተፈጥሯዊ ማዕድናዊ ማቋቋሚያ ንጥረ ነገሮች አማካኝነት።"
+      }
     }
   ],
   "physical_intelligence": {

@@ -1,6 +1,6 @@
 "use strict";
 
-const CACHE_NAME = "ethioferti-shell-v2";
+const CACHE_NAME = "ethioferti-shell-v3";
 const APP_FILES = [
   "/",
   "/scanner",

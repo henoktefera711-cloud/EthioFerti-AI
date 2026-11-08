@@ -25,10 +25,10 @@ jobs:
         run: |
           mkdir -p android/app/src/main/assets/runtime/app/static
           cp app/main.py android/app/src/main/assets/runtime/app/main.py
-          touch android/app/src/main/assets/runtime/app/__init__.py
-          cp -a app/static/. android/app/src/main/assets/runtime/app/static/
+          cp app/__init__.py android/app/src/main/assets/runtime/app/__init__.py
+          rsync -a --delete --delete-excluded --exclude='*.backup*' --exclude='*.pre-*' --exclude='*.before-*' --exclude='*.lab-backup' --exclude='__pycache__/' app/static/ android/app/src/main/assets/runtime/app/static/
           mkdir -p android/app/src/main/assets/runtime/data/knowledge
-          cp -a data/knowledge/. android/app/src/main/assets/runtime/data/knowledge/
+          rsync -a --delete --delete-excluded --exclude='*.backup*' --exclude='*.pre-*' --exclude='*.lab-backup' --exclude='__pycache__/' data/knowledge/ android/app/src/main/assets/runtime/data/knowledge/
 
       - name: Build Android APK
         working-directory: android
